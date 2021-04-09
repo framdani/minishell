@@ -16,10 +16,10 @@ For more informations : (https://www.howtogeek.com/68563/htg-explains-what-are-t
 
 The shell that we should create must implement the builtins like in bash :
 
-- echo : write arguments to the standard output.
-- pwd  : present working directory.
-- env
-- unset
+- echo  : write arguments to the standard output.
+- pwd   : present working directory.
+- env   : set environment and execute command, or print environment.
+- unset : delete variables. 
 - export
 - cd
 - exit
@@ -32,9 +32,14 @@ In addition to shell commands and its own arguments and options we need to deal 
 	```
 	command < file.txt
 	```
-- (>) :
-- (>>) :
-- ($) :
+- (>) :  Directs the output of a command into a file.
+	```
+	command > file.txt
+	```
+- (>>) : Does the same as >, except that if the target file exists, the new data are appended.
 
+	```
+	command >> out.txt
+	``` 
 
-
+To learn more about shell's control and redirection operators : (https://unix.stackexchange.com/questions/159513/what-are-the-shells-control-and-redirection-operators).
