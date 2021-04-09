@@ -1,4 +1,4 @@
 # minishell
 
-[  ] The difference between Bash, Zsh, and other Linux Shells
-[  ]
+- [  ] The difference between Bash, Zsh, and other Linux Shells
+- [  ]
