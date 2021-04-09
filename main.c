@@ -16,22 +16,38 @@
 #include <string.h>
 #include "get_next_line.h"
 #define EXIT 0
+#define TRUE 1
 int		main(int argc, char **argv)
 {
-	char *line;
-	if (argc == 1)
+	char	*line;
+	int		test;
+
+	test = 1;
+	while (test)
 	{
-		printf("minishell$ ");
-		while (get_next_line(0, &line))
+		if (argc == 1)
 		{
-			if (strcmp(line, "exit") == 0)
+			//start the shell
+			write(1, "minishell$ ",10);
+			while (get_next_line(0, &line))
 			{
-				printf("minishell$");
-				return (0);
+				if (strcmp(line, "exit") == 0)
+				{
+					write(1, "exit", 4);
+					test = 0;
+					break;
+				}
+				else
+				{
+					//parse the user input
+					write(1, "minishell$ ", 10);
+				}
 			}
-			else {
-				printf("minishell$ Apply smth");
-			}
+		}
+		else
+		{
+			printf("Error");
+			test = 0;
 		}
 	}
 }
