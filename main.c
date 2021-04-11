@@ -17,37 +17,32 @@
 #include "get_next_line.h"
 #define EXIT 0
 #define TRUE 1
-int		main(int argc, char **argv)
+int		main()
 {
 	char	*line;
-	int		test;
+	int		status;
 
-	test = 1;
-	while (test)
+	status = 1;
+	while (status)
 	{
-		if (argc == 1)
-		{
-			//start the shell
-			write(1, "minishell$ ",10);
+			//start the shell => initialize
+			write(1, "minishell$ ",11);
 			while (get_next_line(0, &line))
 			{
 				if (strcmp(line, "exit") == 0)
 				{
 					write(1, "exit", 4);
-					test = 0;
+					status = 0;
 					break;
 				}
 				else
 				{
-					//parse the user input
-					write(1, "minishell$ ", 10);
+					//Read the command
+					//parse the command
+					//Run the command
+					write(1, "minishell$ ", 11);
 				}
+				free(line);
 			}
-		}
-		else
-		{
-			printf("Error");
-			test = 0;
-		}
 	}
 }
