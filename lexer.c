@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/16 14:09:06 by framdani          #+#    #+#             */
-/*   Updated: 2021/04/16 14:09:39 by framdani         ###   ########.fr       */
+/*   Created: 2021/04/30 16:17:56 by framdani          #+#    #+#             */
+/*   Updated: 2021/04/30 16:55:32 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include "../libft/libft.h"
+#include "includes/minishell.h"
+#include "includes/lexer.h"
 
-#endif
+void	build_lexer(char *input)
+{
+	int		state;
+	char	c;
+
+	state = NORMAL;
+	//Skipe_spaces
+	//Detect type of char
+	//store each token with the exact type
+
+}

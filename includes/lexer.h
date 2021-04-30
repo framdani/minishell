@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/16 14:09:06 by framdani          #+#    #+#             */
-/*   Updated: 2021/04/16 14:09:39 by framdani         ###   ########.fr       */
+/*   Created: 2021/04/30 16:20:32 by framdani          #+#    #+#             */
+/*   Updated: 2021/04/30 16:53:12 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include "../libft/libft.h"
+#ifndef LEXER_H
+#define LEXER_H
+
+# define NORMAL 	= 1
+# define IN_QUOTE 	= 2
+# define IN_DQUOTE 	= 3
+
+typedef struct 	s_token
+{
+	char 		*data;
+	char 		type;
+}				t_token;
+
+typedef struct 	s_lexer
+{
+	t_token 	tok;
+	t_token 	*next;
+}				t_lexer;
 
 #endif

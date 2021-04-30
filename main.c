@@ -14,29 +14,13 @@
 #include "libft/libft.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 void	prompt()
 {
 	write(1, "minishell$ ", 11);
 }
 
-/*void 	print_history(t_list *cmds)
-{
-	t_list *tmp;
-	int		i;
-
-	tmp = cmds;
-	i = 0;
-	while (tmp != NULL)
-	{
-		printf("%d", i);
-		i++;
-		write(1, "  ", 2);
-		write (1, tmp->content, ft_strlen(tmp->content));
-		write(1, "\n", 1);
-		tmp = tmp->next;
-	}
-}*/
 static char *read_command_line(void)
 {
 	char	*line_cmd;
@@ -48,12 +32,12 @@ static char *read_command_line(void)
 
 static	int is_builtin_command(char *cmd)
 {
-	cmd = "";
 	const char *cmds[8] = {"echo", "cd", "pwd", "export", "unset", "env",
 		"exit", "history"};
 	int i = 0;
 	while (i < 8)
 	{
+		//printf("|%s|, |%s|, |%d|\n", cmd, cmds[i], strcmp(cmd, cmds[i]));
 		if (strcmp(cmd, cmds[i]) == 0)
 			return (1);
 		i++;
@@ -73,21 +57,21 @@ int		main(int argc, char **argv, char **env)
 	path = getenv("PATH");
 
 	*env = NULL;
-	/*while (*env != NULL)
-	{
-		printf("%s\n", *env);
-		env++;
-	}*/
+	//init env_var
 	while (status)
 	{
 			//start the shell => initialize
 			prompt();
 			cmd_line = read_command_line();
-			//record in history
-			//cmnds = parse_commands(); =>parsing errors
-			//while (cmnds[i])
-			//if not builtin_command[i] => launch the executable(path)
-			//if bultin_command[i] => run command
+			//record in history//in a file
+			//build_lexer(cmd_line);
+			//parse
+			//create abstract syntax tree
+			//execution
+			if (is_builtin_command(cmd_line))
+				write(1,"recode\n", 7);
+			else
+				printf("search binary on path\n");
 			if (strcmp(cmd_line, "exit") == 0)
 			{
 				write(1, "exit", 4);
@@ -98,3 +82,5 @@ int		main(int argc, char **argv, char **env)
 			free(cmd_line);
 	}
 }
+
+// |; ||;| syntax error near unexpected token
