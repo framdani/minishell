@@ -12,21 +12,31 @@
 
 #ifndef LEXER_H
 #define LEXER_H
+# define NORMAL 1
+# define IN_QUOTE 2
+# define IN_DQUOTE 3
 
-# define NORMAL 	= 1
-# define IN_QUOTE 	= 2
-# define IN_DQUOTE 	= 3
+/*
+ * Define Token Types
+ */
+# define SEMICOLON	 59
+# define SPACE		 32
+# define CHAR		 -1
+# define PIPE		 124
+# define QUOTE		 39
+# define D_QUOTE	 34
+# define left_dr	 60
+# define right_dr	 62
 
-typedef struct 	s_token
+
+
+typedef struct			s_token
 {
-	char 		*data;
-	char 		type;
-}				t_token;
+	char				*value;
+	int					type;
+	struct s_token		*next;
+}						t_token;
 
-typedef struct 	s_lexer
-{
-	t_token 	tok;
-	t_token 	*next;
-}				t_lexer;
-
+t_token		*build_lexer(char *input);
+void		print_lexer(t_token *lexer);
 #endif

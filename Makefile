@@ -2,7 +2,8 @@ CC = clang
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = main.c
+SRCS = main.c\
+	   lexer.c
 
 NAME= minishell
 

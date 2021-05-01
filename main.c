@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "./includes/lexer.h"
 
 void	prompt()
 {
@@ -29,6 +30,15 @@ static char *read_command_line(void)
 	get_next_line(0, &line_cmd);
 	return (line_cmd);
 }
+void		print_lexer(t_token *lexer)
+{
+	t_token *tmp = lexer;
+	while (tmp != NULL)
+	{
+		printf("(%s  ,   %d)\n", lexer->value, lexer->type);
+		tmp = tmp->next;
+	}
+}
 
 static	int is_builtin_command(char *cmd)
 {
@@ -37,7 +47,6 @@ static	int is_builtin_command(char *cmd)
 	int i = 0;
 	while (i < 8)
 	{
-		//printf("|%s|, |%s|, |%d|\n", cmd, cmds[i], strcmp(cmd, cmds[i]));
 		if (strcmp(cmd, cmds[i]) == 0)
 			return (1);
 		i++;
@@ -47,9 +56,10 @@ static	int is_builtin_command(char *cmd)
 
 int		main(int argc, char **argv, char **env)
 {
-	char	*cmd_line;
-	int		status;
-	char	*path;
+	char		*cmd_line;
+	int			status;
+	char		*path;
+	t_token		*lexer;
 
 	argc = 0;
 	argv = NULL;
@@ -64,7 +74,7 @@ int		main(int argc, char **argv, char **env)
 			prompt();
 			cmd_line = read_command_line();
 			//record in history//in a file
-			//build_lexer(cmd_line);
+			lexer = build_lexer(cmd_line);
 			//parse
 			//create abstract syntax tree
 			//execution
