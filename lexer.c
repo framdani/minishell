@@ -15,44 +15,34 @@
 #include "libft/libft.h"
 #include <stdlib.h>
 
-static t_token		*new_token(char *data, int type)
+static void		add_token(t_token **lst_tok, char *data, int type)
 {
-	t_token		*token;
-
-	if (!(token = malloc(sizeof(t_token))))
-		return (NULL);
-	token->value = ft_strdup(data);
-	token->type = type;
-	token->next = NULL;
-	return (token);
-}
-
-static void		add_token(t_token **lst_tok, t_token *token)
-{
+	t_token *new;
 	t_token *tmp;
-	if (lst_tok && token)
+
+	new = malloc(sizeof(t_token));
+	if (new != NULL)
 	{
-		tmp = (*lst_tok);
-		if (!tmp)
-			*lst_tok = token;
+		new->next = NULL;
+		new->value = ft_strdup(data);
+		new->type = type;
+		if (*lst_tok == NULL)
+			*lst_tok = new;
 		else
 		{
+			tmp = *lst_tok;
 			while (tmp->next != NULL)
 				tmp = tmp->next;
-			tmp->next = token;
+			tmp->next = new;
 		}
 	}
 }
 
-/*
- *detect_type_char()
- */
-
-char	*skip_spaces(char **str)
+char	*skip_spaces(char *str)
 {
-	while (**str != '\0' && (**str == 32 || **str == '\t'))
-		(*str)++;
-	return (*str);
+	while (*str != '\0' && (*str == 32 || *str == '\t'))
+		str++;
+	return (str);
 }
 
 t_token		*build_lexer(char *input)
@@ -60,50 +50,73 @@ t_token		*build_lexer(char *input)
 	t_token		*lst_tok;
 	int			state;
 	char		*data;
+	int			size;
 	int			j;
-	t_token		*tok;
-	int			l;
 
-	l = ft_strlen(input) + 1;
 	lst_tok = NULL;
 	state = NORMAL;
 	j = 0;
-	skip_spaces(&input);
+	size = ft_strlen(input) + 1;
+	input = skip_spaces(input);
 	while (*input != '\0')
 	{
 		while (state == NORMAL && *input != '\0')
 		{
-			if (*input == SEMICOLON)
+			if (*input == ' ' || *input == '\t')
 			{
-				tok = new_token(";", SEMICOLON);
-				add_token(&lst_tok, tok);
+				input = skip_spaces(input);
+				add_token(&lst_tok, "SPACE", SPACE);
+			}
+			else if (*input == ';')
+			{
+				add_token(&lst_tok, "SEMICOLON", SEMICOLON);
 				input++;
 			}
-			else if (*input == SPACE || *input == '\t')
+			else if (*input == '|')
 			{
-				skip_spaces(&input);
-				add_token(&lst_tok, new_token(" ", SPACE));
+				add_token(&lst_tok, "PIPE", PIPE);
+				input++;
 			}
-			else if (ft_isalnum(*input))
+			else if (*input == '<')
 			{
-				data = malloc()
+				add_token(&lst_tok, "LEFT", LEFT);
+				input++;
+			}
+			else if (*input == '>')
+			{
+				add_token(&lst_tok, "RIGHT", RIGHT);
+				input++;
+			}
+			else if (*input == '$')
+			{
+				add_token(&lst_tok, "DOLLAR", DOLLAR);
+			}
+			else if (*input == IN_QUOTE)
+			{
+				state = IN_QUOTE;
+				break;
+			}
+			else if (*input == IN_DQUOTE)
+			{
+				state = IN_DQUOTE;
+				break;
+			}
+			else if (no_special_char(*input))
+			{
+				data = malloc(size);
 				j = 0;
-				while (*input != '\0' && ft_isalnum(*input))
+				while (*input != '\0' && no_special_char(*input))
 				{
 					data[j] = *input;
 					j++;
 					input++;
 				}
 				data[j] = '\0';
-				add_token(&lst_tok, new_token(data, CHAR));
+				add_token(&lst_tok, data, CHAR);
 				free(data);
-				data = NULL;
 			}
-			else if (*input == IN_QUOTE)
-				state = IN_QUOTE;
-			else if (*input == IN_DQUOTE)
-				state = IN_DQUOTE;
 		}
+		input++;
 		//else if (state == IN_QUOTE)
 		//else if (state == IN_DQUOTE)
 	}

@@ -25,8 +25,9 @@
 # define PIPE		 124
 # define QUOTE		 39
 # define D_QUOTE	 34
-# define left_dr	 60
-# define right_dr	 62
+# define LEFT		 60
+# define RIGHT		62
+# define DOLLAR 36
 
 
 
