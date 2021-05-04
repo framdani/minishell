@@ -67,6 +67,11 @@ t_token		*build_lexer(char *input)
 				input = skip_spaces(input);
 				add_token(&lst_tok, "SPACE", SPACE);
 			}
+			else if (*input == ESC_CHAR)
+			{
+				add_token(&lst_tok, "ESCAPE", ESC_CHAR);
+				input++;
+			}
 			else if (*input == ';')
 			{
 				add_token(&lst_tok, "SEMICOLON", SEMICOLON);
@@ -91,12 +96,12 @@ t_token		*build_lexer(char *input)
 			{
 				add_token(&lst_tok, "DOLLAR", DOLLAR);
 			}
-			else if (*input == IN_QUOTE)
+			else if (*input == QUOTE)
 			{
 				state = IN_QUOTE;
 				break;
 			}
-			else if (*input == IN_DQUOTE)
+			else if (*input == D_QUOTE)
 			{
 				state = IN_DQUOTE;
 				break;
@@ -116,11 +121,85 @@ t_token		*build_lexer(char *input)
 				free(data);
 			}
 		}
-		input++;
-		//else if (state == IN_QUOTE)
-		//else if (state == IN_DQUOTE)
+		while (state == IN_QUOTE && *input != '\0')
+		{
+			add_token(&lst_tok, "QUOTE", QUOTE);
+			input++;
+			data = malloc(size);
+			j = 0;
+			while (*input != QUOTE && *input != '\0')
+			{
+				data[j] = *input;
+				j++;
+				input++;
+			}
+			data[j] = '\0';
+			add_token(&lst_tok, data, CHAR);
+			free(data);
+			if (*input == QUOTE)
+			{
+				add_token(&lst_tok, "QUOTE", QUOTE);
+				state = NORMAL;
+				input++;
+			}
+		}
+		while (state == IN_DQUOTE && *input)
+		{
+			add_token(&lst_tok, "DQUOTE", D_QUOTE);
+			input++;
+			if (*input != '\0' && *input == DOLLAR)
+			{
+				add_token(&lst_tok, "DOLLAR", DOLLAR);
+				input++;
+			}
+			else if (*input != '\0' && *input == ESC_CHAR)
+			{
+				add_token(&lst_tok, "ESCAPE", ESC_CHAR);
+				input++;
+			}
+			else if (*input != '\0' && *input != D_QUOTE && *input != DOLLAR
+					&& *input != ESC_CHAR)
+			{
+				data = malloc(size);
+				j = 0;
+				while (*input != '\0' && *input != D_QUOTE && *input != DOLLAR
+						&& *input != ESC_CHAR)
+				{
+					data[j] = *input;
+					j++;
+					input++;
+				}
+				data[j] = '\0';
+				add_token(&lst_tok, data, CHAR);
+				free(data);
+			}
+			if (*input != '\0' && *input == D_QUOTE)
+			{
+				state = NORMAL;
+				add_token(&lst_tok, "DQUOTE", D_QUOTE);
+				input++;
+			}
+		}
 	}
 	print_lexer(lst_tok);
 	//store each token with the exact type
 	return (lst_tok);
 }
+
+/*
+ * Escape character => it preserves  the literal value of the next char
+ * example : echo "\"" => "
+ *			echo "\$PATH" => $PATH
+ *
+ */
+
+/*
+ * Single quotes => preserves the LITERAL value of each character within the quotes.
+ * A single quote may not occur between single quotes, even when preceded by a backslash.
+ */
+
+/*
+ * Double quotes => preserves the literal value of all characters, with the exception of $
+ * ` and \'
+ * 
+ */

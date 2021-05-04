@@ -19,15 +19,16 @@
 /*
  * Define Token Types
  */
-# define SEMICOLON	 59
-# define SPACE		 32
-# define CHAR		 -1
-# define PIPE		 124
-# define QUOTE		 39
-# define D_QUOTE	 34
-# define LEFT		 60
-# define RIGHT		62
-# define DOLLAR 36
+# define SEMICOLON		59
+# define SPACE			32
+# define CHAR			-1
+# define PIPE			124
+# define QUOTE			39
+# define D_QUOTE		34
+# define LEFT			60
+# define RIGHT			62
+# define DOLLAR			36
+# define ESC_CHAR		92
 
 
 
