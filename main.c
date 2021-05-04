@@ -75,7 +75,7 @@ int		main(int argc, char **argv, char **env)
 			cmd_line = read_command_line();
 			//record in history//in a file
 			lexer = build_lexer(cmd_line);
-			//parse
+			//parser(lexer)
 			//create abstract syntax tree
 			//execution
 			if (is_builtin_command(cmd_line))
@@ -94,3 +94,5 @@ int		main(int argc, char **argv, char **env)
 }
 
 // |; ||;| syntax error near unexpected token
+// Rules for naming variable name : it must begin with alphanemuric or underscore
+// if the flag is not specified print the flag as it
