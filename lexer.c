@@ -6,7 +6,7 @@
 /*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 16:17:56 by framdani          #+#    #+#             */
-/*   Updated: 2021/05/01 14:38:55 by framdani         ###   ########.fr       */
+/*   Updated: 2021/05/05 15:28:23 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ char	*skip_spaces(char *str)
 	return (str);
 }
 
+char		next_char(char *str)
+{
+	str++;
+	return (*str);
+}
+
 t_token		*build_lexer(char *input)
 {
 	t_token		*lst_tok;
@@ -52,6 +58,7 @@ t_token		*build_lexer(char *input)
 	char		*data;
 	int			size;
 	int			j;
+	char		c;
 
 	lst_tok = NULL;
 	state = NORMAL;
@@ -69,7 +76,20 @@ t_token		*build_lexer(char *input)
 			}
 			else if (*input == ESC_CHAR)
 			{
-				add_token(&lst_tok, "ESCAPE", ESC_CHAR);
+				//check next char => if char skip don't store it
+				c = next_char(input);
+				if  (!c)
+					add_token(&lst_tok, "ESCAPE", ESC_CHAR);
+				else if (ft_strchr("<>|;$\"\'\\", c))
+				{
+					data = malloc(2);
+					data[0]=c;
+					data[1] = '\0';
+					add_token(&lst_tok, data, CHAR);
+					data = NULL;
+					free(data);
+					input++;
+				}
 				input++;
 			}
 			else if (*input == ';')
@@ -95,6 +115,7 @@ t_token		*build_lexer(char *input)
 			else if (*input == '$')
 			{
 				add_token(&lst_tok, "DOLLAR", DOLLAR);
+				input++;
 			}
 			else if (*input == QUOTE)
 			{
@@ -152,9 +173,21 @@ t_token		*build_lexer(char *input)
 				add_token(&lst_tok, "DOLLAR", DOLLAR);
 				input++;
 			}
-			else if (*input != '\0' && *input == ESC_CHAR)
+			else if (*input == ESC_CHAR)
 			{
-				add_token(&lst_tok, "ESCAPE", ESC_CHAR);
+				c = next_char(input);
+				if (ft_strchr("$\"\\", c))
+				{
+					data = malloc(2);
+					data[0] = c;
+					data[1] = '\0';
+					add_token(&lst_tok, data, CHAR);
+					data = NULL;
+					free(data);
+					input++;
+				}
+				else
+					add_token(&lst_tok, "ESCAPE", ESC_CHAR);
 				input++;
 			}
 			else if (*input != '\0' && *input != D_QUOTE && *input != DOLLAR
@@ -201,5 +234,5 @@ t_token		*build_lexer(char *input)
 /*
  * Double quotes => preserves the literal value of all characters, with the exception of $
  * ` and \'
- * 
+ *
  */

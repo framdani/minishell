@@ -35,7 +35,7 @@ void		print_lexer(t_token *lexer)
 	t_token *tmp = lexer;
 	while (tmp != NULL)
 	{
-		printf("(%s,%d)\n", tmp->value, tmp->type);
+		printf("TOKEN (%s,%d)\n", tmp->value, tmp->type);
 		tmp = tmp->next;
 	}
 }
