@@ -40,7 +40,7 @@ void		print_lexer(t_token *lexer)
 	}
 }
 
-static	int is_builtin_command(char *cmd)
+/*static	int is_builtin_command(char *cmd)
 {
 	const char *cmds[8] = {"echo", "cd", "pwd", "export", "unset", "env",
 		"exit", "history"};
@@ -52,7 +52,7 @@ static	int is_builtin_command(char *cmd)
 		i++;
 	}
 	return (0);
-}
+}*/
 
 int		main(int argc, char **argv, char **env)
 {
@@ -78,10 +78,10 @@ int		main(int argc, char **argv, char **env)
 			//parser(lexer)
 			//create abstract syntax tree
 			//execution
-			if (is_builtin_command(cmd_line))
+			/*if (is_builtin_command(cmd_line))
 				write(1,"recode\n", 7);
 			else
-				printf("search binary on path\n");
+				printf("search binary on path\n");*/
 			if (strcmp(cmd_line, "exit") == 0)
 			{
 				write(1, "exit", 4);

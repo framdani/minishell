@@ -190,7 +190,7 @@ t_token		*build_lexer(char *input)
 					add_token(&lst_tok, "ESCAPE", ESC_CHAR);
 				input++;
 			}
-			else if (*input != '\0' && *input != D_QUOTE && *input != DOLLAR
+			else if (*input != D_QUOTE && *input != DOLLAR
 					&& *input != ESC_CHAR)
 			{
 				data = malloc(size);
@@ -214,7 +214,10 @@ t_token		*build_lexer(char *input)
 			}
 		}
 	}
-	print_lexer(lst_tok);
+	if (state == IN_QUOTE || state == IN_DQUOTE)
+		printf("Minishell : Syntax Error : Missing quotes\n");
+	else
+		print_lexer(lst_tok);
 	//store each token with the exact type
 	return (lst_tok);
 }
