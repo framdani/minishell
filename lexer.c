@@ -120,11 +120,15 @@ t_token		*build_lexer(char *input)
 			else if (*input == QUOTE)
 			{
 				state = IN_QUOTE;
+				add_token(&lst_tok, "QUOTE", QUOTE);
+				input++;
 				break;
 			}
 			else if (*input == D_QUOTE)
 			{
 				state = IN_DQUOTE;
+				add_token(&lst_tok, "DQUOTE", D_QUOTE);
+				input++;
 				break;
 			}
 			else if (no_special_char(*input))
@@ -144,8 +148,6 @@ t_token		*build_lexer(char *input)
 		}
 		while (state == IN_QUOTE && *input != '\0')
 		{
-			add_token(&lst_tok, "QUOTE", QUOTE);
-			input++;
 			data = malloc(size);
 			j = 0;
 			while (*input != QUOTE && *input != '\0')
@@ -166,8 +168,6 @@ t_token		*build_lexer(char *input)
 		}
 		while (state == IN_DQUOTE && *input)
 		{
-			add_token(&lst_tok, "DQUOTE", D_QUOTE);
-			input++;
 			if (*input != '\0' && *input == DOLLAR)
 			{
 				add_token(&lst_tok, "DOLLAR", DOLLAR);
@@ -178,6 +178,7 @@ t_token		*build_lexer(char *input)
 				c = next_char(input);
 				if (ft_strchr("$\"\\", c))
 				{
+					//printf(" --%s, -%c\n",ft_strchr("$\"\\", c), *input );
 					data = malloc(2);
 					data[0] = c;
 					data[1] = '\0';
@@ -238,4 +239,8 @@ t_token		*build_lexer(char *input)
  * Double quotes => preserves the literal value of all characters, with the exception of $
  * ` and \'
  *
+ */
+
+/*
+ * if ESC_char at the end error
  */
