@@ -131,7 +131,8 @@ t_token		*build_lexer(char *input)
 				input++;
 				break;
 			}
-			else if (no_special_char(*input))
+			else
+				//if (no_special_char(*input))
 			{
 				data = malloc(size);
 				j = 0;
@@ -216,9 +217,7 @@ t_token		*build_lexer(char *input)
 		}
 	}
 	if (state == IN_QUOTE || state == IN_DQUOTE)
-		printf("Minishell : Syntax Error : Missing quotes\n");
-	else
-		print_lexer(lst_tok);
+		printf("Minishell : Syntax Error : Missing quote.\n");
 	//store each token with the exact type
 	return (lst_tok);
 }
@@ -244,3 +243,9 @@ t_token		*build_lexer(char *input)
 /*
  * if ESC_char at the end error
  */
+
+//echo "$ "=> $
+//echo "$1" => depends
+//echo "$1kol">it's like echo "$1" "kol"
+//
+//"command" => command

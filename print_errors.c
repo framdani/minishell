@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   print_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/16 14:09:06 by framdani          #+#    #+#             */
-/*   Updated: 2021/04/16 14:09:39 by framdani         ###   ########.fr       */
+/*   Created: 2021/05/21 16:51:26 by framdani          #+#    #+#             */
+/*   Updated: 2021/05/21 16:51:32 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-#include <unistd.h>
+#include "includes/minishell.h"
+#include "includes/lexer.h"
+#include "libft/libft.h"
 #include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-//#include "../libft/libft.h"
-#include "lexer.h"
 
-void	parser(t_token *lexer);
-#endif
+void	print_error(char *str)
+{
+	ft_putstr_fd(str, 1);
+}

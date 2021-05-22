@@ -75,7 +75,7 @@ int		main(int argc, char **argv, char **env)
 			cmd_line = read_command_line();
 			//record in history//in a file
 			lexer = build_lexer(cmd_line);
-			//parser(lexer)
+			parser(lexer);
 			//create abstract syntax tree
 			//execution
 			/*if (is_builtin_command(cmd_line))
