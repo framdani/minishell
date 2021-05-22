@@ -189,7 +189,13 @@ t_token		*build_lexer(char *input)
 					input++;
 				}
 				else
-					add_token(&lst_tok, "ESCAPE", ESC_CHAR);
+				{
+					data = malloc(2);
+					data[0] = '\\';
+					data[1] = '\0';
+					add_token(&lst_tok, data, CHAR);
+					free(data);
+				}
 				input++;
 			}
 			else if (*input != D_QUOTE && *input != DOLLAR
