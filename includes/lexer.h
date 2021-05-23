@@ -29,6 +29,7 @@
 # define RIGHT			62
 # define DOLLAR			36
 # define ESC_CHAR		92
+#define GREATER			-2
 
 
 

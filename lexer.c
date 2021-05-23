@@ -80,7 +80,7 @@ t_token		*build_lexer(char *input)
 				c = next_char(input);
 				if  (!c)
 					add_token(&lst_tok, "ESCAPE", ESC_CHAR);
-				else if (ft_strchr("<>|;$\"\'\\", c))
+				else if (ft_strchr("<>|;$\"\'\\ ", c))
 				{
 					data = malloc(2);
 					data[0]=c;
@@ -94,23 +94,33 @@ t_token		*build_lexer(char *input)
 			}
 			else if (*input == ';')
 			{
-				add_token(&lst_tok, "SEMICOLON", SEMICOLON);
 				input++;
+				add_token(&lst_tok, "SEMICOLON", SEMICOLON);
+				input = skip_spaces(input);
 			}
 			else if (*input == '|')
 			{
-				add_token(&lst_tok, "PIPE", PIPE);
 				input++;
+				add_token(&lst_tok, "PIPE", PIPE);
+				input = skip_spaces(input);
 			}
 			else if (*input == '<')
 			{
-				add_token(&lst_tok, "LEFT", LEFT);
 				input++;
+				add_token(&lst_tok, "LEFT", LEFT);
+				input = skip_spaces(input);
 			}
 			else if (*input == '>')
 			{
-				add_token(&lst_tok, "RIGHT", RIGHT);
 				input++;
+				input = skip_spaces(input);
+				if (*input == '>')
+				{
+					add_token(&lst_tok, "GREATER", GREATER);
+					input++;
+				}
+				else
+					add_token(&lst_tok, "RIGHT", RIGHT);
 			}
 			else if (*input == '$')
 			{
@@ -223,7 +233,10 @@ t_token		*build_lexer(char *input)
 		}
 	}
 	if (state == IN_QUOTE || state == IN_DQUOTE)
+	{
 		printf("Minishell : Syntax Error : Missing quote.\n");
+		return (NULL);
+	}
 	//store each token with the exact type
 	return (lst_tok);
 }
