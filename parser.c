@@ -81,11 +81,13 @@ void	parser(t_token *lexer)
 			print_error("Minishell : syntax error unexpected token after | \n.");
 	//; | last char
 		else
-			print_lexer(lexer);
-	//check unexpected characters after |
-	//check unexpected char ater ;
-	//check unexpected char after \
-	//check unexpected char after <
-	//check unexpected char after >
-	
+			print_lexer(lexer);//create the struct
+		//TODO
+		//Separate by semicolon into commands
+		//detect for each command the name and the args
+		//if A pipe exist
+		//
+		//
+		//Create a struct for simple command
+		//a struct for pipe sequence => contain a strcut for simple commands
 }}

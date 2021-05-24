@@ -130,14 +130,14 @@ t_token		*build_lexer(char *input)
 			else if (*input == QUOTE)
 			{
 				state = IN_QUOTE;
-				add_token(&lst_tok, "QUOTE", QUOTE);
+				//add_token(&lst_tok, "QUOTE", QUOTE);
 				input++;
 				break;
 			}
 			else if (*input == D_QUOTE)
 			{
 				state = IN_DQUOTE;
-				add_token(&lst_tok, "DQUOTE", D_QUOTE);
+				//add_token(&lst_tok, "DQUOTE", D_QUOTE);
 				input++;
 				break;
 			}
@@ -172,7 +172,7 @@ t_token		*build_lexer(char *input)
 			free(data);
 			if (*input == QUOTE)
 			{
-				add_token(&lst_tok, "QUOTE", QUOTE);
+				//add_token(&lst_tok, "QUOTE", QUOTE);
 				state = NORMAL;
 				input++;
 			}
@@ -227,7 +227,7 @@ t_token		*build_lexer(char *input)
 			if (*input != '\0' && *input == D_QUOTE)
 			{
 				state = NORMAL;
-				add_token(&lst_tok, "DQUOTE", D_QUOTE);
+				//add_token(&lst_tok, "DQUOTE", D_QUOTE);
 				input++;
 			}
 		}

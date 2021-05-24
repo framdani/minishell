@@ -1,0 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/24 17:27:45 by framdani          #+#    #+#             */
+/*   Updated: 2021/05/24 17:29:51 by framdani         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef PARSER_H
+# define PARSER_H
+#include "lexer.h"
+
+/* List of args = SUFFIX
+ *
+ * option
+ * simple arg
+ * redirection filename
+ *
+ * */
+typedef struct			s_arg
+{
+	char				*arg;
+	struct s_arg		*next;
+}						t_arg;
+
+/*
+ * cmd name is the first arg
+ * linked_list of args
+ * nbr_args = size of t_args
+ *
+ */
+
+typedef struct			s_cmd
+{
+	char				*name;
+	t_arg				*args;
+	int					nbr_args;
+}						t_cmd;
+
+
+/*
+ * Pipe sequence : simple commands
+ *	              |pipe sequence
+ *	Linked list of commands
+ *  number of commands = size of t_cmd
+ *
+ */
+
+typedef struct			s_pipe_sequence
+{
+	t_cmd				cmds;
+	int					nbr_cmds;
+}						t_pipe_sequence;
+
+void 	parser(t_token *lexer);
+#endif

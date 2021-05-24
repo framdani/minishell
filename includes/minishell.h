@@ -18,6 +18,7 @@
 #include <string.h>
 //#include "../libft/libft.h"
 #include "lexer.h"
+#include "parser.h"
 
-void	parser(t_token *lexer);
+void	print_error(char *str);
 #endif
