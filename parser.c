@@ -81,7 +81,7 @@ void	parser(t_token *lexer)
 			print_error("Minishell : syntax error unexpected token after | \n.");
 	//; | last char
 		else
-			print_lexer(lexer);//create the struct
+			print_lexer(lexer);//new_pipe_sequence
 		//TODO
 		//Separate by semicolon into commands
 		//detect for each command the name and the args

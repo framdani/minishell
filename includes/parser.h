@@ -23,7 +23,7 @@
  * */
 typedef struct			s_arg
 {
-	char				*arg;
+	char				*value;
 	struct s_arg		*next;
 }						t_arg;
 
@@ -39,8 +39,8 @@ typedef struct			s_cmd
 	char				*name;
 	t_arg				*args;
 	int					nbr_args;
+	struct s_cmd		*next;
 }						t_cmd;
-
 
 /*
  * Pipe sequence : simple commands
@@ -53,7 +53,7 @@ typedef struct			s_cmd
 typedef struct			s_pipe_sequence
 {
 	t_cmd				cmds;
-	int					nbr_cmds;
+	int					nbr_pipe; // cmds
 }						t_pipe_sequence;
 
 void 	parser(t_token *lexer);

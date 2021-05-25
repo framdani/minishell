@@ -76,7 +76,7 @@ int		main(int argc, char **argv, char **env)
 			//record in history//in a file
 			lexer = build_lexer(cmd_line);
 			parser(lexer);
-			//create abstract syntax tree
+			//create pipe_sequence
 			//execution
 			/*if (is_builtin_command(cmd_line))
 				write(1,"recode\n", 7);
