@@ -67,21 +67,19 @@ t_pipe_sequence		*new_pipe_sequence(t_token *lexer)
 	t_pipe_sequence		*pipe_seq;
 	t_cmd				*cmds;
 	t_arg				*args;
+	t_token				*tmp;
 	char				*name;
 
 	cmds = NULL;
 	args = NULL;
 	pipe_seq = NULL;
 	name = "";
-	while (lexer != NULL)
-	{
-		//if (lexer->type == SEMICOLON)
-			//{execution; free;return to lexer}
-		//else if (lexer->type == PIPE)
-			//{add_cmd};
-		//else if (lexer->type == CHAR)
-		//lexer = lexer->next;
-	}
+	tmp = lexer;
+	//skip_spaces
+	//
+	//if (SEMICOLON) RETURN PIPE_SEQUENCE
+	//if (CHAR || REDIRECTION) create new_cmd
+	//
 	return pipe_seq;
 	//pipe_seq->cmds = lstof commands;
 	//pipe_seq->nbr = nbr of pipes
