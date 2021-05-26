@@ -22,7 +22,10 @@ char		*expander(t_token **lst_token,char *input)
 
 	new_value = ft_strdup("");
 	if (ft_isdigit(*input))
+	{
 		input++;
+		add_token(lst_token, "SPACE", SPACE);
+	}
 	else if (ft_isalpha(*input) || *input == '_')
 	{
 		while (ft_isalnum(*input) || *input == '_')
@@ -33,6 +36,8 @@ char		*expander(t_token **lst_token,char *input)
 		token = getenv(new_value);
 		if (token)
 			add_token(lst_token, token, CHAR);
+		else
+			add_token(lst_token, "SPACE", SPACE);
 	}
 	return (input);
 }

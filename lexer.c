@@ -134,8 +134,14 @@ t_token		*build_lexer(char *input)
 			else if (*input == '$')
 			{
 				input++;
-				if (*input == SPACE || *input == '\0')
-					add_token(&lst_tok, "DOLLAR", DOLLAR);
+				if (*input == SPACE || *input == '\0' || *input == DOLLAR)
+				{
+					data = malloc(2);
+					data[0] = '$';
+					data[1] = '\0';
+					add_token(&lst_tok, data, CHAR);
+					free(data);
+				}
 				else
 					input = expander(&lst_tok, input);
 			}
