@@ -12,10 +12,11 @@
 
 #include "includes/minishell.h"
 #include "includes/lexer.h"
+#include "includes/parser.h"
 #include "libft/libft.h"
 #include <stdlib.h>
 
-static void		add_token(t_token **lst_tok, char *data, int type)
+void		add_token(t_token **lst_tok, char *data, int type)
 {
 	t_token *new;
 	t_token *tmp;
@@ -108,24 +109,35 @@ t_token		*build_lexer(char *input)
 			{
 				input++;
 				add_token(&lst_tok, "LEFT", LEFT);
-				input = skip_spaces(input);
+				if (*input == ' ')
+				{
+					input = skip_spaces(input);
+					if (*input == '>')
+						add_token(&lst_tok, "SPACE", SPACE);
+				}
 			}
 			else if (*input == '>')
 			{
 				input++;
-				input = skip_spaces(input);
+				//input = skip_spaces(input);
 				if (*input == '>')
 				{
 					add_token(&lst_tok, "GREATER", GREATER);
 					input++;
 				}
 				else
+				{
 					add_token(&lst_tok, "RIGHT", RIGHT);
+				}
+				input = skip_spaces(input);
 			}
 			else if (*input == '$')
 			{
-				add_token(&lst_tok, "DOLLAR", DOLLAR);
 				input++;
+				if (*input == SPACE || *input == '\0')
+					add_token(&lst_tok, "DOLLAR", DOLLAR);
+				else
+					input = expander(&lst_tok, input);
 			}
 			else if (*input == QUOTE)
 			{
@@ -181,8 +193,11 @@ t_token		*build_lexer(char *input)
 		{
 			if (*input != '\0' && *input == DOLLAR)
 			{
-				add_token(&lst_tok, "DOLLAR", DOLLAR);
 				input++;
+				if (*input == SPACE || *input == '\0')
+					add_token(&lst_tok, "DOLLAR", DOLLAR);
+				else
+					input = expander(&lst_tok, input);
 			}
 			else if (*input == ESC_CHAR)
 			{

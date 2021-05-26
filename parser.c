@@ -39,11 +39,14 @@ int		check_syntax_errors(t_token *lexer)
 			if (tmp->next->type == PIPE || tmp->next->type == SEMICOLON ||
 					tmp->next->type == LEFT)
 				return (4);
+			if (tmp->next->type == SPACE && tmp->next->next->type == RIGHT)
+				return (5);
 		}
 		else if (tmp->type == RIGHT)
 		{
 			if (tmp->next->type == PIPE || tmp->next->type == SEMICOLON ||
-					tmp->next->type == LEFT || tmp->next->type == GREATER)
+					tmp->next->type == LEFT || tmp->next->type == GREATER ||
+					tmp->next->type == RIGHT)
 				return (5);
 		}
 		else if (tmp->type == GREATER)
@@ -69,16 +72,18 @@ void	parser(t_token *lexer)
 		//check first element
 		if (lexer->type == PIPE)
 			print_error("Minishell : syntax error near unexpected token '|'\n");
+		else if (lexer->type == SEMICOLON)
+			print_error("Minishell : syntax error near unexpected token ';'\n");
 		else if (check_syntax_errors(lexer) == 6)
 			print_error("Minishell : syntax error near unexpected token 'newline'\n");
 		else if (check_syntax_errors(lexer) == 3)
 			print_error("Minishell : syntax error unexpected token after ';'\n");
 		else if (check_syntax_errors(lexer) == 4)
-			print_error("Minishell : syntax error unexpected token after <\n");
+			print_error("Minishell : syntax error unexpected token after '<''\n");
 		else if (check_syntax_errors(lexer) == 5)
-			print_error("Minishell : syntax error unexpected token after >\n");
+			print_error("Minishell : syntax error unexpected token after '>'\n");
 		else if (check_syntax_errors(lexer) == 2)
-			print_error("Minishell : syntax error unexpected token after | \n.");
+			print_error("Minishell : syntax error unexpected token after '|' \n.");
 	//; | last char
 		else
 			print_lexer(lexer);//new_pipe_sequence

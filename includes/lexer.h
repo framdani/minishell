@@ -42,4 +42,5 @@ typedef struct			s_token
 
 t_token		*build_lexer(char *input);
 void		print_lexer(t_token *lexer);
+void		add_token(t_token **lst_token, char *data, int type);
 #endif

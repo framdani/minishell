@@ -57,4 +57,5 @@ typedef struct			s_pipe_sequence
 }						t_pipe_sequence;
 
 void 	parser(t_token *lexer);
+char	*expander(t_token **lst, char *input);
 #endif

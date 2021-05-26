@@ -22,7 +22,7 @@ void	prompt()
 	write(1, "minishell$ ", 11);
 }
 
-static char *read_command_line(void)
+char *read_command_line(void)
 {
 	char	*line_cmd;
 
@@ -58,16 +58,21 @@ int		main(int argc, char **argv, char **env)
 {
 	char		*cmd_line;
 	int			status;
-	char		*path;
 	t_token		*lexer;
 
 	argc = 0;
 	argv = NULL;
 	status = 1;
-	path = getenv("PATH");
 
-	*env = NULL;
+	env = NULL;
 	//init env_var
+	/*ft_putstr_fd(getenv("PATH"), 1);
+	write(1, "\n",1);
+	while (*env)
+	{
+		ft_putstr_fd(*env, 1);
+		env++;
+	}*/
 	while (status)
 	{
 			//start the shell => initialize

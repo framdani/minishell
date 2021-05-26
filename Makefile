@@ -5,7 +5,8 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = main.c\
 	   lexer.c\
 	   parser.c\
-	   print_errors.c
+	   print_errors.c\
+	   expander.c
 
 NAME= minishell
 
