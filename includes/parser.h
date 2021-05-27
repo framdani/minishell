@@ -14,6 +14,8 @@
 # define PARSER_H
 #include "lexer.h"
 
+# define INPUT = 0
+# define OUTPUT = 1
 /* List of args = SUFFIX
  *
  * option
@@ -27,6 +29,12 @@ typedef struct			s_arg
 	struct s_arg		*next;
 }						t_arg;
 
+typedef struct			s_file
+{
+	char				*filename;
+	int					type;
+	struct s_file		*next;
+}						t_file;
 /*
  * cmd name is the first arg
  * linked_list of args
@@ -38,6 +46,7 @@ typedef struct			s_cmd
 {
 	char				*name;
 	t_arg				*args;
+	t_file				*file;
 	int					nbr_args;
 	struct s_cmd		*next;
 }						t_cmd;
