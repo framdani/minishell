@@ -1,12 +1,15 @@
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 SRCS = main.c\
 	   lexer.c\
 	   parser.c\
 	   print_errors.c\
-	   expander.c
+	   expander.c\
+	   fill_struct_and_execute.c\
+	   create_pipe_sequence.c\
+	   initialize.c
 
 NAME= minishell
 

@@ -21,4 +21,5 @@
 #include "parser.h"
 
 void	print_error(char *str);
+t_pipe_sequence *new_pipe_sequence(t_token *lexer);
 #endif

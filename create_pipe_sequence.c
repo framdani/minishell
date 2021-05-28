@@ -38,7 +38,7 @@ void		add_arg(t_arg **lst_args, char *arg)
 	}
 }
 
-void		add_cmd(t_cmd **lst_cmds, char *name, t_arg *args)
+void		add_cmd(t_cmd **lst_cmds, t_arg **args, t_file **files)
 {
 	t_cmd	*new;
 	t_cmd	*tmp;
@@ -47,8 +47,8 @@ void		add_cmd(t_cmd **lst_cmds, char *name, t_arg *args)
 	if (new != NULL)
 	{
 		new->next = NULL;
-		new->name = ft_strdup(name);
-		new->args = args;
+		new->args = *args;
+		new->file = *files;
 		//new->nbr_args = size(args);
 		if (*lst_cmds == NULL)
 			*lst_cmds = new;
@@ -62,26 +62,48 @@ void		add_cmd(t_cmd **lst_cmds, char *name, t_arg *args)
 	}
 }
 
-t_pipe_sequence		*new_pipe_sequence(t_token *lexer)
+void		add_file(t_file **lst_files, char *filename, int type)
 {
-	t_pipe_sequence		*pipe_seq;
-	t_cmd				*cmds;
-	t_arg				*args;
-	t_token				*tmp;
-	char				*name;
 
-	cmds = NULL;
-	args = NULL;
-	pipe_seq = NULL;
-	name = "";
-	tmp = lexer;
-	//skip_spaces
-	//
-	//if (SEMICOLON) RETURN PIPE_SEQUENCE
-	//if (CHAR || REDIRECTION) create new_cmd
-	//
-	return pipe_seq;
-	//pipe_seq->cmds = lstof commands;
-	//pipe_seq->nbr = nbr of pipes
+	t_file	*new;
+	t_file	*tmp;
+
+	new = malloc(sizeof(t_arg));
+	if (new != NULL)
+	{
+		new->next = NULL;
+		new->filename = ft_strdup(filename);
+		new->type = type;
+		if (*lst_files == NULL)
+			*lst_files= new;
+		else
+		{
+			tmp = *lst_files;
+			while (tmp->next != NULL)
+				tmp = tmp->next;
+			tmp->next = new;
+		}
+	}
 }
 
+void	print_struct(t_cmd *lst_cmds)
+{
+	t_cmd		*tmp;
+	t_arg		*arg_tmp;
+
+	tmp = lst_cmds;
+	while (tmp != NULL)
+	{
+		arg_tmp = tmp->args;
+		ft_putstr_fd("cmds : \n", 1);
+		while(arg_tmp != NULL)
+		{
+			ft_putstr_fd("ARG : ", 1);
+			ft_putstr_fd(arg_tmp->value, 1);
+			ft_putstr_fd("\n", 1);
+			arg_tmp = arg_tmp->next;
+		}
+		tmp = tmp->next;
+	}
+	
+}

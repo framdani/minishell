@@ -19,7 +19,11 @@
 
 void	prompt()
 {
-	write(1, "minishell$ ", 11);
+	char *str;
+
+	//str = ft_strdup("\033[0;34mminishell$ ");
+	str = "minishell$ ";
+	write(1, str, ft_strlen(str));
 }
 
 char *read_command_line(void)
@@ -58,7 +62,7 @@ int		main(int argc, char **argv, char **env)
 {
 	char		*cmd_line;
 	int			status;
-	t_token		*lexer;
+	t_token		*tokens;
 
 	argc = 0;
 	argv = NULL;
@@ -79,14 +83,9 @@ int		main(int argc, char **argv, char **env)
 			prompt();
 			cmd_line = read_command_line();
 			//record in history//in a file
-			lexer = build_lexer(cmd_line);
-			parser(lexer);
-			//create pipe_sequence
-			//execution
-			/*if (is_builtin_command(cmd_line))
-				write(1,"recode\n", 7);
-			else
-				printf("search binary on path\n");*/
+			tokens = lexer(cmd_line);
+			parser(tokens);
+			fill_struct_and_execute(tokens);
 			if (strcmp(cmd_line, "exit") == 0)
 			{
 				write(1, "exit", 4);

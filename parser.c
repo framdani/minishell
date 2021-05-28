@@ -15,11 +15,24 @@
 #include "libft/libft.h"
 #include <stdlib.h>
 
+/*
+ *check_first_token(type)
+ */
+
+
+/*
+ * check_last_token(type)
+ */
+
 int		check_syntax_errors(t_token *lexer)
 {
 	t_token *tmp;
 
 	tmp = lexer;
+	if (lexer->type == PIPE)
+		return (7);
+	else if (lexer->type == SEMICOLON)
+		return(8);
 	while (tmp->next != NULL)
 	{
 		if (tmp->type == PIPE)
@@ -65,34 +78,14 @@ int		check_syntax_errors(t_token *lexer)
 void	parser(t_token *lexer)
 {
 	t_token *tmp;
+	int		id_error;
 
 	tmp = lexer;
+	id_error = 1;
 	if (tmp != NULL)
 	{
-		//check first element
-		if (lexer->type == PIPE)
-			print_error("Minishell : syntax error near unexpected token '|'\n");
-		else if (lexer->type == SEMICOLON)
-			print_error("Minishell : syntax error near unexpected token ';'\n");
-		else if (check_syntax_errors(lexer) == 6)
-			print_error("Minishell : syntax error near unexpected token 'newline'\n");
-		else if (check_syntax_errors(lexer) == 3)
-			print_error("Minishell : syntax error unexpected token after ';'\n");
-		else if (check_syntax_errors(lexer) == 4)
-			print_error("Minishell : syntax error unexpected token after '<''\n");
-		else if (check_syntax_errors(lexer) == 5)
-			print_error("Minishell : syntax error unexpected token after '>'\n");
-		else if (check_syntax_errors(lexer) == 2)
-			print_error("Minishell : syntax error unexpected token after '|' \n.");
-	//; | last char
-		else
-			print_lexer(lexer);//new_pipe_sequence
-		//TODO
-		//Separate by semicolon into commands
-		//detect for each command the name and the args
-		//if A pipe exist
-		//
-		//
-		//Create a struct for simple command
-		//a struct for pipe sequence => contain a strcut for simple commands
-}}
+		id_error = check_syntax_errors(lexer);
+		if (id_error != 1)
+			print_error_and_exit(&lexer, id_error);
+	}
+}

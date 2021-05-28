@@ -52,7 +52,7 @@ char		next_char(char *str)
 	return (*str);
 }
 
-t_token		*build_lexer(char *input)
+t_token		*lexer(char *input)
 {
 	t_token		*lst_tok;
 	int			state;

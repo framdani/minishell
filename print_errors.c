@@ -19,3 +19,25 @@ void	print_error(char *str)
 {
 	ft_putstr_fd(str, 1);
 }
+
+void	print_error_and_exit(t_token **lst_tok, int error)
+{
+
+	//free_list_tokens
+	*lst_tok = NULL;
+	print_error("Minishell : syntax error ");
+	if (error == 6)
+		print_error("near unexpected token 'newline'\n");
+	else if (error == 3)
+		print_error("unexpected token after ';'\n");
+	else if (error == 4)
+		print_error("unexpected token after '<''\n");
+	else if (error == 5)
+		print_error("unexpected token after '>'\n");
+	else if (error == 2)
+		print_error("unexpected token after '|' \n.");
+	else if (error == 7)
+		print_error("near unexpected token '|'\n");
+	else if (error == 8)
+		print_error("near unexpected token ';'\n");
+}

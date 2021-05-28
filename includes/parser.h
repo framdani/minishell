@@ -44,7 +44,6 @@ typedef struct			s_file
 
 typedef struct			s_cmd
 {
-	char				*name;
 	t_arg				*args;
 	t_file				*file;
 	int					nbr_args;
@@ -61,10 +60,19 @@ typedef struct			s_cmd
 
 typedef struct			s_pipe_sequence
 {
-	t_cmd				cmds;
+	t_cmd				*cmds;
 	int					nbr_pipe; // cmds
 }						t_pipe_sequence;
 
 void 	parser(t_token *lexer);
 char	*expander(t_token **lst, char *input);
+void	print_error_and_exit(t_token **lst_token, int error);
+void	fill_struct_and_execute(t_token *token);
+void	add_arg(t_arg **lst_arg, char *arg);
+void	add_cmd(t_cmd **lst_cmds, t_arg **args, t_file **files);
+void	add_file(t_file **lst_files, char *filename, int type);
+void	print_struct(t_cmd *lst_cmnds);
+t_cmd	init_cmd(void);
+t_file	init_file(void);
+t_arg	init_args(void);
 #endif
