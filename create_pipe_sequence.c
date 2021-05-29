@@ -94,11 +94,12 @@ void	print_struct(t_cmd *lst_cmds)
 	int			i;
 
 	tmp = lst_cmds;
-	arg = lst_cmds->args;
 	i = 0;
 	//convert args into double pointer
 	while (tmp != NULL)
 	{
+		i = 0;
+		arg = tmp->args;
 		ft_putstr_fd("cmds : \n", 1);
 		if (arg)
 		{
@@ -115,7 +116,9 @@ void	print_struct(t_cmd *lst_cmds)
 		{
 			ft_putstr_fd("File : ", 1);
 			ft_putstr_fd(files->filename, 1);
-			write(1, &files->type, 1);
+			ft_putstr_fd("\n", 1);
+			ft_putstr_fd("Type : ", 1);
+			ft_putchar_fd(files->type, 1);
 			ft_putstr_fd("\n", 1);
 			files = files->next;
 		}

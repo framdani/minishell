@@ -127,13 +127,14 @@ void	fill_struct_and_execute(t_token *lexer)
 		}
 		if (tmp != NULL && tmp->type == SEMICOLON)
 		{
-			add_cmd(&lst_cmds, &lst_args, &lst_files);
-			print_struct(lst_cmds);
-			tmp=tmp->next;
+			tmp = tmp->next;
 			//execute();
 		}
 	}
+	if (lst_args != NULL || lst_files != NULL)
+	{
 		add_cmd(&lst_cmds, &lst_args, &lst_files);
 		print_struct(lst_cmds);
 		//execute
+	}
 }
