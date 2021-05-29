@@ -47,7 +47,7 @@ void		add_cmd(t_cmd **lst_cmds, t_arg **args, t_file **files)
 	if (new != NULL)
 	{
 		new->next = NULL;
-		new->args = *args;
+		new->args = convert_into_dpointer(args);
 		new->file = *files;
 		//new->nbr_args = size(args);
 		if (*lst_cmds == NULL)
@@ -68,7 +68,7 @@ void		add_file(t_file **lst_files, char *filename, int type)
 	t_file	*new;
 	t_file	*tmp;
 
-	new = malloc(sizeof(t_arg));
+	new = malloc(sizeof(t_file));
 	if (new != NULL)
 	{
 		new->next = NULL;
@@ -89,21 +89,46 @@ void		add_file(t_file **lst_files, char *filename, int type)
 void	print_struct(t_cmd *lst_cmds)
 {
 	t_cmd		*tmp;
-	t_arg		*arg_tmp;
+	char 		**arg;
+	t_file		*files;
+	int			i;
 
 	tmp = lst_cmds;
+	arg = lst_cmds->args;
+	i = 0;
+	//convert args into double pointer
 	while (tmp != NULL)
 	{
-		arg_tmp = tmp->args;
 		ft_putstr_fd("cmds : \n", 1);
-		while(arg_tmp != NULL)
+		if (arg)
+		{
+		while(arg[i] != NULL)
 		{
 			ft_putstr_fd("ARG : ", 1);
-			ft_putstr_fd(arg_tmp->value, 1);
+			ft_putstr_fd(arg[i], 1);
 			ft_putstr_fd("\n", 1);
-			arg_tmp = arg_tmp->next;
+			i++;
+		}
+		}
+		files = tmp->file;
+		while (files!= NULL)
+		{
+			ft_putstr_fd("File : ", 1);
+			ft_putstr_fd(files->filename, 1);
+			write(1, &files->type, 1);
+			ft_putstr_fd("\n", 1);
+			files = files->next;
 		}
 		tmp = tmp->next;
 	}
-	
+	i = 0;
+	if (arg)
+	{
+		while (arg[i])
+		{
+			free(arg[i]);
+			i++;
+		}
+		free(arg);
+	}
 }

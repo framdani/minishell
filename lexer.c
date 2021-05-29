@@ -210,7 +210,6 @@ t_token		*lexer(char *input)
 				c = next_char(input);
 				if (ft_strchr("$\"\\", c))
 				{
-					//printf(" --%s, -%c\n",ft_strchr("$\"\\", c), *input );
 					data = malloc(2);
 					data[0] = c;
 					data[1] = '\0';
@@ -234,7 +233,7 @@ t_token		*lexer(char *input)
 			{
 				data = malloc(size);
 				j = 0;
-				while (*input != '\0' && *input != D_QUOTE && *input != DOLLAR
+				while (*input != D_QUOTE && *input != DOLLAR
 						&& *input != ESC_CHAR)
 				{
 					data[j] = *input;
@@ -245,7 +244,7 @@ t_token		*lexer(char *input)
 				add_token(&lst_tok, data, CHAR);
 				free(data);
 			}
-			if (*input != '\0' && *input == D_QUOTE)
+			if (*input == D_QUOTE)
 			{
 				state = NORMAL;
 				//add_token(&lst_tok, "DQUOTE", D_QUOTE);

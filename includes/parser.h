@@ -44,7 +44,7 @@ typedef struct			s_file
 
 typedef struct			s_cmd
 {
-	t_arg				*args;
+	char				**args;
 	t_file				*file;
 	int					nbr_args;
 	struct s_cmd		*next;
@@ -75,4 +75,5 @@ void	print_struct(t_cmd *lst_cmnds);
 t_cmd	init_cmd(void);
 t_file	init_file(void);
 t_arg	init_args(void);
+char	**convert_into_dpointer(t_arg **lst_arg);
 #endif

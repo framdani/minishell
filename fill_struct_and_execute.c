@@ -18,6 +18,43 @@
 #include <string.h>
 #include "./includes/lexer.h"
 
+int		ft_lst_size(t_arg	*lst_arg)
+{
+	int		cmpt;
+	t_arg	*tmp;
+
+	cmpt = 0;
+	tmp = lst_arg;
+	while (tmp != NULL)
+	{
+		cmpt++;
+		tmp = tmp->next;
+	}
+	return (cmpt);
+}
+
+char	**convert_into_dpointer(t_arg	**lst_arg)
+{
+	char	**arg;
+	int		i;
+	int		size;
+	t_arg	*tmp;
+
+	i = 0;
+	tmp = *lst_arg;
+	size = ft_lst_size(*lst_arg);
+	if (!(arg = malloc(sizeof(char *) * (size + 1))))
+		return (NULL);
+	while (tmp != NULL)
+	{
+		arg[i] = ft_strdup(tmp->value);
+		i++;
+		tmp = tmp->next;
+	}
+	arg[i] = 0;
+	return (arg);
+}
+
 void	fill_struct_and_execute(t_token *lexer)
 {
 	t_cmd				*lst_cmds;
@@ -90,13 +127,13 @@ void	fill_struct_and_execute(t_token *lexer)
 		}
 		if (tmp != NULL && tmp->type == SEMICOLON)
 		{
+			add_cmd(&lst_cmds, &lst_args, &lst_files);
 			print_struct(lst_cmds);
 			tmp=tmp->next;
 			//execute();
 		}
-		//if (tmp != NULL)
-		//	tmp = tmp->next;
 	}
 		add_cmd(&lst_cmds, &lst_args, &lst_files);
 		print_struct(lst_cmds);
+		//execute
 }

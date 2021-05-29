@@ -87,5 +87,7 @@ void	parser(t_token *lexer)
 		id_error = check_syntax_errors(lexer);
 		if (id_error != 1)
 			print_error_and_exit(&lexer, id_error);
+		else
+			print_lexer(lexer);
 	}
 }
