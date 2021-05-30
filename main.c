@@ -12,28 +12,35 @@
 
 #include "./includes/minishell.h"
 #include "libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "./includes/lexer.h"
 
 void	prompt()
 {
 	char *str;
 
-	//str = ft_strdup("\033[0;34mminishell$ ");
-	str = "minishell$ ";
+	str = ft_strdup("\033[0;33mminishell$ \033[0m");
 	write(1, str, ft_strlen(str));
 }
 
 char *read_command_line(void)
 {
 	char	*line_cmd;
+	char	*buff;
 
-	line_cmd = NULL;
-	get_next_line(0, &line_cmd);
+	buff = malloc(1);
+	line_cmd = ft_strdup("");
+	while (read(0, buff, 1))
+	{
+		if(buff[0] == '\n')
+		{
+			free(buff);
+			return (line_cmd);
+		}
+		line_cmd = ft_charjoin(line_cmd, buff[0]);
+	}
+	free(buff);
 	return (line_cmd);
 }
+
 void		print_lexer(t_token *lexer)
 {
 	t_token *tmp = lexer;
@@ -69,31 +76,23 @@ int		main(int argc, char **argv, char **env)
 	status = 1;
 
 	env = NULL;
-	//init env_var
-	/*ft_putstr_fd(getenv("PATH"), 1);
-	write(1, "\n",1);
-	while (*env)
-	{
-		ft_putstr_fd(*env, 1);
-		env++;
-	}*/
 	while (status)
 	{
 			//start the shell => initialize
-			prompt();
-			cmd_line = read_command_line();
+		prompt();
+		cmd_line = read_command_line();
 			//record in history//in a file
-			tokens = lexer(cmd_line);
-			parser(tokens);
-			fill_struct_and_execute(tokens);
-			if (strcmp(cmd_line, "exit") == 0)
-			{
-				write(1, "exit", 4);
-				status = 0;
-				free(cmd_line);
-				break;
-			}
+		tokens = lexer(cmd_line);
+		parser(tokens);
+		fill_struct_and_execute(tokens);
+		if (strcmp(cmd_line, "exit") == 0)
+		{
+			write(1, "exit", 4);
+			status = 0;
 			free(cmd_line);
+			break;
+		}
+		free(cmd_line);
 	}
 }
 

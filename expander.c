@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-#include "includes/lexer.h"
 #include "libft/libft.h"
-#include <stdlib.h>
 
 char		*expander(t_token **lst_token,char *input)
 {

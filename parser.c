@@ -11,9 +11,7 @@
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-#include "includes/lexer.h"
 #include "libft/libft.h"
-#include <stdlib.h>
 
 /*
  *check_first_token(type)

@@ -11,10 +11,7 @@
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-#include "includes/lexer.h"
-#include "includes/parser.h"
 #include "libft/libft.h"
-#include <stdlib.h>
 
 void		add_token(t_token **lst_tok, char *data, int type)
 {
@@ -148,19 +145,16 @@ t_token		*lexer(char *input)
 			else if (*input == QUOTE)
 			{
 				state = IN_QUOTE;
-				//add_token(&lst_tok, "QUOTE", QUOTE);
 				input++;
 				break;
 			}
 			else if (*input == D_QUOTE)
 			{
 				state = IN_DQUOTE;
-				//add_token(&lst_tok, "DQUOTE", D_QUOTE);
 				input++;
 				break;
 			}
 			else
-				//if (no_special_char(*input))
 			{
 				data = malloc(size);
 				j = 0;
@@ -190,14 +184,13 @@ t_token		*lexer(char *input)
 			free(data);
 			if (*input == QUOTE)
 			{
-				//add_token(&lst_tok, "QUOTE", QUOTE);
 				state = NORMAL;
 				input++;
 			}
 		}
-		while (state == IN_DQUOTE && *input)
+		while (state == IN_DQUOTE && *input != '\0')
 		{
-			if (*input != '\0' && *input == DOLLAR)
+			if (*input == DOLLAR)
 			{
 				input++;
 				if (*input == SPACE || *input == '\0')
@@ -228,8 +221,12 @@ t_token		*lexer(char *input)
 				}
 				input++;
 			}
-			else if (*input != D_QUOTE && *input != DOLLAR
-					&& *input != ESC_CHAR)
+			//else if (*input == D_QUOTE)
+			//{
+			//	state = NORMAL;
+			//	input++;
+			//}
+			else if (state == IN_DQUOTE && *input != '\0')
 			{
 				data = malloc(size);
 				j = 0;
@@ -244,13 +241,13 @@ t_token		*lexer(char *input)
 				add_token(&lst_tok, data, CHAR);
 				free(data);
 			}
-			if (*input == D_QUOTE)
+			if (*input != '\0' && *input == D_QUOTE)
 			{
 				state = NORMAL;
-				//add_token(&lst_tok, "DQUOTE", D_QUOTE);
 				input++;
 			}
 		}
+
 	}
 	if (state == IN_QUOTE || state == IN_DQUOTE)
 	{

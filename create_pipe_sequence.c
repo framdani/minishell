@@ -11,10 +11,7 @@
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-#include "includes/lexer.h"
-#include "includes/parser.h"
 #include "libft/libft.h"
-#include <stdlib.h>
 
 void		add_arg(t_arg **lst_args, char *arg)
 {

@@ -13,7 +13,6 @@
 #ifndef PARSER_H
 # define PARSER_H
 #include "lexer.h"
-
 # define INPUT = 0
 # define OUTPUT = 1
 /* List of args = SUFFIX

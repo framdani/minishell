@@ -11,12 +11,7 @@
 /* ************************************************************************** */
 
 #include "./includes/minishell.h"
-#include "includes/parser.h"
 #include "libft/libft.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "./includes/lexer.h"
 
 int		ft_lst_size(t_arg	*lst_arg)
 {
@@ -77,14 +72,14 @@ void	fill_struct_and_execute(t_token *lexer)
 	type = 0;
 	if (tmp != NULL)
 	{
-		while (tmp->type == SPACE)
+		while (tmp != NULL && tmp->type == SPACE)
 			tmp = tmp->next;
-		if (tmp->type == SEMICOLON || tmp->type == PIPE)
+		if (tmp != NULL && (tmp->type == SEMICOLON || tmp->type == PIPE))
 			tmp = tmp->next;
 	}
 	while (tmp != NULL)
 	{
-		if (tmp->type == CHAR)
+		if (tmp != NULL && tmp->type == CHAR)
 		{
 			arg = ft_strdup("");
 			while (tmp != NULL && tmp->type == CHAR)
