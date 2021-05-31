@@ -63,6 +63,18 @@ typedef struct			s_pipe_sequence
 	int					nbr_pipe; // cmds
 }						t_pipe_sequence;
 
+/*
+ *
+ * Env_var
+ *
+ */
+
+typedef struct		s_envv
+{
+	char		*name;
+	char		*value;
+}				t_envv;
+
 void 	parser(t_token *lexer);
 char	*expander(t_token **lst, char *input);
 void	print_error_and_exit(t_token **lst_token, int error);

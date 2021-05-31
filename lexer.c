@@ -221,11 +221,6 @@ t_token		*lexer(char *input)
 				}
 				input++;
 			}
-			//else if (*input == D_QUOTE)
-			//{
-			//	state = NORMAL;
-			//	input++;
-			//}
 			else if (state == IN_DQUOTE && *input != '\0')
 			{
 				data = malloc(size);

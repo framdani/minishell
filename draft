@@ -1,0 +1,18 @@
+//la norme 42
+
+int			get_type_char(char c)
+{
+	
+}
+
+int			tokenize(t_token *lst_tok, char *input, int state)
+{
+	while (*input != '0')
+	{
+		if (state == NORMAL && *input  '\0')
+			//
+		else if (state == IN_QUOTE)
+			///
+		else if (state == IN_DQUOTE)
+			//
+}

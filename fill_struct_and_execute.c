@@ -13,6 +13,51 @@
 #include "./includes/minishell.h"
 #include "libft/libft.h"
 
+int 	is_valid_identifier(char *arg)
+{
+	int i;
+
+	i = 0;
+	if (ft_isdigit(arg[0]) || arg[0] == '\0' || arg[0] == '=')
+		return (0);
+	return (1);
+
+}
+
+t_envv	*get_key_value(char	*arg)
+{
+	t_envv		*envv;
+	int			i;
+
+	i = 0;
+	envv->name=ft_strdup("");
+	envv->value = ft_strdup("");
+	envv = NULL;
+	if (!is_valid_identifier(arg))
+		return(NULL);
+	else
+	{
+		while (arg[i] != '=' && arg[i] != '\0')
+		{
+			envv->name = ft_charjoin(envv->name, arg[i]);
+			i++;
+		}
+		if (arg[i] == '=')
+		{
+			while(arg[i] != '\0')
+			{
+				envv->value = ft_charjoin(envv->value, arg[i]);
+				i++;
+			}
+		}
+		else if (arg[i] == '\0')
+		{
+			envv->value = NULL;
+		}
+	}
+	return (envv);
+}
+
 int		ft_lst_size(t_arg	*lst_arg)
 {
 	int		cmpt;
