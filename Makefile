@@ -9,7 +9,8 @@ SRCS = main.c\
 	   expander.c\
 	   fill_struct_and_execute.c\
 	   create_pipe_sequence.c\
-	   initialize.c
+	   initialize.c\
+	   draft.c
 
 NAME= minishell
 

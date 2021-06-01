@@ -18,11 +18,25 @@ void	print_error(char *str)
 	ft_putstr_fd(str, 1);
 }
 
+void	free_token(t_token **lst_tok)
+{
+	t_token *tmp;
+
+	if (lst_tok)
+	{
+		tmp = (*lst_tok)->next;
+		free((*lst_tok)->value);
+		free(*lst_tok);
+		*lst_tok = tmp;
+	}
+}
+
 void	print_error_and_exit(t_token **lst_tok, int error)
 {
 
 	//free_list_tokens
-	*lst_tok = NULL;
+	free_token(lst_tok);
+	//*lst_tok = NULL;
 	print_error("Minishell : syntax error ");
 	if (error == 6)
 		print_error("near unexpected token 'newline'\n");

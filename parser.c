@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "includes/lexer.h"
 #include "includes/minishell.h"
 #include "libft/libft.h"
 
@@ -68,12 +69,13 @@ int		check_syntax_errors(t_token *lexer)
 		}
 		tmp = tmp->next;
 	}
-	if (tmp->type == PIPE || tmp->type == LEFT || tmp->type == RIGHT || tmp->type == ESC_CHAR)
+	if (tmp->type == PIPE || tmp->type == LEFT || tmp->type == RIGHT ||
+			tmp->type == ESC_CHAR || tmp->type == GREATER)
 		return (6);
 	return (1);
 }
 
-void	parser(t_token *lexer)
+t_token		*parser(t_token *lexer)
 {
 	t_token *tmp;
 	int		id_error;
@@ -84,8 +86,12 @@ void	parser(t_token *lexer)
 	{
 		id_error = check_syntax_errors(lexer);
 		if (id_error != 1)
+		{
 			print_error_and_exit(&lexer, id_error);
-		else
-			print_lexer(lexer);
+			return (NULL);
+		}
+		//else
+		//	print_lexer(lexer);
 	}
+	return (lexer);
 }

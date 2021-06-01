@@ -32,6 +32,11 @@
 #define GREATER			-2
 
 
+typedef struct			s_info
+{
+	int				state;
+	char			*input;
+}						t_info;
 
 typedef struct			s_token
 {
@@ -43,4 +48,10 @@ typedef struct			s_token
 t_token		*lexer(char *input);
 void		print_lexer(t_token *lexer);
 void		add_token(t_token **lst_token, char *data, int type);
+t_info		tokenize_state_normal( char *input, t_token **lst_tok, int size);
+t_info		tokenize_inside_dquote(char *input, t_token **lst_tok, int size);
+t_info		tokenize_inside_squote(char *input, t_token **lst_tok, int size);
+char		*skip_spaces(char *str);
+char		next_char(char *str);
+void	free_token(t_token **lst);
 #endif

@@ -75,7 +75,7 @@ typedef struct		s_envv
 	char		*value;
 }				t_envv;
 
-void 	parser(t_token *lexer);
+t_token *parser(t_token *lexer);
 char	*expander(t_token **lst, char *input);
 void	print_error_and_exit(t_token **lst_token, int error);
 void	fill_struct_and_execute(t_token *token);

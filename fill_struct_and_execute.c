@@ -13,7 +13,7 @@
 #include "./includes/minishell.h"
 #include "libft/libft.h"
 
-int 	is_valid_identifier(char *arg)
+/*int 	is_valid_identifier(char *arg)
 {
 	int i;
 
@@ -32,9 +32,12 @@ t_envv	*get_key_value(char	*arg)
 	i = 0;
 	envv->name=ft_strdup("");
 	envv->value = ft_strdup("");
-	envv = NULL;
 	if (!is_valid_identifier(arg))
+	{
+		free(envv->name);
+		free(envv->value);
 		return(NULL);
+	}
 	else
 	{
 		while (arg[i] != '=' && arg[i] != '\0')
@@ -56,7 +59,7 @@ t_envv	*get_key_value(char	*arg)
 		}
 	}
 	return (envv);
-}
+}*/
 
 int		ft_lst_size(t_arg	*lst_arg)
 {
@@ -169,6 +172,7 @@ void	fill_struct_and_execute(t_token *lexer)
 		{
 			tmp = tmp->next;
 			//execute();
+			//free_lst_cmd();
 		}
 	}
 	if (lst_args != NULL || lst_files != NULL)
@@ -177,4 +181,5 @@ void	fill_struct_and_execute(t_token *lexer)
 		print_struct(lst_cmds);
 		//execute
 	}
+	
 }

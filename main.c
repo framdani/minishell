@@ -83,7 +83,7 @@ int		main(int argc, char **argv, char **env)
 		cmd_line = read_command_line();
 			//record in history//in a file
 		tokens = lexer(cmd_line);
-		parser(tokens);
+		tokens = parser(tokens);
 		fill_struct_and_execute(tokens);
 		if (strcmp(cmd_line, "exit") == 0)
 		{
