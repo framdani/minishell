@@ -42,6 +42,12 @@ t_envv	*get_key_value(char	*arg)
 	{
 		while (arg[i] != '=' && arg[i] != '\0')
 		{
+			if (arg[i] != '_' || !ft_isalnum(arg[i]))
+			{
+				free(envv->name);
+				free(envv->value);
+				return (NULL);
+			}
 			envv->name = ft_charjoin(envv->name, arg[i]);
 			i++;
 		}
