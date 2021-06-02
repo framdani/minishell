@@ -53,6 +53,7 @@ t_envv	*get_key_value(char	*arg)
 		}
 		if (arg[i] == '=')
 		{
+			i++;
 			while(arg[i] != '\0')
 			{
 				envv->value = ft_charjoin(envv->value, arg[i]);
