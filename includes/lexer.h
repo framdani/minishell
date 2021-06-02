@@ -53,5 +53,5 @@ t_info		tokenize_inside_dquote(char *input, t_token **lst_tok, int size);
 t_info		tokenize_inside_squote(char *input, t_token **lst_tok, int size);
 char		*skip_spaces(char *str);
 char		next_char(char *str);
-void	free_token(t_token **lst);
+void		free_lst_tokens(t_token **lst);
 #endif

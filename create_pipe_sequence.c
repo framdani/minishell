@@ -14,7 +14,7 @@
 #include "libft/libft.h"
 #include <unistd.h>
 
-void		add_arg(t_arg **lst_args, char *arg)
+void	add_arg(t_arg **lst_args, char *arg)
 {
 	t_arg	*new;
 	t_arg	*tmp;
@@ -34,9 +34,10 @@ void		add_arg(t_arg **lst_args, char *arg)
 			tmp->next = new;
 		}
 	}
+	free(arg);
 }
 
-void		add_cmd(t_cmd **lst_cmds, t_arg **args, t_file **files)
+void	add_cmd(t_cmd **lst_cmds, t_arg **args, t_file **files)
 {
 	t_cmd	*new;
 	t_cmd	*tmp;
@@ -46,8 +47,9 @@ void		add_cmd(t_cmd **lst_cmds, t_arg **args, t_file **files)
 	{
 		new->next = NULL;
 		new->args = convert_into_dpointer(args);
+		free_lst_args(args);
 		new->file = *files;
-		//new->nbr_args = size(args);
+		//nbrarg = size(lst_args)
 		if (*lst_cmds == NULL)
 			*lst_cmds = new;
 		else
@@ -60,9 +62,8 @@ void		add_cmd(t_cmd **lst_cmds, t_arg **args, t_file **files)
 	}
 }
 
-void		add_file(t_file **lst_files, char *filename, int type)
+void	add_file(t_file **lst_files, char *filename, int type)
 {
-
 	t_file	*new;
 	t_file	*tmp;
 
@@ -73,7 +74,7 @@ void		add_file(t_file **lst_files, char *filename, int type)
 		new->filename = ft_strdup(filename);
 		new->type = type;
 		if (*lst_files == NULL)
-			*lst_files= new;
+			*lst_files = new;
 		else
 		{
 			tmp = *lst_files;
@@ -82,18 +83,18 @@ void		add_file(t_file **lst_files, char *filename, int type)
 			tmp->next = new;
 		}
 	}
+	free(filename);
 }
 
 void	print_struct(t_cmd *lst_cmds)
 {
 	t_cmd		*tmp;
-	char 		**arg;
+	char		**arg;
 	t_file		*files;
 	int			i;
 
 	tmp = lst_cmds;
 	i = 0;
-	//convert args into double pointer
 	while (tmp != NULL)
 	{
 		i = 0;
@@ -101,16 +102,16 @@ void	print_struct(t_cmd *lst_cmds)
 		ft_putstr_fd("cmds : \n", 1);
 		if (arg)
 		{
-		while(arg[i] != NULL)
-		{
-			ft_putstr_fd("ARG : ", 1);
-			ft_putstr_fd(arg[i], 1);
-			ft_putstr_fd("\n", 1);
-			i++;
-		}
+			while (arg[i] != NULL)
+			{
+				ft_putstr_fd("ARG : ", 1);
+				ft_putstr_fd(arg[i], 1);
+				ft_putstr_fd("\n", 1);
+				i++;
+			}
 		}
 		files = tmp->file;
-		while (files!= NULL)
+		while (files != NULL)
 		{
 			ft_putstr_fd("File : ", 1);
 			ft_putstr_fd(files->filename, 1);
@@ -121,15 +122,5 @@ void	print_struct(t_cmd *lst_cmds)
 			files = files->next;
 		}
 		tmp = tmp->next;
-	}
-	i = 0;
-	if (arg)
-	{
-		while (arg[i])
-		{
-			free(arg[i]);
-			i++;
-		}
-		free(arg);
 	}
 }

@@ -87,4 +87,7 @@ t_cmd	init_cmd(void);
 t_file	init_file(void);
 t_arg	init_args(void);
 char	**convert_into_dpointer(t_arg **lst_arg);
+void	free_lst_files(t_file **lst_files);
+void	free_lst_args(t_arg **lst_args);
+void 	free_lst_cmds(t_cmd **lst_cmds);
 #endif

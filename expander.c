@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "includes/lexer.h"
 #include "includes/minishell.h"
 #include "libft/libft.h"
 

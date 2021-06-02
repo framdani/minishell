@@ -16,3 +16,5 @@ int			tokenize(t_token *lst_tok, char *input, int state)
 		else if (state == IN_DQUOTE)
 			//
 }
+
+

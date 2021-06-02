@@ -61,7 +61,7 @@ t_envv	*get_key_value(char	*arg)
 	return (envv);
 }*/
 
-int		ft_lst_size(t_arg	*lst_arg)
+int	ft_lst_size(t_arg	*lst_arg)
 {
 	int		cmpt;
 	t_arg	*tmp;
@@ -86,7 +86,8 @@ char	**convert_into_dpointer(t_arg	**lst_arg)
 	i = 0;
 	tmp = *lst_arg;
 	size = ft_lst_size(*lst_arg);
-	if (!(arg = malloc(sizeof(char *) * (size + 1))))
+	arg = malloc(sizeof(char *) * (size + 1));
+	if (!arg)
 		return (NULL);
 	while (tmp != NULL)
 	{
@@ -106,7 +107,6 @@ void	fill_struct_and_execute(t_token *lexer)
 	char				*filename;
 	int					type;
 
-
 	t_arg	*lst_args =  NULL;
 		//init_args();
 	//lst_cmds.args = &lst_args;
@@ -122,7 +122,7 @@ void	fill_struct_and_execute(t_token *lexer)
 	{
 		while (tmp != NULL && tmp->type == SPACE)
 			tmp = tmp->next;
-		if (tmp != NULL && (tmp->type == SEMICOLON || tmp->type == PIPE))
+		if (tmp != NULL && is_separator(tmp->type))
 			tmp = tmp->next;
 	}
 	while (tmp != NULL)
@@ -136,9 +136,8 @@ void	fill_struct_and_execute(t_token *lexer)
 				tmp = tmp->next;
 			}
 			add_arg(&lst_args, arg);
-			free(arg);
 		}
-		if (tmp != NULL && (tmp->type == LEFT || tmp->type == RIGHT || tmp->type == GREATER))
+		if (tmp != NULL && is_redirection(tmp->type))
 		{
 			filename = ft_strdup("");
 			if (tmp->type == LEFT)
@@ -154,7 +153,6 @@ void	fill_struct_and_execute(t_token *lexer)
 				tmp = tmp->next;
 			}
 			add_file(&lst_files, filename, type);
-			free(filename);
 		}
 		if (tmp != NULL && tmp->type == SPACE)
 		{
@@ -181,5 +179,5 @@ void	fill_struct_and_execute(t_token *lexer)
 		print_struct(lst_cmds);
 		//execute
 	}
-	
+	free_lst_cmds(&lst_cmds);
 }
