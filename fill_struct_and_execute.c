@@ -99,78 +99,88 @@ char	**convert_into_dpointer(t_arg	**lst_arg)
 	return (arg);
 }
 
+t_token 	*skip_token_space(t_token *tok)
+{
+	if (tok != NULL)
+	{
+		while (tok != NULL && tok->type == SPACE)
+			tok = tok->next;
+	}
+	return (tok);
+}
+
+t_token *fill_lst_args(t_arg **lst_args, t_token *tok)
+{
+	char *arg;
+
+	arg = ft_strdup("");
+	while (tok != NULL && tok->type == CHAR)
+	{
+		arg = ft_strjoin(arg, tok->value);
+		tok = tok->next;
+	}
+	add_arg(lst_args, arg);
+	return (tok);
+}
+
+t_token *fill_lst_files(t_file **lst_files, t_token *tok)
+{
+	char 	*filename;
+	int 	type;
+
+	type = 0;
+	filename = ft_strdup("");
+	if (tok->type == LEFT)
+		type = 0;
+	else if (tok->type == RIGHT)
+		type = 1;
+	else if (tok->type == GREATER)
+		type = 2;
+	tok = tok->next;
+	while( tok!= NULL && tok->type == CHAR)
+	{
+		filename = ft_strjoin(filename, tok->value);
+		tok = tok->next;
+	}
+	add_file(lst_files, filename, type);
+	return (tok);
+}
+
 void	fill_struct_and_execute(t_token *lexer)
 {
-	t_cmd				*lst_cmds;
-	t_token				*tmp;
-	char				*arg;
-	char				*filename;
-	int					type;
-
-	t_arg	*lst_args =  NULL;
-		//init_args();
-	//lst_cmds.args = &lst_args;
-	t_file	*lst_files = NULL;
+	t_cmd	*lst_cmds;
+	t_token	*tmp;
+	t_arg	*lst_args;
+	t_file	*lst_files;
+	
+	lst_args = NULL;
+	lst_files = NULL;
 	lst_cmds = NULL;
-		//init_file();
-	//lst_cmds.file = &lst_files;
 	tmp = lexer;
-	filename = ft_strdup("");
-	arg = ft_strdup("");
-	type = 0;
 	if (tmp != NULL)
 	{
-		while (tmp != NULL && tmp->type == SPACE)
-			tmp = tmp->next;
+		tmp = skip_token_space(tmp);
 		if (tmp != NULL && is_separator(tmp->type))
 			tmp = tmp->next;
 	}
 	while (tmp != NULL)
 	{
 		if (tmp != NULL && tmp->type == CHAR)
-		{
-			arg = ft_strdup("");
-			while (tmp != NULL && tmp->type == CHAR)
-			{
-				arg = ft_strjoin(arg, tmp->value);
-				tmp = tmp->next;
-			}
-			add_arg(&lst_args, arg);
-		}
+			tmp = fill_lst_args(&lst_args, tmp);
 		if (tmp != NULL && is_redirection(tmp->type))
-		{
-			filename = ft_strdup("");
-			if (tmp->type == LEFT)
-				type = 0;
-			else if (tmp->type == RIGHT)
-				type = 1;
-			else if (tmp->type == GREATER)
-				type = 2;
-			tmp = tmp->next;
-			while( tmp!= NULL && tmp->type == CHAR)
-			{
-				filename = ft_strjoin(filename, tmp->value);
-				tmp = tmp->next;
-			}
-			add_file(&lst_files, filename, type);
-		}
+			tmp = fill_lst_files(&lst_files, tmp);
 		if (tmp != NULL && tmp->type == SPACE)
-		{
-			while(tmp != NULL && tmp->type == SPACE)
-				tmp = tmp->next;
-		}
+			tmp = skip_token_space(tmp);
 		if (tmp != NULL && tmp->type == PIPE)
 		{
 			tmp=tmp->next;
 			add_cmd(&lst_cmds, &lst_args, &lst_files);
-			lst_args = NULL;
-			lst_files = NULL;
 		}
 		if (tmp != NULL && tmp->type == SEMICOLON)
 		{
 			tmp = tmp->next;
 			//execute();
-			//free_lst_cmd();
+			//free_lst_cmd(); done
 		}
 	}
 	if (lst_args != NULL || lst_files != NULL)
