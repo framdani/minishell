@@ -16,7 +16,7 @@ int			tokenize(t_token *lst_tok, char *input, int state)
 		else if (state == IN_DQUOTE)
 			//
 }
-
+oko ok
 t_token *fill_lst_files(t_arg **lst_files, t_token *tok)
 {
 	char *filename;
