@@ -13,7 +13,7 @@
 #include "includes/minishell.h"
 #include "libft/libft.h"
 
-char		*expander(t_token **lst_token,char *input)
+char	*expander(t_token **lst_token, char *input)
 {
 	char	*new_value;
 	char	*token;

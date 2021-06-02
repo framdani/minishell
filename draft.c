@@ -196,7 +196,7 @@ t_info 	tokenize_inside_squote(char *input, t_token **lst_tok, int size)
 	data = malloc(size);
 	j = 0;
 	t_info	info;
-	info.state = 0;
+	info.state = IN_QUOTE;
 	info.input = input;
 	while (*input != QUOTE && *input != '\0')
 	{
@@ -209,7 +209,6 @@ t_info 	tokenize_inside_squote(char *input, t_token **lst_tok, int size)
 	free(data);
 	if (*input == QUOTE)
 	{
-		//state = NORMAL;
 		input++;
 		info.input = input;
 		info.state = NORMAL;

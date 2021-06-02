@@ -70,11 +70,12 @@ int		main(int argc, char **argv, char **env)
 	char		*cmd_line;
 	int			status;
 	t_token		*tokens;
+	int			size;
 
 	argc = 0;
 	argv = NULL;
 	status = 1;
-
+	size = 0;
 	env = NULL;
 	while (status)
 	{
@@ -82,7 +83,8 @@ int		main(int argc, char **argv, char **env)
 		prompt();
 		cmd_line = read_command_line();
 			//record in history//in a file
-		tokens = lexer(cmd_line);
+		size = ft_strlen(cmd_line) + 1;
+		tokens = lexer(cmd_line, size);
 		tokens = parser(tokens);
 		fill_struct_and_execute(tokens);
 		if (strcmp(cmd_line, "exit") == 0)
