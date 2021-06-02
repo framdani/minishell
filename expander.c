@@ -14,6 +14,33 @@
 #include "includes/minishell.h"
 #include "libft/libft.h"
 
+void 	expand_value(t_token **lst_tok,char *value)
+{
+	char 	*new_value;
+
+	new_value = ft_strdup("");
+	while (*value != '\0' && *value == 32)
+		value++;
+	while (*value != '\0')
+	{
+		while (*value != 32 && *value != '\0')
+		{
+			new_value = ft_charjoin(new_value, *value);
+			value++;
+		}
+		add_token(lst_tok, new_value, CHAR);
+		free(new_value);
+		new_value = ft_strdup("");
+		if (*value == 32)
+		{
+			while (*value == 32 && *value != '\0')
+				value++;
+			add_token(lst_tok, "SPACE", SPACE);
+		}
+	}
+	free(new_value);
+}
+
 char	*expander(t_token **lst_token, char *input)
 {
 	char	*new_value;
@@ -33,8 +60,9 @@ char	*expander(t_token **lst_token, char *input)
 			input++;
 		}
 		token = getenv(new_value);
-		if (token)
-			add_token(lst_token, token, CHAR);
+		if (token != NULL)
+			//add_token(lst_token, token, CHAR);// a parser
+			expand_value(lst_token, token);
 		else
 			add_token(lst_token, "SPACE", SPACE);
 	}

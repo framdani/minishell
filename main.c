@@ -19,6 +19,7 @@ void	prompt()
 
 	str = ft_strdup("\033[0;33mminishell$ \033[0m");
 	write(1, str, ft_strlen(str));
+	free(str);
 }
 
 char *read_command_line(void)
@@ -92,8 +93,10 @@ int		main(int argc, char **argv, char **env)
 			write(1, "exit", 4);
 			status = 0;
 			free(cmd_line);
+			system("leaks minishell");
 			break;
 		}
+		system("leaks minishell");
 		free(cmd_line);
 	}
 }

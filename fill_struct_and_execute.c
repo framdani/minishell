@@ -112,14 +112,18 @@ t_token 	*skip_token_space(t_token *tok)
 t_token *fill_lst_args(t_arg **lst_args, t_token *tok)
 {
 	char *arg;
+	char *tmp;
 
 	arg = ft_strdup("");
 	while (tok != NULL && tok->type == CHAR)
 	{
+		tmp = arg;
 		arg = ft_strjoin(arg, tok->value);
+		free(tmp);
 		tok = tok->next;
 	}
 	add_arg(lst_args, arg);
+	//free(tmp);
 	return (tok);
 }
 
@@ -127,9 +131,11 @@ t_token *fill_lst_files(t_file **lst_files, t_token *tok)
 {
 	char 	*filename;
 	int 	type;
+	char 	*tmp;
 
 	type = 0;
 	filename = ft_strdup("");
+	tmp = filename;
 	if (tok->type == LEFT)
 		type = 0;
 	else if (tok->type == RIGHT)
@@ -139,8 +145,10 @@ t_token *fill_lst_files(t_file **lst_files, t_token *tok)
 	tok = tok->next;
 	while( tok!= NULL && tok->type == CHAR)
 	{
+		tmp = filename;
 		filename = ft_strjoin(filename, tok->value);
 		tok = tok->next;
+		free(tmp);
 	}
 	add_file(lst_files, filename, type);
 	return (tok);
@@ -180,7 +188,7 @@ void	fill_struct_and_execute(t_token *lexer)
 		{
 			tmp = tmp->next;
 			//execute();
-			//free_lst_cmd(); done
+			//free_lst_cmd();done
 		}
 	}
 	if (lst_args != NULL || lst_files != NULL)
@@ -189,5 +197,6 @@ void	fill_struct_and_execute(t_token *lexer)
 		print_struct(lst_cmds);
 		//execute
 	}
+	free_lst_tokens(&lexer);
 	free_lst_cmds(&lst_cmds);
 }

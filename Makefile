@@ -1,6 +1,6 @@
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRCS = main.c\
 	   lexer.c\

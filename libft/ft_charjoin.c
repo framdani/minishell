@@ -31,5 +31,6 @@ char 	*ft_charjoin(char 	*str, char c)
 	}
 	res[i] = c;
 	res[i + 1] = '\0';
+	free(str);
 	return (res);
 }
