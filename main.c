@@ -66,6 +66,7 @@ int	main(int argc, char **argv, char **env)
 	status = 1;
 	size = 0;
 	env = NULL;
+	//return value = 0;
 	while (status)
 	{
 		prompt();
@@ -73,6 +74,8 @@ int	main(int argc, char **argv, char **env)
 		size = ft_strlen(cmd_line) + 1;
 		tokens = lexer(cmd_line, size);
 		tokens = parser(tokens);
+		//if (size > 0 && tokens != NULL)
+			//set_return_value
 		fill_struct_and_execute(tokens);
 		if (strcmp(cmd_line, "exit") == 0)
 		{

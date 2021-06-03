@@ -46,6 +46,13 @@ char	*expander(t_token **lst_token, char *input)
 	char	*token;
 
 	new_value = ft_strdup("");
+	if (*input == '?')
+	{
+		add_token(lst_token, "$?", CHAR);
+		input++;
+		free(new_value);
+		return (input);
+	}
 	if (ft_isdigit(*input))
 	{
 		input++;

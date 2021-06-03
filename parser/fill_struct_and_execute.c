@@ -171,6 +171,7 @@ void	fill_struct_and_execute(t_token *lexer)
 	lst_files = NULL;
 	lst_cmds = NULL;
 	tmp = lexer;
+	print_lexer(lexer);
 	if (tmp != NULL)
 	{
 		tmp = skip_token_space(tmp);
@@ -189,11 +190,13 @@ void	fill_struct_and_execute(t_token *lexer)
 		{
 			tmp = tmp->next;
 			add_cmd(&lst_cmds, &lst_args, &lst_files);
+			//free_lst_files(&lst_files);
+			lst_files = NULL;
 		}
 		if (tmp != NULL && tmp->type == SEMICOLON)
 		{
 			tmp = tmp->next;
-			//execute();
+			//return value = execute();
 			//free_lst_cmd();done
 		}
 	}
@@ -201,7 +204,7 @@ void	fill_struct_and_execute(t_token *lexer)
 	{
 		add_cmd(&lst_cmds, &lst_args, &lst_files);
 		print_struct(lst_cmds);
-		//execute
+		//retrun value = execute()
 	}
 	free_lst_tokens(&lexer);
 	free_lst_cmds(&lst_cmds);
