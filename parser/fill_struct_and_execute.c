@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/minishell.h"
-#include "libft/libft.h"
+#include "../includes/minishell.h"
+#include "../libft/libft.h"
 
 /*int 	is_valid_identifier(char *arg)
 {
@@ -116,10 +116,10 @@ t_token 	*skip_token_space(t_token *tok)
 	return (tok);
 }
 
-t_token *fill_lst_args(t_arg **lst_args, t_token *tok)
+t_token	*fill_lst_args(t_arg **lst_args, t_token *tok)
 {
-	char *arg;
-	char *tmp;
+	char	*arg;
+	char	*tmp;
 
 	arg = ft_strdup("");
 	while (tok != NULL && tok->type == CHAR)
@@ -130,15 +130,14 @@ t_token *fill_lst_args(t_arg **lst_args, t_token *tok)
 		tok = tok->next;
 	}
 	add_arg(lst_args, arg);
-	//free(tmp);
 	return (tok);
 }
 
-t_token *fill_lst_files(t_file **lst_files, t_token *tok)
+t_token	*fill_lst_files(t_file **lst_files, t_token *tok)
 {
-	char 	*filename;
-	int 	type;
-	char 	*tmp;
+	char	*filename;
+	char	*tmp;
+	int	type;
 
 	type = 0;
 	filename = ft_strdup("");
@@ -150,7 +149,7 @@ t_token *fill_lst_files(t_file **lst_files, t_token *tok)
 	else if (tok->type == GREATER)
 		type = 2;
 	tok = tok->next;
-	while( tok!= NULL && tok->type == CHAR)
+	while (tok != NULL && tok->type == CHAR)
 	{
 		tmp = filename;
 		filename = ft_strjoin(filename, tok->value);
@@ -167,7 +166,7 @@ void	fill_struct_and_execute(t_token *lexer)
 	t_token	*tmp;
 	t_arg	*lst_args;
 	t_file	*lst_files;
-	
+
 	lst_args = NULL;
 	lst_files = NULL;
 	lst_cmds = NULL;
@@ -188,7 +187,7 @@ void	fill_struct_and_execute(t_token *lexer)
 			tmp = skip_token_space(tmp);
 		if (tmp != NULL && tmp->type == PIPE)
 		{
-			tmp=tmp->next;
+			tmp = tmp->next;
 			add_cmd(&lst_cmds, &lst_args, &lst_files);
 		}
 		if (tmp != NULL && tmp->type == SEMICOLON)

@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/lexer.h"
-#include "includes/minishell.h"
-#include "libft/libft.h"
+#include "../includes/minishell.h"
+#include "../libft/libft.h"
 
-void 	expand_value(t_token **lst_tok,char *value)
+void 	expand_value(t_token **lst_tok, char *value)
 {
-	char 	*new_value;
+	char	*new_value;
 
 	new_value = ft_strdup("");
 	while (*value != '\0' && *value == 32)
@@ -61,7 +60,6 @@ char	*expander(t_token **lst_token, char *input)
 		}
 		token = getenv(new_value);
 		if (token != NULL)
-			//add_token(lst_token, token, CHAR);// a parser
 			expand_value(lst_token, token);
 		else
 			add_token(lst_token, "SPACE", SPACE);

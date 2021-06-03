@@ -10,9 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/lexer.h"
-#include "includes/minishell.h"
-#include "libft/libft.h"
+#include "../includes/minishell.h"
+#include "../libft/libft.h"
 
 int	is_redirection(int type)
 {

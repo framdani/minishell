@@ -3,15 +3,14 @@ CC = clang
 CFLAGS = -Wall -Wextra -Werror -g
 
 SRCS = main.c\
-	   lexer.c\
-	   parser.c\
-	   print_errors.c\
-	   expander.c\
-	   fill_struct_and_execute.c\
-	   create_pipe_sequence.c\
-	   initialize.c\
-	   draft.c\
-	   free.c
+	   parser/lexer.c\
+	   parser/parser.c\
+	   parser/print_errors.c\
+	   parser/expander.c\
+	   parser/fill_struct_and_execute.c\
+	   parser/create_pipe_sequence.c\
+	   parser/draft.c\
+	   parser/free.c
 
 NAME= minishell
 
@@ -29,6 +28,7 @@ clean:
 fclean:clean
 	@cd libft && make fclean
 	@rm -rf $(NAME)
+	@rm -rvf minishell.dSYM
 
 re:fclean all
 

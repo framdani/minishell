@@ -10,10 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/lexer.h"
-#include "includes/minishell.h"
-#include "includes/parser.h"
-#include "libft/libft.h"
+#include "../includes/minishell.h"
+#include "../libft/libft.h"
 
 void	add_token(t_token **lst_tok, char *data, int type)
 {

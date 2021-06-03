@@ -13,16 +13,16 @@
 #include "./includes/minishell.h"
 #include "libft/libft.h"
 
-void	prompt()
+void	prompt(void)
 {
-	char *str;
+	char	*str;
 
 	str = ft_strdup("\033[0;33mminishell$ \033[0m");
 	write(1, str, ft_strlen(str));
 	free(str);
 }
 
-char *read_command_line(void)
+char	*read_command_line(void)
 {
 	char	*line_cmd;
 	char	*buff;
@@ -31,7 +31,7 @@ char *read_command_line(void)
 	line_cmd = ft_strdup("");
 	while (read(0, buff, 1))
 	{
-		if(buff[0] == '\n')
+		if (buff[0] == '\n')
 		{
 			free(buff);
 			return (line_cmd);
@@ -42,9 +42,11 @@ char *read_command_line(void)
 	return (line_cmd);
 }
 
-void		print_lexer(t_token *lexer)
+void	print_lexer(t_token *lexer)
 {
-	t_token *tmp = lexer;
+	t_token	*tmp;
+
+	tmp = lexer;
 	while (tmp != NULL)
 	{
 		printf("TOKEN (%s,%d)\n", tmp->value, tmp->type);
@@ -52,21 +54,7 @@ void		print_lexer(t_token *lexer)
 	}
 }
 
-/*static	int is_builtin_command(char *cmd)
-{
-	const char *cmds[8] = {"echo", "cd", "pwd", "export", "unset", "env",
-		"exit", "history"};
-	int i = 0;
-	while (i < 8)
-	{
-		if (strcmp(cmd, cmds[i]) == 0)
-			return (1);
-		i++;
-	}
-	return (0);
-}*/
-
-int		main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	char		*cmd_line;
 	int			status;
@@ -80,10 +68,8 @@ int		main(int argc, char **argv, char **env)
 	env = NULL;
 	while (status)
 	{
-			//start the shell => initialize
 		prompt();
 		cmd_line = read_command_line();
-			//record in history//in a file
 		size = ft_strlen(cmd_line) + 1;
 		tokens = lexer(cmd_line, size);
 		tokens = parser(tokens);
@@ -94,13 +80,9 @@ int		main(int argc, char **argv, char **env)
 			status = 0;
 			free(cmd_line);
 			system("leaks minishell");
-			break;
+			break ;
 		}
 		system("leaks minishell");
 		free(cmd_line);
 	}
 }
-
-// |; ||;| syntax error near unexpected token
-// Rules for naming variable name : it must begin with alphanemuric or underscore
-// if the flag is not specified print the flag as it

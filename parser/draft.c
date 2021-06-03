@@ -1,7 +1,6 @@
 
-#include "includes/lexer.h"
-#include "includes/minishell.h"
-#include "libft/libft.h"
+#include "../includes/minishell.h"
+#include "../libft/libft.h"
 
 t_info		tokenize_state_normal(char *input, t_token **lst_tok, int size)
 {
