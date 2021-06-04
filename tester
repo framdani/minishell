@@ -1,0 +1,116 @@
+echo $PWD; echo $PWD; cd .; pwd; echo $PWD; echo $PWD\n                                                   
+echo $PWD; echo $PWD; cd ..; pwd; echo $PWD; echo $PWD\n                                                  
+echo $PWD; echo $PWD; cd ../..; pwd; echo $PWD; echo $PWD\n                                               
+echo $PWD; echo $PWD; cd ../../..; pwd; echo $PWD; echo $PWD\n                                            
+echo $PWD; echo $PWD; cd ../../../..; pwd; echo $PWD; echo $PWD\n                                         
+echo $PWD; echo $PWD; cd ../../../../..; pwd; echo $PWD; echo $PWD\n                                      
+echo $PWD; echo $PWD; cd ../../../../../..; pwd; echo $PWD; echo $PWD\n                                   
+echo $PWD; echo $PWD; cd /; pwd; echo $PWD; echo $PWD\n                                                   
+echo $PWD; echo $PWD; cd ''; pwd; echo $PWD; echo $PWD\n                                                  
+echo $PWD; echo $PWD; cd '' ''; pwd; echo $PWD; echo $PWD\n                                               
+echo $PWD; echo $PWD; cd '' '' ''; pwd; echo $PWD; echo $PWD\n                                            
+echo $PWD; echo $PWD; cd ' '; pwd; echo $PWD; echo $PWD\n                                                                       
+export HOME='/home/tenshi' echo $PWD; echo $PWD; cd $HOME; pwd; echo $PWD; echo $PWD\n                 
+echo $PWD; echo $PWD; cd /; pwd; echo $PWD; echo $PWD\n                                                   
+echo $PWD; echo $PWD; cd /.; pwd; echo $PWD; echo $PWD\n                                                  
+echo $PWD; echo $PWD; cd /./; pwd; echo $PWD; echo $PWD\n                                                 
+echo $PWD; echo $PWD; cd /././././; pwd; echo $PWD; echo $PWD\n
+cd ; cd Desktop/Minishell                                                                                          
+echo $PWD; echo $PWD; cd ///; pwd; echo $PWD; echo $PWD\n                                                 
+echo $PWD; echo $PWD; cd ////; pwd; echo $PWD; echo $PWD\n                                                
+echo $PWD; echo $PWD; cd //////////////////////////////////////////////////////; pwd; echo $PWD; echo $OL... 
+echo $PWD; echo $PWD; cd; echo $PWD\n                                                                     
+export HOME='/home/tenshi' echo $PWD; echo $PWD; cd; echo $PWD; echo $PWD\n                            
+echo $PWD; echo $PWD; cd ' /'; pwd; echo $PWD; echo $PWD\n                                                
+echo $PWD; echo $PWD; cd ' / '; pwd; echo $PWD; echo $PWD\n                                               
+echo $PWD; echo $PWD; cd '                  /'; pwd; echo $PWD; echo $PWD\n                               
+echo $PWD; echo $PWD; cd '                  /              '; pwd; echo $PWD; echo $PWD\n                 
+echo $PWD; echo $PWD; cd ' // '; pwd; echo $PWD; echo $PWD\n                                              
+echo $PWD; echo $PWD; cd //home; pwd; echo $PWD; echo $PWD\n                                              
+echo $PWD; echo $PWD; cd ' //home'; pwd; echo $PWD; echo $PWD\n                                           
+echo $PWD; echo $PWD; cd '     //home    '; pwd; echo $PWD; echo $PWD\n                                                                           
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; unset PWD; cd /dev; echo $PWD\n                      
+echo $PWD; echo $PWD; cd /; echo $PWD; echo $PWD; export PWD=bonjour; cd /dev; echo $PWD\n             
+Cd .\n                                                                                                          
+cD .\n                                                                                                          
+export PATH='/bin:/usr/bin' Cd .\n                                                                           
+export PATH='/bin:/usr/bin' cD .\n                                                                           
+echo\n                                                                                                          
+echo bonjour\n                                                                                                  
+echo lalalala lalalalal alalalalal alalalala\n                                                                  
+echo lalalala                lalalalal      alalalalal alalalala\n                                              
+echo Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas mole... 
+echo -n\n                                                                                                       
+echo -n bonjour\n                                                                                               
+echo -n lalalala lalalalal alalalalal alalalala\n                                                               
+echo -n lalalala                lalalalal      alalalalal alalalala\n                                           
+echo -n Mollitia asperiores assumenda excepturi et ipsa. Nihil corporis facere aut a rem consequatur. Quas m... 
+echo bonjour -n\n                                                                                               
+echo -n bonjour -n\n                                                                                            
+                        echo                     bonjour             je\n                                       
+                        echo       -n            bonjour             je\n                                       
+echo a '' b '' c '' d\n                                                                                         
+echo a "" b "" c "" d\n                                                                                         
+echo -n a '' b '' c '' d\n                                                                                      
+echo -n a "" b "" c "" d\n                                                                                      
+echo '' '' ''\n                                                                                                 
+Echo bonjour\n                                                                                                  
+eCho bonjour\n                                                                                                  
+ecHo bonjour\n                                                                                                  
+echO bonjour\n                                                                                                  
+EchO bonjour\n                                                                                                  
+eCHo bonjour\n                                                                                                  
+EcHo bonjour\n                                                                                                  
+eChO bonjour\n                                                                                                  
+export PATH='/bin:/usr/bin' Echo bonjour\n                                                                   
+export PATH='/bin:/usr/bin' eCho bonjour\n                                                                   
+export PATH='/bin:/usr/bin' ecHo bonjour\n                                                                   
+export PATH='/bin:/usr/bin' echO bonjour\n                                                                   
+export PATH='/bin:/usr/bin' EchO bonjour\n                                                                   
+export PATH='/bin:/usr/bin' eCHo bonjour\n                                                                   
+export PATH='/bin:/usr/bin' EcHo bonjour\n                                                                   
+export PATH='/bin:/usr/bin' eChO bonjour\n                                                                   
+export PATH='/bin:/usr/bin' eChO 'bonjo\nur'\n                                                            
+echo -n -n -n -n bonjour\n                                                                                      
+echo -nnnnnnnnnnnnnnnnnnnnn bonjour\n                                                                           
+echo -nnnnnnnnnnnnnnnnnnnnn -n -n -n bonjour -n -n\n                                                            
+env\n                                                                                                                                                                            
+Env\n                                                                                                           
+enV\n                                                                                                           
+export PATH='/bin:/usr/bin' Env\n                                                                            
+export PATH='/bin:/usr/bin' enV\n                                                                            
+exit\n                                                                                                          
+exit 1\n                                                                                                        
+exit 2\n                                                                                                        
+exit 3\n                                                                                                        
+exit ' 3'\n                                                                                                     
+exit '\t3'\n                                                                                                    
+exit '\t\f\r 3'\n                                                                                               
+exit '3 '\n                                                                                                     
+exit '3\t'\n                                                                                                    
+exit '3\r'\n                                                                                                    
+exit '3\t\f\r '\n                                                                                               
+exit '3     a'\n                                                                                                
+exit '3\t\t\ta'\n                                                                                               
+exit 0\n                                                                                                        
+exit -0\n                                                                                                       
+exit -1\n                                                                                                       
+exit 255\n                                                                                                      
+exit 256\n                                                                                                      
+exit 2000000\n                                                                                                  
+exit -2000000\n                                                                                                 
+exit 2147483647\n                                                                                               
+exit -2147483648\n                                                                                              
+exit 2147483648\n                                                                                               
+exit -2147483649\n                                                                                              
+exit 3147483648\n                                                                                               
+exit -3147483649\n                                                                                              
+exit 4294967295\n                                                                                               
+exit 4294967296\n                                                                                               
+exit -9223372036854775808\n                                                                                     
+exit 9223372036854775807\n                                                                                      
+exit -9223372036854775809\n                                                                                     
+exit 9223372036854775808\n                                                                                      
+exit 18446744073709551615\n                                                                                     
+exit 1844...
+Collapse

@@ -25,3 +25,4 @@
 //echo "$1kol">it's like echo "$1" "kol"
 //
 //"command" => command
+//export MallocStackLogging=1 to test the leaks
