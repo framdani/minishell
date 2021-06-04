@@ -134,7 +134,7 @@ t_info		tokenize_inside_dquote(char *input, t_token **lst_tok, int size)
 		if (*input == SPACE || *input == '\0')
 			add_token(lst_tok, "DOLLAR", DOLLAR);
 		else
-			input = expander(lst_tok, input);
+			input = expander_inside_dquote(lst_tok, input);
 	}
 	else if (*input == ESC_CHAR)
 	{

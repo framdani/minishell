@@ -190,7 +190,6 @@ void	fill_struct_and_execute(t_token *lexer)
 		{
 			tmp = tmp->next;
 			add_cmd(&lst_cmds, &lst_args, &lst_files);
-			//free_lst_files(&lst_files);
 			lst_files = NULL;
 		}
 		if (tmp != NULL && tmp->type == SEMICOLON)

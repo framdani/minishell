@@ -74,3 +74,53 @@ char	*expander(t_token **lst_token, char *input)
 	free(new_value);
 	return (input);
 }
+
+void 	expand_value_inside_dquote(t_token **lst_tok, char *value)
+{
+	char	*new_value;
+
+	new_value = ft_strdup("");
+	while (*value != '\0')
+	{
+		new_value = ft_charjoin(new_value, *value);
+		value++;
+	}
+	add_token(lst_tok, new_value, CHAR);
+	free(new_value);
+
+}
+
+char 	*expander_inside_dquote(t_token **lst_token, char *input)
+{
+	char	*new_value;
+	char	*token;
+
+	new_value = ft_strdup("");
+	if (*input == '?')
+	{
+		add_token(lst_token, "$?", CHAR);
+		input++;
+		free(new_value);
+		return (input);
+	}
+	if (ft_isdigit(*input))
+	{
+		input++;
+		add_token(lst_token, "SPACE", SPACE);
+	}
+	else if (ft_isalpha(*input) || *input == '_')
+	{
+		while (ft_isalnum(*input) || *input == '_')
+		{
+			new_value = ft_charjoin(new_value, *input);
+			input++;
+		}
+		token = getenv(new_value);
+		if (token != NULL)
+			expand_value_inside_dquote(lst_token, token);
+		else
+			add_token(lst_token, "SPACE", SPACE);
+	}
+	free(new_value);
+	return (input);
+}
