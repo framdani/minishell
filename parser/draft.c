@@ -2,15 +2,16 @@
 #include "../includes/minishell.h"
 #include "../libft/libft.h"
 
-t_info		tokenize_state_normal(char *input, t_token **lst_tok, int size)
+t_info		tokenize_state_normal(char *input, t_token **lst_tok, int size, int spec_case)
 {
 	char *data;
 	int j;
 	char c;
 	t_info	info;
+
 	info.input = input;
 	info.state = NORMAL;
-
+	info.spec_case = spec_case;
 	if (*input == ' ' || *input == '\t')
 	{
 		input = skip_spaces(input);
@@ -83,6 +84,11 @@ t_info		tokenize_state_normal(char *input, t_token **lst_tok, int size)
 			add_token(lst_tok, data, CHAR);
 			free(data);
 		}
+		else if (info.spec_case == 1)
+		{
+			info.spec_case = 0;
+			input = expander_spec_case(lst_tok, input);
+		}
 		else
 			input = expander(lst_tok, input);
 	}
@@ -108,6 +114,8 @@ t_info		tokenize_state_normal(char *input, t_token **lst_tok, int size)
 		j = 0;
 		while (*input != '\0' && no_special_char(*input))
 		{
+			if (*input == '=' && next_char(input) == '$')
+				info.spec_case = 1;
 			data[j] = *input;
 			j++;
 			input++;
@@ -135,6 +143,7 @@ t_info		tokenize_inside_dquote(char *input, t_token **lst_tok, int size)
 			add_token(lst_tok, "DOLLAR", DOLLAR);
 		else
 			input = expander_inside_dquote(lst_tok, input);
+			//input = expander(lst_tok, input);
 	}
 	else if (*input == ESC_CHAR)
 	{

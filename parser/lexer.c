@@ -68,11 +68,12 @@ t_token	*lexer(char *input, int size)
 	lst_tok = NULL;
 	input = skip_spaces(input);
 	info.state = NORMAL;
+	info.spec_case = 0;
 	while (*input != '\0')
 	{
 		while (info.state == NORMAL && *input != '\0')
 		{
-			info = tokenize_state_normal(input, &lst_tok, size);
+			info = tokenize_state_normal(input, &lst_tok, size, info.spec_case);
 			input = info.input;
 		}
 		while (info.state == IN_QUOTE && *input != '\0')

@@ -26,3 +26,17 @@
 //
 //"command" => command
 //export MallocStackLogging=1 to test the leaks
+
+//export a=$c for exmaple
+
+//tokenize inside state normal => so I have to handle this case by not separating by spaces
+//if befor dollar therr an affectation operator
+
+//export a="echo hey"
+//$a => hey  
+//"$a" => echo hey : command not found
+//=$a =>=echo
+//="$a" => =echo hye : command not found
+
+//Assignement is not required
+//inside export if there is

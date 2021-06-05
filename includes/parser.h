@@ -78,6 +78,7 @@ typedef struct		s_envv
 t_token *parser(t_token *lexer);
 char	*expander(t_token **lst, char *input);
 char 	*expander_inside_dquote(t_token **lst_token, char *input);
+char 	*expander_spec_case(t_token **lst_token, char *input);
 void	print_error_and_exit(t_token **lst_token, int error);
 void	fill_struct_and_execute(t_token *token);
 void	add_arg(t_arg **lst_arg, char *arg);
