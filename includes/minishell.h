@@ -18,6 +18,7 @@
 #include <string.h>
 #include "lexer.h"
 #include "parser.h"
+//# include "../libft/libft.h"
 
 void	print_error(char *str);
 t_pipe_sequence *new_pipe_sequence(t_token *lexer);
