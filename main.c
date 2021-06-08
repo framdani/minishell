@@ -12,7 +12,13 @@
 
 #include "./includes/minishell.h"
 #include "libft/libft.h"
-
+#include <signal.h>
+/*void 	signal_handler(int sig)
+{
+	sig = 0;
+	ft_putstr_fd(" CTRL-\\ Detected\n", 1);
+}*/
+//ft_putchar_fd(1,"\b\b  \b\b")
 void	prompt(void)
 {
 	char	*str;
@@ -67,6 +73,7 @@ int	main(int argc, char **argv, char **env)
 	size = 0;
 	env = NULL;
 	//return value = 0;
+	//signal(SIGQUIT, signal_handler);
 	while (status)
 	{
 		prompt();
