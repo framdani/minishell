@@ -40,3 +40,6 @@
 
 //Assignement is not required
 //inside export if there is
+
+//used functions: ft_strdup.c // ft_putstr_fd.c // ft_strchr.c // ft_charjoin.c \\ ft_isalpha.c \\ ft_isalnum.c || ft_strjoin.c ||
+// 

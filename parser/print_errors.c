@@ -15,7 +15,7 @@
 
 void	print_error(char *str)
 {
-	ft_putstr_fd(str, 1);
+	ft_putstr_fd(str, 2);
 }
 
 void	print_error_and_exit(t_token **lst_tok, int error)
