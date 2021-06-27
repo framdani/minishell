@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef LEXER_H
-#define LEXER_H
+# define LEXER_H
 # define NORMAL 1
 # define IN_QUOTE 2
 # define IN_DQUOTE 3
@@ -19,7 +19,7 @@
 /*
  * Define Token Types
  */
-# define SEMICOLON		59
+//# define SEMICOLON		59
 # define SPACE			32
 # define CHAR			-1
 # define PIPE			124
@@ -28,8 +28,9 @@
 # define LEFT			60
 # define RIGHT			62
 # define DOLLAR			36
-# define ESC_CHAR		92
-#define GREATER			-2
+//# define ESC_CHAR		92
+# define GREATER		-2
+# define LESSER			-3
 
 
 typedef struct			s_info

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/20 02:32:35 by framdani          #+#    #+#             */
-/*   Updated: 2019/10/31 07:30:12 by framdani         ###   ########.fr       */
+/*   Created: 2019/10/15 19:20:33 by akhalidy          #+#    #+#             */
+/*   Updated: 2019/10/19 23:35:26 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,22 @@
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	char	*ptr;
-	size_t	si;
+	void	*ptr;
+	int		n;
+	int		r;
+	int		k;
 
-	si = count * size;
-	if (!(ptr = (char*)malloc(si)))
-		return (NULL);
-	ft_bzero(ptr, si);
-	return (ptr);
+	ptr = malloc(count * size);
+	if (ptr)
+	{
+		n = count * size / sizeof(long);
+		r = count * size % sizeof(long);
+		k = 0;
+		while (n--)
+			((long *)ptr)[k++] = 0;
+		while (r--)
+			((char *)ptr)[k * sizeof(long) + r] = 0;
+		return (ptr);
+	}
+	return (NULL);
 }

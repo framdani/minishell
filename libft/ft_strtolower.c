@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_strtolower.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 17:23:43 by framdani          #+#    #+#             */
-/*   Updated: 2019/10/26 05:50:13 by framdani         ###   ########.fr       */
+/*   Created: 2021/05/05 13:04:30 by akhalidy          #+#    #+#             */
+/*   Updated: 2021/06/08 18:30:01 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_strtolower(char **str)
 {
-	if (lst && f)
-	{
-		while (lst)
-		{
-			(*f)(lst->content);
-			lst = lst->next;
-		}
-	}
+	int	i;
+
+	i = -1;
+	while ((*str)[++i])
+	//  str[0][i] = ft_tolower(str[0][i]);
+		*(*str + i) = ft_tolower(*(*str + i));
 }

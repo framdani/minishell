@@ -3,74 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/26 04:16:16 by framdani          #+#    #+#             */
-/*   Updated: 2019/10/30 01:01:56 by framdani         ###   ########.fr       */
+/*   Created: 2019/10/18 06:56:01 by akhalidy          #+#    #+#             */
+/*   Updated: 2019/10/30 04:21:06 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	start(const char *s, const char *set)
+static int	ft_isinset(char c, char *str)
 {
 	int i;
-	int j;
 
 	i = 0;
-	while (s[i])
+	while (str[i])
 	{
-		j = 0;
-		while (set[j])
-		{
-			if (s[i] == set[j])
-				break ;
-			j++;
-		}
-		if (set[j] == '\0')
-			break ;
+		if (str[i] == c)
+			return (1);
 		i++;
 	}
-	return (i);
+	return (0);
 }
 
-static int	end(const char *s, const char *set)
+char		*ft_strtrim(char const *s1, char const *set)
 {
-	int i;
-	int j;
-	int k;
+	char			*s;
+	unsigned int	start;
+	unsigned int	end;
+	unsigned int	size;
+	unsigned int	len;
 
-	i = start(s, set);
-	k = ft_strlen(s);
-	k--;
-	while (k >= i)
-	{
-		j = 0;
-		while (set[j])
-		{
-			if (s[k] == set[j])
-				break ;
-			j++;
-		}
-		if (set[j] == '\0')
-			break ;
-		k--;
-	}
-	return (k);
-}
-
-char		*ft_strtrim(const char *s, const char *set)
-{
-	char	*str;
-	int		i;
-	int		k;
-
-	if (!s || !set)
+	if (!s1 || !set)
 		return (NULL);
-	k = end(s, set);
-	i = start(s, set);
-	if (!(str = (char*)malloc(k - i + 2)))
-		return (NULL);
-	str = ft_substr(s, i, k - i + 1);
-	return (str);
+	if (!*s1)
+		return (ft_strdup(s1));
+	start = 0;
+	end = 0;
+	len = ft_strlen(s1);
+	while (ft_isinset(s1[start], (char *)set) && s1[start])
+		start++;
+	while (ft_isinset(s1[len - 1], (char *)set) && len && len-- > start)
+		end++;
+	size = ft_strlen(s1) - (start + end);
+	s = ft_substr(s1, start, size);
+	return (s);
 }

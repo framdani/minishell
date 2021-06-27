@@ -12,7 +12,14 @@
 
 #ifndef PARSER_H
 # define PARSER_H
+
 #include "lexer.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include "lexer.h"
+#include "../libft/libft.h"
 # define INPUT = 0
 # define OUTPUT = 1
 /* List of args = SUFFIX
@@ -45,7 +52,7 @@ typedef struct			s_cmd
 {
 	char				**args;
 	t_file				*file;
-	int					nbr_args;
+	int					pid;
 	struct s_cmd		*next;
 }						t_cmd;
 
@@ -69,18 +76,12 @@ typedef struct			s_pipe_sequence
  *
  */
 
-typedef struct		s_envv
-{
-	char		*name;
-	char		*value;
-}				t_envv;
-
 t_token *parser(t_token *lexer);
 char	*expander(t_token **lst, char *input);
 char 	*expander_inside_dquote(t_token **lst_token, char *input);
 char 	*expander_spec_case(t_token **lst_token, char *input);
 void	print_error_and_exit(t_token **lst_token, int error);
-void	fill_struct_and_execute(t_token *token);
+void	fill_struct_and_execute(t_token *token, t_list *envl);
 void	add_arg(t_arg **lst_arg, char *arg);
 void	add_cmd(t_cmd **lst_cmds, t_arg **args, t_file **files);
 void	add_file(t_file **lst_files, char *filename, int type);
@@ -94,4 +95,5 @@ void	free_lst_args(t_arg **lst_args);
 void 	free_lst_cmds(t_cmd **lst_cmds);
 int		is_redirection(int type);
 int		is_separator(int type);
+void	print_error(char *str);
 #endif

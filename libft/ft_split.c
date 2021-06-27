@@ -3,88 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/18 18:31:04 by framdani          #+#    #+#             */
-/*   Updated: 2019/10/27 22:30:53 by framdani         ###   ########.fr       */
+/*   Created: 2019/10/20 05:09:59 by akhalidy          #+#    #+#             */
+/*   Updated: 2021/06/17 21:03:43 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_nbr_mots(const char *s, char c)
+int		wordcounter(const char *str, char c)
 {
-	int test;
-	int nbr;
+	int count;
 	int i;
 
-	i = 0;
-	test = 1;
-	nbr = 0;
-	while (s[i] != '\0')
+	if (!*str)
+		return (0);
+	count = 0;
+	i = 1;
+	if (str[0] != c)
+		count++;
+	while (str[i])
 	{
-		if (test == 1 && s[i] != c)
-		{
-			nbr++;
-			test = 0;
-		}
-		else if (s[i] == c)
-		{
-			test = 1;
-		}
+		if (str[i] != c && str[i - 1] == c)
+			count++;
 		i++;
 	}
-	return (nbr);
+	return (count);
 }
 
-static int	ft_length_word(const char *s, char c)
+int		ft_split_num(char **s)
 {
 	int i;
 
 	i = 0;
-	while (s[i] != '\0' && s[i] != c)
-	{
+	while (s[i])
 		i++;
-	}
 	return (i);
 }
 
-static char	*ft_free(char **tab, int i)
+char	**ft_free(char **ptr)
 {
-	while (i >= 0)
-	{
-		free(tab[i]);
-		i--;
-	}
-	free(tab);
+	int i;
+
+	i = 0;
+	while (ptr[i])
+		free(ptr[i++]);
+	free(ptr);
 	return (NULL);
 }
 
-char		**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-	char	**tab;
-	int		i;
-	int		j;
-	int		k;
-	int		l;
+	size_t	end;
+	size_t	start;
+	size_t	i;
+	char	**ptr;
 
-	i = 0;
 	if (!s)
-		return (0);
-	l = ft_nbr_mots(s, c);
-	if (!(tab = malloc(sizeof(char *) * (l + 1))))
 		return (NULL);
-	while (i < l)
+	if (!(ptr = (char **)malloc((wordcounter(s, c) + 1) * sizeof(char *))))
+		return (NULL);
+	i = 0;
+	end = 0;
+	while (s[end])
 	{
-		while ((k = ft_length_word(s, c)) == 0)
-			s++;
-		if (!(tab[i] = malloc(sizeof(char) * (k + 1))))
-			ft_free(tab, i - 1);
-		j = 0;
-		while (j < k)
-			tab[i][j++] = *s++;
-		tab[i++][j] = '\0';
+		while (s[end] == c)
+			end++;
+		start = end;
+		while (s[end] != c && s[end])
+			end++;
+		if (s[end - 1] != c)
+			if (!(ptr[i++] = ft_substr(s, start, end - start)))
+				return (ft_free(ptr));
 	}
-	tab[i] = 0;
-	return (tab);
+	ptr[i] = NULL;
+	return (ptr);
 }

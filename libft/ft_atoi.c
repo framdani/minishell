@@ -3,39 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/11 14:35:19 by framdani          #+#    #+#             */
-/*   Updated: 2019/10/31 02:30:27 by framdani         ###   ########.fr       */
+/*   Created: 2019/10/13 05:34:05 by akhalidy          #+#    #+#             */
+/*   Updated: 2021/04/17 11:34:56 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	long	a;
-	int		sign;
+	char			*s;
+	int				signe;
+	unsigned long	x;
 
-	a = 0;
-	sign = 1;
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
-		str++;
-	if (*str == '-')
+	s = (char*)str;
+	signe = 1;
+	x = 0;
+	while ((*s >= 8 && *s <= 13) || *s == 32)
+		s++;
+	if (*s == '-')
 	{
-		str++;
-		sign = (-1);
+		signe = -1;   
+		s++;
 	}
-	else if (*str == '+')
-		str++;
-	while (*str >= '0' && *str <= '9')
+	else if (*s == '+')
+		s++;
+	while (*s >= '0' && *s <= '9')
 	{
-		a = a * 10 + *str - '0';
-		str++;
+		x = x * 10 + (*s - '0');
+		s++;
+		if (x > 9223372036854775807)
+			return (signe < 0 ? 0 : -1);
 	}
-	if (a < 0 && sign < 0)
-		return (0);
-	if (a < 0 && sign > 0)
-		return (-1);
-	return (a * sign);
+	return (signe * x);
 }

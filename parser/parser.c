@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/parser.h"
 #include "../libft/libft.h"
 
 int	is_redirection(int type)
 {
-	if (type == LEFT || type == RIGHT || type == GREATER)
+	if (type == LEFT || type == RIGHT || type == GREATER || type == LESSER)
 		return (1);
 	return (0);
 }
 
 int	is_separator(int type)
 {
-	if (type == SEMICOLON || type == PIPE)
+	if (type == PIPE) //type == SEMICOLON
 		return (1);
 	return (0);
 }
@@ -34,11 +34,11 @@ int	unexpected_after_separator(int current, int next)
 		if (is_separator(next))
 			return (2);
 	}
-	else if (current == SEMICOLON)
+	/*else if (current == SEMICOLON)
 	{
 		if (is_separator(next))
 			return (3);
-	}
+	}*/
 	return (0);
 }
 
@@ -53,8 +53,6 @@ int	unexpected_next_token(int current, int next)
 	{
 		if (is_separator(next) || next == LEFT)
 			return (4);
-		//if (next == SPACE && nnext == RIGHT)
-		//	return (5);
 	}
 	else if (current == RIGHT)
 	{
@@ -67,6 +65,11 @@ int	unexpected_next_token(int current, int next)
 		if (is_separator(next) || is_redirection(next))
 			return (5);
 	}
+	else if (current == LESSER)
+	{
+		if (is_separator(next) || is_redirection(next))
+			return (4);
+	}
 	return (0);
 }
 
@@ -77,15 +80,15 @@ int	check_syntax_errors(t_token *lexer)
 	tmp = lexer;
 	if (lexer->type == PIPE)
 		return (7);
-	else if (lexer->type == SEMICOLON)
-		return (8);
+	//else if (lexer->type == SEMICOLON)
+	//	return (8);
 	while (tmp->next != NULL)
 	{
 		if (unexpected_next_token(tmp->type, tmp->next->type))
 			return (unexpected_next_token(tmp->type, tmp->next->type));
 		tmp = tmp->next;
 	}
-	if (tmp->type == PIPE || is_redirection(tmp->type) || tmp->type == ESC_CHAR)
+	if (tmp->type == PIPE || is_redirection(tmp->type))
 		return (6);
 	return (1);
 }

@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   ft_arr_to_list.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 16:42:33 by framdani          #+#    #+#             */
-/*   Updated: 2019/10/26 05:50:34 by framdani         ###   ########.fr       */
+/*   Created: 2021/05/19 19:07:58 by akhalidy          #+#    #+#             */
+/*   Updated: 2021/06/26 17:05:39 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_list	*ft_arr_to_list(char **str)
 {
-	t_list *tmp;
+	t_list	*lst;
+	char	**split;
+	int		i;
 
-	tmp = lst;
-	if (!lst)
-		return (NULL);
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	return (tmp);
+	i = 0;
+	lst = NULL;
+	while (str[i])
+	{
+		split = ft_split(str[i], '=');
+		ft_lstadd_back(&lst, ft_lstnew(ft_strdup(split[0]), ft_strdup(split[1])));
+		ft_free(split);
+		i++;
+	}
+	return(lst);
 }

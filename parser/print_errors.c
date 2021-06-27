@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/parser.h"
 #include "../libft/libft.h"
 
 void	print_error(char *str)

@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: framdani <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/06/27 20:07:22 by framdani          #+#    #+#              #
+#    Updated: 2021/06/27 20:07:24 by framdani         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 CC = clang
 
 CFLAGS = -Wall -Wextra -Werror -g
@@ -8,25 +20,34 @@ SRCS = main.c\
 	   parser/print_errors.c\
 	   parser/expander.c\
 	   parser/fill_struct_and_execute.c\
-	   parser/create_pipe_sequence.c\
+	   parser/create_lst_cmds.c\
 	   parser/draft.c\
 	   parser/free.c
 
 NAME= minishell
 
+LIBFT_PATH = ./libft/libft.a
+
+EXEC_PATH = ./execution/exec.a
+
+#PARSER_PATH = ./parser/parser.a
+
 OBJS = $(SRCS:.c=.o)
 
 all:$(SRCS)
 	@make -C ./libft
-	@$(CC) $(CFLAGS) -o minishell $(SRCS) -I -L ./libft/libft.a
+	@make -C ./execution
+	@$(CC) $(CFLAGS) $(SRCS) -o minishell $(LIBFT_PATH) $(EXEC_PATH)
 	@echo "minishell created successfully"
 
 clean:
 	@cd libft && make clean
+	@cd execution && make clean
 	@rm -f *.o
 
 fclean:clean
 	@cd libft && make fclean
+	@cd execution && make clean
 	@rm -rf $(NAME)
 	@rm -rvf minishell.dSYM
 

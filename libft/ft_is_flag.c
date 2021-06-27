@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
+/*   ft_str_one_char.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 16:58:33 by framdani          #+#    #+#             */
-/*   Updated: 2019/10/26 05:47:33 by framdani         ###   ########.fr       */
+/*   Created: 2021/05/07 15:53:46 by akhalidy          #+#    #+#             */
+/*   Updated: 2021/06/08 18:35:08 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+//is_flag
+int ft_is_flag(char *str, char c)
 {
-	if (lst)
-	{
-		if (lst->content)
-			del(lst->content);
-		free(lst);
-	}
+    int i;
+    
+    i = -1;
+    if (!str)
+        return(-1);
+    while (str[++i])
+    {
+        if (str[i] != c)
+            return(1);
+    }
+    return(0);
 }

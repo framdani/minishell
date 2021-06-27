@@ -10,8 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/minishell.h"
+#include "./includes/parser.h"
 #include "libft/libft.h"
+#include "./includes/minishell.h"
+
 #include <signal.h>
 /*void 	signal_handler(int sig)
 {
@@ -62,6 +64,7 @@ void	print_lexer(t_token *lexer)
 
 int	main(int argc, char **argv, char **env)
 {
+	t_list		*envl;
 	char		*cmd_line;
 	int			status;
 	t_token		*tokens;
@@ -71,9 +74,13 @@ int	main(int argc, char **argv, char **env)
 	argv = NULL;
 	status = 1;
 	size = 0;
-	env = NULL;
-	//return value = 0;
-	//signal(SIGQUIT, signal_handler);
+	
+	g_help.on_oldpwd = 1;
+	g_help.std_in = dup(STDIN_FILENO);
+	g_help.std_out = dup(STDOUT_FILENO);
+	envl = ft_arr_to_list(env);
+	ft_inc_shlvl(envl);
+
 	while (status)
 	{
 		prompt();
@@ -83,7 +90,7 @@ int	main(int argc, char **argv, char **env)
 		tokens = parser(tokens);
 		//if (size > 0 && tokens != NULL)
 			//set_return_value
-		fill_struct_and_execute(tokens);
+		fill_struct_and_execute(tokens, envl); //envp
 		if (strcmp(cmd_line, "exit") == 0)
 		{
 			write(1, "exit", 4);

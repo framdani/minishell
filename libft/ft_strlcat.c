@@ -3,33 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/11 18:17:39 by framdani          #+#    #+#             */
-/*   Updated: 2019/10/31 08:19:06 by framdani         ###   ########.fr       */
+/*   Created: 2019/10/11 19:15:24 by akhalidy          #+#    #+#             */
+/*   Updated: 2020/12/16 10:31:29 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t		ft_strlcat(char *dst, const char *src, size_t size)
+static size_t	ft_min(size_t a, size_t b)
 {
-	size_t i;
-	size_t j;
-	size_t k;
+	if (a > b)
+		return (b);
+	return (a);
+}
 
-	k = 0;
+size_t			ft_strlcat(char *dst, const char *src, size_t size)
+{
+	int i;
+	int l;
+	int max;
+
 	if (!dst && size == 0)
 		return (ft_strlen(src));
-	j = ft_strlen(dst);
-	i = ft_strlen(src);
-	if (size <= j)
-		return (size + i);
-	while (k < size - j - 1 && src[k] != '\0')
+	l = (int)ft_strlen(dst);
+	max = (int)size - l - 1;
+	i = 0;
+	while (src[i] && i < max)
 	{
-		dst[k + j] = src[k];
-		k++;
+		dst[l + i] = src[i];
+		i++;
 	}
-	dst[k + j] = '\0';
-	return (i + j);
+	if (max > 0)
+		dst[l + i] = '\0';
+	return (ft_min((size_t)l, size) + ft_strlen(src));
 }

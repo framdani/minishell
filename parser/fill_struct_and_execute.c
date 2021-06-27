@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/parser.h"
 #include "../libft/libft.h"
+#include "../includes/minishell.h"
 
 /*int 	is_valid_identifier(char *arg)
 {
@@ -148,6 +149,8 @@ t_token	*fill_lst_files(t_file **lst_files, t_token *tok)
 		type = 1;
 	else if (tok->type == GREATER)
 		type = 2;
+	else if (tok->type == LESSER)
+		type = 3;
 	tok = tok->next;
 	while (tok != NULL && tok->type == CHAR)
 	{
@@ -160,7 +163,7 @@ t_token	*fill_lst_files(t_file **lst_files, t_token *tok)
 	return (tok);
 }
 
-void	fill_struct_and_execute(t_token *lexer)
+void	fill_struct_and_execute(t_token *lexer, t_list *envl)
 {
 	t_cmd	*lst_cmds;
 	t_token	*tmp;
@@ -171,7 +174,7 @@ void	fill_struct_and_execute(t_token *lexer)
 	lst_files = NULL;
 	lst_cmds = NULL;
 	tmp = lexer;
-	print_lexer(lexer);
+	//print_lexer(lexer);
 	if (tmp != NULL)
 	{
 		tmp = skip_token_space(tmp);
@@ -192,18 +195,18 @@ void	fill_struct_and_execute(t_token *lexer)
 			add_cmd(&lst_cmds, &lst_args, &lst_files);
 			lst_files = NULL;
 		}
-		if (tmp != NULL && tmp->type == SEMICOLON)
+		/*if (tmp != NULL && tmp->type == SEMICOLON)
 		{
 			tmp = tmp->next;
 			//return value = execute();
 			//free_lst_cmd();done
-		}
+		}*/
 	}
 	if (lst_args != NULL || lst_files != NULL)
 	{
 		add_cmd(&lst_cmds, &lst_args, &lst_files);
-		print_struct(lst_cmds);
-		//retrun value = execute()
+		//print_struct(lst_cmds);
+		ft_launch_execution(lst_cmds, envl);
 	}
 	free_lst_tokens(&lexer);
 	free_lst_cmds(&lst_cmds);

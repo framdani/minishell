@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/parser.h"
 #include "../libft/libft.h"
 
 void	free_lst_files(t_file **lst_files)

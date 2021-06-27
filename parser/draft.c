@@ -1,12 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draft.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/27 12:38:31 by framdani          #+#    #+#             */
+/*   Updated: 2021/06/27 12:38:34 by framdani         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/parser.h"
 #include "../libft/libft.h"
 
 t_info		tokenize_state_normal(char *input, t_token **lst_tok, int size, int spec_case)
 {
 	char *data;
 	int j;
-	char c;
+	//char c;
 	t_info	info;
 
 	info.input = input;
@@ -17,7 +28,7 @@ t_info		tokenize_state_normal(char *input, t_token **lst_tok, int size, int spec
 		input = skip_spaces(input);
 		add_token(lst_tok, "SPACE", SPACE);
 	}
-	else if (*input == ESC_CHAR)
+	/*else if (*input == ESC_CHAR)
 	{
 		//check next char => if char skip don't store it
 		c = next_char(input);
@@ -34,13 +45,13 @@ t_info		tokenize_state_normal(char *input, t_token **lst_tok, int size, int spec
 			input++;
 		}
 		input++;
-	}
-	else if (*input == ';')
+	}*/
+	/*else if (*input == ';')
 	{
 		input++;
 		add_token(lst_tok, "SEMICOLON", SEMICOLON);
 		input = skip_spaces(input);
-	}
+	}*/
 	else if (*input == '|')
 	{
 		input++;
@@ -50,13 +61,23 @@ t_info		tokenize_state_normal(char *input, t_token **lst_tok, int size, int spec
 	else if (*input == '<')
 	{
 		input++;
-		add_token(lst_tok, "LEFT", LEFT);
+		/*add_token(lst_tok, "LEFT", LEFT);
 		if (*input == ' ')
 		{
 			input = skip_spaces(input);
 			if (*input == '>')
 				add_token(lst_tok, "SPACE", SPACE);
+		}*/
+		if (*input == '<')
+		{
+			add_token(lst_tok, "LESSER", LESSER);
+			input++;
 		}
+		else
+		{
+			add_token(lst_tok, "LEFT", LEFT);
+		}
+		input = skip_spaces(input);
 	}
 	else if (*input == '>')
 	{
@@ -131,7 +152,7 @@ t_info		tokenize_state_normal(char *input, t_token **lst_tok, int size, int spec
 t_info		tokenize_inside_dquote(char *input, t_token **lst_tok, int size)
 {
 	char *data;
-	char c;
+	//char c;
 	int j;
 	t_info	info;
 	info.state= IN_DQUOTE;
@@ -145,7 +166,7 @@ t_info		tokenize_inside_dquote(char *input, t_token **lst_tok, int size)
 			input = expander_inside_dquote(lst_tok, input);
 			//input = expander(lst_tok, input);
 	}
-	else if (*input == ESC_CHAR)
+	/*else if (*input == ESC_CHAR)
 	{
 		c = next_char(input);
 		if (!c)
@@ -169,13 +190,12 @@ t_info		tokenize_inside_dquote(char *input, t_token **lst_tok, int size)
 			free(data);
 		}
 		input++;
-	}
+	}*/
 	else if (info.state == IN_DQUOTE && *input != '\0')
 	{
 		data = malloc(size);
 		j = 0;
-		while (*input != D_QUOTE && *input != DOLLAR
-				&& *input != ESC_CHAR && *input != '\0')
+		while (*input != D_QUOTE && *input != DOLLAR && *input != '\0')
 		{
 			data[j] = *input;
 			j++;
