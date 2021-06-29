@@ -31,11 +31,19 @@ int	ft_isinteger(char *str)
 void	ft_exit(char **args)
 {
 	if (!*args)
+	{
+		ft_putendl_fd("exit", 1);
+		system("leaks minishell");
 		exit(0);
+	}
 	if (!ft_isinteger(*args))
 	{
 		if (!(args[1]))
+		{
+			ft_putendl_fd("exit", 1);
+			system("leaks minishell");
 			exit((unsigned char)ft_atoi(*args));
+		}
 		ft_putendl_fd("bash: exit: too many arguments", 2);
 	}
 	else
