@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 10:12:35 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/27 17:21:23 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/06/29 19:14:56 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ int	ft_path_is_dir(char *args, char **path)
 int	ft_check_path(char **path, char **args, t_list *envl)
 {
 	t_list	*pathenv;
-	
-	//check if I have a binary file
+
 	*path = NULL;
 	if (**args == '\0')
 		*path = NULL;
@@ -74,7 +73,6 @@ int	ft_check_path(char **path, char **args, t_list *envl)
 			return (126);
 		}
 	}
-	// else if I have a simple cmd which i should find it s binary file  
 	else
 	{
 		pathenv = ft_find_node(envl, "PATH");
@@ -120,68 +118,6 @@ int	ft_exec_cmd(t_list *envl, char **args, int fork_on)
 		}
 		ft_free(envp);
 	}
-	if (path)
-		free(path);
+	free(path);
 	return (ret);
 }
-
-/*void	ft_launch_execution(t_cmd *cmds, t_list	*envl)
-{
-	int		ret;
-
-	if (!cmds->next)
-		ret = ft_red_smpl_cmd(cmds, envl);
-	else
-		ret = ft_pipe(cmds, envl);
-	unlink("/tmp/file");
-	printf("ret = %d\n", ret);
-}
-
-int	ft_launch_exec(char **args, t_list *envl, int fork)
-{
-	int	ret;
-
-	ret = 0;
-	if (!ft_strncmp("echo", *args, 5))
-	{
-		ft_echo(args + 1, 1);
-		if (!fork)
-			exit(0);
-	}
-	else if (!ft_strncmp("env", *args, 4))
-	{
-		ft_env(envl, 1);
-		if (!fork)
-			exit(0);
-	}
-	else if (!ft_strncmp("export", *args, 7))
-	{
-		ft_export(&envl, args + 1, 1);
-		if (!fork)
-			exit(0);
-	}
-	else if (!ft_strncmp("unset", *args, 6))
-	{
-		ft_unset(&envl, args + 1);
-		if (!fork)
-			exit(0);
-	}
-	else if (!ft_strncmp("cd", *args, 3))
-	{
-		ft_cd(envl, args + 1);
-		if (!fork)
-			exit(0);
-	}
-	else if (!ft_strncmp("pwd", *args, 4))
-	{
-		ft_pwd(envl);
-		if (!fork)
-			exit(0);
-	}
-	else if (!ft_strncmp("exit", *args, 5))
-		ft_exit(args + 1);
-	else
-		ret = ft_exec_cmd(envl, args, fork);
-	return (ret);
-}*/
-

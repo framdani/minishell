@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:41:12 by framdani          #+#    #+#             */
-/*   Updated: 2021/04/26 17:19:50 by framdani         ###   ########.fr       */
+/*   Updated: 2021/06/29 20:05:25 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	main(int argc, char **argv, char **env)
 	size = 0;
 	
 	g_help.on_oldpwd = 1;
+	g_help.on_pwd = 1;
 	g_help.std_in = dup(STDIN_FILENO);
 	g_help.std_out = dup(STDOUT_FILENO);
 	envl = ft_arr_to_list(env);

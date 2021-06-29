@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:13:32 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/27 19:49:02 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/06/29 20:08:41 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,8 @@ int		ft_cd_print_error(char *path)
 
 void	ft_cd_env_change_pwd(t_list *oldpwd, t_list *pwd)
 {
+	char	*tmp;
+
 	if (oldpwd)
 	{
 		if (oldpwd->value)
@@ -183,7 +185,9 @@ void	ft_cd_env_change_pwd(t_list *oldpwd, t_list *pwd)
 	}
 	if (pwd->value)
 			free(pwd->value);
-	pwd->value = getcwd(NULL, 0);
+	tmp = getcwd(NULL, 0);
+	if (tmp)
+		pwd->value = tmp;
 }	
 
 void	ft_cd_env_change(t_list *oldpwd, char *pwd_old)
@@ -201,7 +205,6 @@ void	ft_cd_env_change(t_list *oldpwd, char *pwd_old)
 		}
 		else
 		{
-			//while (1);
 			free(g_help.old_pwd);
 			g_help.old_pwd = ft_strdup("");
 			g_help.on_oldpwd = 1;	
@@ -238,6 +241,14 @@ int	ft_cd(t_list *envl, char **path)
 	oldpwd = ft_find_node(envl, "OLDPWD");
 	pwd = ft_find_node(envl, "PWD");
 	pwd_old = getcwd(NULL, 0);
+	//printf("getcwd : |%s|\n", pwd_old);
+	//printf("before chdir : |%s|", *path);
+	
+	if (!pwd_old && !ft_strncmp(*path, ".", 2))
+	{
+		ft_putendl_fd(strerror(errno), 2);
+		return (0);
+	}
 //  traitement du chemin.
 	/*if (ft_check_cd_back(path, oldpwd))
 	{
@@ -251,22 +262,29 @@ int	ft_cd(t_list *envl, char **path)
 	// 	printf("path %s \n", path[i]);
 	// 	i++;
 	// }
+	
 	ft_check_cd_home(path, envl);
 	// while(1);
 //	check for errors & change dir.
+	//printf("before chdir : |%s|", *path);
 	if (chdir(*path) == -1 && ft_cd_print_error(*path))
 	{
+		//printf("check err  00 : \n");
+
 		free(pwd_old);
 		return (-1);
 	}
+	//printf("check 00 : \n");
 //	change env var value (pwd & oldpwd).
 	if(ret == 5)
 		ft_free(path);
+	// printf("check 01: \n");
 	if (pwd)
 		ft_cd_env_change_pwd(oldpwd, pwd);
 	else
 		ft_cd_env_change(oldpwd, pwd_old);
 	// while(1);
+	// printf("check 02: \n");
 	if (pwd_old)
 		free(pwd_old);
 	return(1);

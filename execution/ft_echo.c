@@ -12,12 +12,12 @@
 
 #include "../includes/minishell.h"
 
-int		ft_echo_check_flag(char **args, char *flag)
+int	ft_echo_check_flag(char **args, char *flag)
 {
 	int	i;
 
 	i = 0;
-	while(args[i])
+	while (args[i])
 	{
 		if (!ft_strncmp("-n", args[i], 2))
 		{
@@ -29,14 +29,14 @@ int		ft_echo_check_flag(char **args, char *flag)
 			return (i);
 		i++;
 	}
-	return(i);
+	return (i);
 }
 
 void	ft_echo(char **args, int fd)
 {
-	int	i;
-	char flag;
-	
+	int		i;
+	char	flag;
+
 	flag = 0;
 	if (args)
 	{

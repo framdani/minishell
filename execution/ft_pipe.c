@@ -6,13 +6,11 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:32:49 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/25 18:58:06 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/06/29 19:17:39 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-//You should implement a proper funtion that traites all the cases!
 
 void	ft_exit_child(void)
 {
@@ -38,7 +36,7 @@ void	ft_fork_pipe(int *io, char **args, t_list *envl, int *pid)
 			close(io[0]);
 		if (io[1] != 1)
 			close(io[1]);
-		if(io[2] != -18)
+		if (io[2] != -18)
 			close(io[2]);
 		ft_launch_exec(args, envl, 0);
 		ft_exit_child();
@@ -76,7 +74,6 @@ int	ft_pipe(t_cmd *lst, t_list *envl)
 {
 	int		fd[2];
 	int		io[3];
-	// int		status;
 	t_cmd	*new;
 	int		k;
 	int		fd_io[2];
@@ -93,11 +90,6 @@ int	ft_pipe(t_cmd *lst, t_list *envl)
 		ft_set_io(fd_io, io, fd[1]);
 		ft_fork_pipe(io, lst->args, envl, &lst->pid);
 		close(fd[1]);
-		// if (k)
-		// {
-		// 	ft_putendl_fd("GOT HERE", 2);
-		// 	close(fd[0]);
-		// }
 		if (!k)
 			k = 1;
 		io[0] = io[2];
@@ -107,14 +99,6 @@ int	ft_pipe(t_cmd *lst, t_list *envl)
 	ft_set_io(fd_io, io, 1);
 	ft_fork_pipe(io, lst->args, envl, &lst->pid);
 	if (k)
-	{
-		// ft_putendl_fd("GOT HERE222", 2);
 		close(fd[0]);
-	}
 	return (ft_wait_loop(new));
-	// while (new)
-	// {
-	// 	waitpid(lst->pid, &status, 0);
-	// 	new = new->next;
-	// }
 }

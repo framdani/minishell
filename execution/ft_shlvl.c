@@ -16,7 +16,7 @@ void	ft_inc_shlvl(t_list *envl)
 {
 	t_list	*prev_shlvl;
 	char	*pfree;
-	
+
 	prev_shlvl = ft_prev_node(envl, "SHLVL");
 	pfree = (prev_shlvl->next)->value;
 	(prev_shlvl->next)->value = ft_itoa(ft_atoi((prev_shlvl->next)->value) + 1);

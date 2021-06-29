@@ -14,18 +14,18 @@
 
 int	ft_isinteger(char *str)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	if (str[i] == '-')
 		i++;
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-			return(1);
+			return (1);
 		i++;
 	}
-	return(0);
+	return (0);
 }
 
 void	ft_exit(char **args)

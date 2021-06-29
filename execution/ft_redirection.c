@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 12:16:06 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/27 17:34:40 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/06/29 18:26:31 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,16 @@ void	ft_rd_print_error(char *path, int option)
 
 int	ft_redirect(t_file *fil_lst, int *fd_in, int *fd_out, int option)
 {
-	t_file  *lst;
+	t_file	*lst;
 	int		tmp;
 	char	*line;
 	int		fd;
-	
+
 	*fd_in = -18;
 	*fd_out = -18;
 	lst = fil_lst;
 	if (!lst)
-		return(-1);
+		return (-1);
 	while (lst)
 	{
 		if (!lst->type)
@@ -58,7 +58,6 @@ int	ft_redirect(t_file *fil_lst, int *fd_in, int *fd_out, int option)
 		}
 		else if (lst->type == 3)
 		{
-			
 			tmp = *fd_in;
 			fd = open("/tmp/file", O_CREAT | O_TRUNC | O_WRONLY, 0644);
 			while (1)
@@ -97,10 +96,10 @@ int	ft_redirect(t_file *fil_lst, int *fd_in, int *fd_out, int option)
 		}	
 		lst = lst->next;
 	}
-	return(1);
+	return (1);
 }
 
-void    reset_stds(void)
+void	reset_stds(void)
 {
 	dup2(g_help.std_in, STDIN_FILENO);
 	dup2(g_help.std_out, STDOUT_FILENO);

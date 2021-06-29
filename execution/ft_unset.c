@@ -14,8 +14,8 @@
 
 void	ft_unset(t_list **envl, char **args)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (args[i])
 	{

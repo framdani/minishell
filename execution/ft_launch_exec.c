@@ -4,12 +4,13 @@ void	ft_launch_execution(t_cmd *cmds, t_list	*envl)
 {
 	int		ret;
 
+	printf("\n\n\n");
 	if (!cmds->next)
 		ret = ft_red_smpl_cmd(cmds, envl);
 	else
 		ret = ft_pipe(cmds, envl);
 	unlink("/tmp/file");
-	printf("ret = %d\n", ret);
+	printf("ret = %d\n\n\n", ret);
 }
 
 int	ft_launch_exec(char **args, t_list *envl, int fork)
