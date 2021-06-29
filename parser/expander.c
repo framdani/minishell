@@ -144,7 +144,12 @@ char 	*expander_inside_dquote(t_token **lst_token, char *input, t_list **envl)
 		if (token != NULL)
 			expand_value_inside_dquote(lst_token, token);
 		else
-			add_token(lst_token, "SPACE", SPACE);
+		{
+			free(new_value);
+			new_value = ft_strdup("");
+			add_token(lst_token, new_value, CHAR);
+			//add_token(lst_token, "SPACE", SPACE);
+		}
 	}
 	free(new_value);
 	return (input);

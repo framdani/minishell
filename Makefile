@@ -46,8 +46,8 @@ clean:
 	@rm -f *.o
 
 fclean:clean
-	@cd libft && make fclean
-	@cd execution && make clean
+	make -C ./libft/ fclean
+	make -C ./execution/ fclean
 	@rm -rf $(NAME)
 	@rm -rvf minishell.dSYM
 
