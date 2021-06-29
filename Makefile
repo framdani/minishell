@@ -41,8 +41,8 @@ all:$(SRCS)
 	@echo "minishell created successfully"
 
 clean:
-	@cd libft && make clean
-	@cd execution && make clean
+	make -C ./libft/ clean
+	make -C ./execution/ clean
 	@rm -f *.o
 
 fclean:clean
