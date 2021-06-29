@@ -60,7 +60,7 @@ t_token	*check_return_value(int state, t_token **lst_tok)
 		return (*lst_tok);
 }
 
-t_token	*lexer(char *input, int size)
+t_token	*lexer(char *input, int size, t_list **envl)
 {
 	t_token		*lst_tok;
 	t_info		info;
@@ -73,7 +73,7 @@ t_token	*lexer(char *input, int size)
 	{
 		while (info.state == NORMAL && *input != '\0')
 		{
-			info = tokenize_state_normal(input, &lst_tok, size, info.spec_case);
+			info = tokenize_state_normal(input, &lst_tok, size, info.spec_case, envl);
 			input = info.input;
 		}
 		while (info.state == IN_QUOTE && *input != '\0')
@@ -83,7 +83,7 @@ t_token	*lexer(char *input, int size)
 		}
 		while (info.state == IN_DQUOTE && *input != '\0')
 		{
-			info = tokenize_inside_dquote(input, &lst_tok, size);
+			info = tokenize_inside_dquote(input, &lst_tok, size, envl);
 			input = info.input;
 		}
 	}

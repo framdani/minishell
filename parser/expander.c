@@ -13,6 +13,27 @@
 #include "../includes/parser.h"
 #include "../libft/libft.h"
 
+char	*get_env(char *name, t_list **env)
+{
+	//int	len;
+	t_list *tmp;
+
+	tmp = *env;
+	while (tmp !=	NULL)
+	{
+		if(strcmp(tmp->env, name) == 0)
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	/*while (env && *env)
+	{
+		if (ft_strcmp(*env, name, len) == 0)
+			return (*env + len);
+		env++;
+	}*/
+	return (NULL);
+}
+
 void 	expand_value(t_token **lst_tok, char *value)
 {
 	char	*new_value;
@@ -40,7 +61,7 @@ void 	expand_value(t_token **lst_tok, char *value)
 	free(new_value);
 }
 
-char	*expander(t_token **lst_token, char *input)
+char	*expander(t_token **lst_token, char *input, t_list **envl)
 {
 	char	*new_value;
 	char	*token;
@@ -65,7 +86,7 @@ char	*expander(t_token **lst_token, char *input)
 			new_value = ft_charjoin(new_value, *input);
 			input++;
 		}
-		token = getenv(new_value);
+		token = get_env(new_value, envl);
 		if (token != NULL)
 			expand_value(lst_token, token);
 		else
@@ -90,7 +111,7 @@ void 	expand_value_inside_dquote(t_token **lst_tok, char *value)
 
 }
 
-char 	*expander_inside_dquote(t_token **lst_token, char *input)
+char 	*expander_inside_dquote(t_token **lst_token, char *input, t_list **envl)
 {
 	char	*new_value;
 	char	*token;
@@ -115,7 +136,7 @@ char 	*expander_inside_dquote(t_token **lst_token, char *input)
 			new_value = ft_charjoin(new_value, *input);
 			input++;
 		}
-		token = getenv(new_value);
+		token = get_env(new_value, envl);//search in envl
 		if (token != NULL)
 			expand_value_inside_dquote(lst_token, token);
 		else
@@ -125,7 +146,7 @@ char 	*expander_inside_dquote(t_token **lst_token, char *input)
 	return (input);
 }
 
-char 	*expander_spec_case(t_token **lst_token, char *input)
+char 	*expander_spec_case(t_token **lst_token, char *input, t_list **envl)
 {
 	char	*new_value;
 	char	*token;
@@ -150,7 +171,7 @@ char 	*expander_spec_case(t_token **lst_token, char *input)
 			new_value = ft_charjoin(new_value, *input);
 			input++;
 		}
-		token = getenv(new_value);
+		token = get_env(new_value, envl);
 		if (token != NULL)
 		{
 			free(new_value);

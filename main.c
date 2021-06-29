@@ -86,7 +86,7 @@ int	main(int argc, char **argv, char **env)
 		prompt();
 		cmd_line = read_command_line();
 		size = ft_strlen(cmd_line) + 1;
-		tokens = lexer(cmd_line, size);
+		tokens = lexer(cmd_line, size, &envl);
 		tokens = parser(tokens);
 		//if (size > 0 && tokens != NULL)
 			//set_return_value
