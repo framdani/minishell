@@ -174,7 +174,7 @@ void	fill_struct_and_execute(t_token *lexer, t_list *envl)
 	lst_files = NULL;
 	lst_cmds = NULL;
 	tmp = lexer;
-	//print_lexer(lexer);
+	print_lexer(lexer);
 	if (tmp != NULL)
 	{
 		tmp = skip_token_space(tmp);
@@ -205,7 +205,7 @@ void	fill_struct_and_execute(t_token *lexer, t_list *envl)
 	if (lst_args != NULL || lst_files != NULL)
 	{
 		add_cmd(&lst_cmds, &lst_args, &lst_files);
-		//print_struct(lst_cmds);
+		print_struct(lst_cmds);
 		ft_launch_execution(lst_cmds, envl);
 	}
 	free_lst_tokens(&lexer);
