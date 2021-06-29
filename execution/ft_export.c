@@ -82,6 +82,7 @@ t_envv	*get_key_value(char	*arg)
 		}
 		else if (arg[i] == '\0')
 		{
+			free(envv->value);
 			envv->value = NULL;
 		}
 	}

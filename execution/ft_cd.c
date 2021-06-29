@@ -239,11 +239,11 @@ int	ft_cd(t_list *envl, char **path)
 	pwd = ft_find_node(envl, "PWD");
 	pwd_old = getcwd(NULL, 0);
 //  traitement du chemin.
-	if (ft_check_cd_back(path, oldpwd))
+	/*if (ft_check_cd_back(path, oldpwd))
 	{
 		free(pwd_old);
 		return(-1);
-	}
+	}*/
 	// int i = 0;
 	// while(path[i])
 	// {
