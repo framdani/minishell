@@ -9,9 +9,10 @@
 /*   Updated: 2021/05/26 15:47:43 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include "../includes/minishell.h"
 #include "../includes/parser.h"
 #include "../libft/libft.h"
+#include <string.h>
 
 char	*get_env(char *name, t_list **env)
 {
@@ -21,6 +22,9 @@ char	*get_env(char *name, t_list **env)
 	tmp = *env;
 	while (tmp !=	NULL)
 	{
+		if ((strcmp(name, "PWD") == 0 && g_help.on_pwd == 0)
+				||(strcmp(name, "OLDPWD") == 0 && g_help.on_oldpwd == 0))
+			return (NULL);
 		if(strcmp(tmp->env, name) == 0)
 			return (tmp->value);
 		tmp = tmp->next;

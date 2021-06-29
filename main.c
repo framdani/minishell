@@ -91,14 +91,14 @@ int	main(int argc, char **argv, char **env)
 		//if (size > 0 && tokens != NULL)
 			//set_return_value
 		fill_struct_and_execute(tokens, envl); //envp
-		if (strcmp(cmd_line, "exit") == 0)
+		/*if (strcmp(cmd_line, "exit") == 0)
 		{
 			write(1, "exit", 4);
 			status = 0;
 			free(cmd_line);
 			system("leaks minishell");
 			break ;
-		}
+		}*/
 		system("leaks minishell");
 		free(cmd_line);
 	}

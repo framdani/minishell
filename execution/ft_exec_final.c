@@ -62,11 +62,13 @@ int	ft_check_path(char **path, char **args, t_list *envl)
 	
 	//check if I have a binary file
 	*path = NULL;
-	if(**args == '/' || !ft_strncmp(*args, "./", 2) || !ft_strncmp(*args, "../", 3))
+	if (**args == '\0')
+		*path = NULL;
+	else if(**args == '/' || !ft_strncmp(*args, "./", 2) || !ft_strncmp(*args, "../", 3))
 	{
 		if (!ft_path_is_dir(*args, path))
 		{
-			ft_putstr_fd("bash: ", 2);
+			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(args[0] , 2);
 			ft_putendl_fd(": is a directory", 2);
 			return (126);
@@ -83,7 +85,7 @@ int	ft_check_path(char **path, char **args, t_list *envl)
 	}
 	if (!*path)
 	{
-		ft_putstr_fd("bash: ", 2);
+		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(args[0] , 2);
 		ft_putendl_fd(": command not found", 2);
 		return (127);
