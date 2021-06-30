@@ -23,7 +23,8 @@ SRCS = main.c\
 	   parser/create_lst_cmds.c\
 	   parser/draft.c\
 	   parser/free.c\
-	   parser/parse_line_hd.c
+	   parser/parse_line_hd.c\
+	   parser/lexer_utils.c
 
 NAME= minishell
 

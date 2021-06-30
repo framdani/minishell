@@ -28,7 +28,6 @@ void	free_lst_files(t_file **lst_files)
 			*lst_files = tmp;
 		}
 		*lst_files = NULL;
-		//write(1, "fiinhsed", 8);
 	}
 }
 
@@ -93,8 +92,6 @@ void 	free_lst_cmds(t_cmd **lst_cmds)
 		{
 			tmp = (*lst_cmds)->next;
 			free_double_pointer((*lst_cmds)->args);
-			//write(1, "cmd", 3);
-			//if ((*lst_cmds)->file != NULL)
 			free_lst_files(&(*lst_cmds)->file);
 			free(*lst_cmds);
 			*lst_cmds = tmp;

@@ -20,54 +20,29 @@ int	is_redirection(int type)
 	return (0);
 }
 
-int	is_separator(int type)
-{
-	if (type == PIPE) //type == SEMICOLON
-		return (1);
-	return (0);
-}
-
-int	unexpected_after_separator(int current, int next)
-{
-	if (current == PIPE)
-	{
-		if (is_separator(next))
-			return (2);
-	}
-	/*else if (current == SEMICOLON)
-	{
-		if (is_separator(next))
-			return (3);
-	}*/
-	return (0);
-}
-
 int	unexpected_next_token(int current, int next)
 {
-	if (is_separator(current))
-	{
-		if (unexpected_after_separator(current, next))
-			return (unexpected_after_separator(current, next));
-	}
+	if (current == PIPE && next == PIPE)
+		return (2);
 	else if (current == LEFT)
 	{
-		if (is_separator(next) || next == LEFT)
+		if (next == PIPE || next == LEFT)
 			return (4);
 	}
 	else if (current == RIGHT)
 	{
-		if (is_separator(next) || next == LEFT
+		if (next == PIPE || next == LEFT
 			|| next == GREATER)
 			return (5);
 	}
 	else if (current == GREATER)
 	{
-		if (is_separator(next) || is_redirection(next))
+		if (next == PIPE || is_redirection(next))
 			return (5);
 	}
 	else if (current == LESSER)
 	{
-		if (is_separator(next) || is_redirection(next))
+		if (next == PIPE || is_redirection(next))
 			return (4);
 	}
 	return (0);
@@ -80,8 +55,6 @@ int	check_syntax_errors(t_token *lexer)
 	tmp = lexer;
 	if (lexer->type == PIPE)
 		return (7);
-	//else if (lexer->type == SEMICOLON)
-	//	return (8);
 	while (tmp->next != NULL)
 	{
 		if (unexpected_next_token(tmp->type, tmp->next->type))

@@ -178,7 +178,7 @@ void	fill_struct_and_execute(t_token *lexer, t_list *envl)
 	if (tmp != NULL)
 	{
 		tmp = skip_token_space(tmp);
-		if (tmp != NULL && is_separator(tmp->type))
+		if (tmp != NULL && tmp->type == PIPE)
 			tmp = tmp->next;
 	}
 	while (tmp != NULL)

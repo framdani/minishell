@@ -78,8 +78,8 @@ typedef struct			s_pipe_sequence
 
 char 	*parse_line_hd(char *input, t_list **envl);
 t_token *parser(t_token *lexer);
-char	*expander(t_token **lst, char *input, t_list **envl);
-char 	*expander_inside_dquote(t_token **lst_token, char *input, t_list **envl);
+char	*expander(t_token **lst, char *input, t_list **envl, int state);
+char 	*expander_inside_dquote(t_token **lst_token, char *input, t_list **envl, int state);
 char 	*expander_spec_case(t_token **lst_token, char *input, t_list **envl);
 void	print_error_and_exit(t_token **lst_token, int error);
 void	fill_struct_and_execute(t_token *token, t_list *envl);
@@ -95,6 +95,5 @@ void	free_lst_files(t_file **lst_files);
 void	free_lst_args(t_arg **lst_args);
 void 	free_lst_cmds(t_cmd **lst_cmds);
 int		is_redirection(int type);
-int		is_separator(int type);
 void	print_error(char *str);
 #endif

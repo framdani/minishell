@@ -15,6 +15,7 @@
 # define NORMAL 1
 # define IN_QUOTE 2
 # define IN_DQUOTE 3
+# define SPEC_CASE 4
 #include "../libft/libft.h"
 /*
  * Define Token Types
