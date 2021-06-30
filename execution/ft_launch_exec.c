@@ -72,7 +72,7 @@ int	ft_red_smpl_cmd(t_cmd *cmds, t_list *envl)
 		return(ret);
 	}
 		// return (ft_launch_exec(cmds->args, envl, 1));
-	else if(ft_redirect(cmds->file, &fd[0], &fd[1], 0) == 1)
+	else if(ft_redirect(cmds->file, &fd[0], &fd[1], 0, &envl) == 1)
 	{
 		if (cmds->args[0] == NULL)
 		{

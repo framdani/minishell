@@ -60,6 +60,7 @@ typedef struct		s_envv
 // void	ft_putstrstr_fd(char **str, int fd);
 
 //main functions
+char	*get_env(char *env, t_list **envl);
 void	ft_echo(char **args, int fd);
 void	ft_env(t_list *envl, int fd);
 void	ft_export(t_list **envl, char **args, int fd);
@@ -71,7 +72,7 @@ void	ft_inc_shlvl(t_list *envl);
 int		ft_exec_cmd(t_list *envl, char **args, int fork);
 int		ft_launch_exec(char **args, t_list *envl, int fork);
 void	ft_exit(char **args);
-int		ft_redirect(t_file *fil_lst, int *fd_in, int *fd_out, int option);
+int		ft_redirect(t_file *fil_lst, int *fd_in, int *fd_out, int option, t_list **env);
 void	ft_fork_pipe(int *io, char **args, t_list *envl, int *pid);
 void	ft_set_io(int *fd_io, int *io, int out);
 int		ft_pipe(t_cmd *lst, t_list *envl);

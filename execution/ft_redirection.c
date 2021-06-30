@@ -29,7 +29,7 @@ void	ft_rd_print_error(char *path, int option)
 		exit (1);
 }
 
-int	ft_redirect(t_file *fil_lst, int *fd_in, int *fd_out, int option)
+int	ft_redirect(t_file *fil_lst, int *fd_in, int *fd_out, int option, t_list **env)
 {
 	t_file	*lst;
 	int		tmp;
@@ -71,6 +71,7 @@ int	ft_redirect(t_file *fil_lst, int *fd_in, int *fd_out, int option)
 					break ;
 				}
 			//framdani fonction to chech for any env var!
+				line = parse_line_hd(line, env);
 				write(fd, line, ft_strlen(line));
 				write(fd, "\n", 1);
 				free(line);
