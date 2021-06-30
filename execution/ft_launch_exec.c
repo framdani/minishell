@@ -61,18 +61,29 @@ int	ft_launch_exec(char **args, t_list *envl, int fork)
 	return (ret);
 }
 
+void	ft_dup_io(int fd[2])
+{
+	if (fd[0] != -18)
+		dup2(fd[0], STDIN_FILENO);
+	if (fd[1] != -18)
+		dup2(fd[1], STDOUT_FILENO);
+	if (fd[0] != 0)
+		close(fd[0]);
+	if (fd[1] != 1)
+		close(fd[1]);
+}
+
 int	ft_red_smpl_cmd(t_cmd *cmds, t_list *envl)
 {
-	int fd[2];
+	int	fd[2];
 	int	ret;
 
 	if (!cmds->file)
 	{
 		ret = ft_launch_exec(cmds->args, envl, 1);
-		return(ret);
+		return (ret);
 	}
-		// return (ft_launch_exec(cmds->args, envl, 1));
-	else if(ft_redirect(cmds->file, &fd[0], &fd[1], 0) == 1)
+	else if (ft_redirect(cmds->file, &fd[0], &fd[1], 0) == 1)
 	{
 		if (cmds->args[0] == NULL)
 		{
@@ -80,19 +91,10 @@ int	ft_red_smpl_cmd(t_cmd *cmds, t_list *envl)
 			close(fd[1]);
 			return (0);
 		}
-		if (fd[0] != -18)
-			dup2(fd[0], STDIN_FILENO);
-		if (fd[1] != -18)
-			dup2(fd[1], STDOUT_FILENO);
-		if (fd[0] != 0)
-			close(fd[0]);
-		if (fd[1] != 1)
-			close(fd[1]);
+		ft_dup_io(fd);
 		ret = ft_launch_exec(cmds->args, envl, 1);
-		
 		reset_stds();
 		return (ret);
 	}
-	// This means that it was a prob opening the file!
 	return (1);
 }

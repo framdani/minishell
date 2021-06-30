@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:32:49 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/29 19:17:39 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/06/30 18:17:09 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	ft_pipe(t_cmd *lst, t_list *envl)
 		io[0] = io[2];
 		lst = lst->next;
 	}
-	ft_redirect(lst->file, &fd_io[0], &fd_io[1], 1);
+	ft_redirect(lst->file, &fd_io[0], &fd_io[1], 0);
 	ft_set_io(fd_io, io, 1);
 	ft_fork_pipe(io, lst->args, envl, &lst->pid);
 	if (k)

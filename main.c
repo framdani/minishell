@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:41:12 by framdani          #+#    #+#             */
-/*   Updated: 2021/06/29 20:05:25 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/06/29 20:12:39 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	print_lexer(t_token *lexer)
 	tmp = lexer;
 	while (tmp != NULL)
 	{
-		printf("TOKEN (%s,%d)\n", tmp->value, tmp->type);
+		printf(" (%s,%d)\n", tmp->value, tmp->type);
 		tmp = tmp->next;
 	}
 }
