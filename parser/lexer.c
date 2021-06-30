@@ -36,20 +36,7 @@ void	add_token(t_token **lst_tok, char *data, int type)
 	}
 }
 
-char	*skip_spaces(char *str)
-{
-	while (*str != '\0' && (*str == 32 || *str == '\t'))
-		str++;
-	return (str);
-}
-
-char	next_char(char *str)
-{
-	str++;
-	return (*str);
-}
-
-t_token	*check_return_value(int state, t_token **lst_tok)
+t_token	*check_unclosed_quotes(int state, t_token **lst_tok)
 {
 	if (state == IN_QUOTE || state == IN_DQUOTE)
 	{
@@ -60,20 +47,26 @@ t_token	*check_return_value(int state, t_token **lst_tok)
 		return (*lst_tok);
 }
 
+void	initialize_vars(t_token **lst_tok, t_info *info)
+{
+	*lst_tok = NULL;
+	info->state = NORMAL;
+	info->spec_case = 0;
+}
+
 t_token	*lexer(char *input, int size, t_list **envl)
 {
 	t_token		*lst_tok;
 	t_info		info;
 
-	lst_tok = NULL;
 	input = skip_spaces(input);
-	info.state = NORMAL;
-	info.spec_case = 0;
+	initialize_vars(&lst_tok, &info);
 	while (*input != '\0')
 	{
 		while (info.state == NORMAL && *input != '\0')
 		{
-			info = tokenize_state_normal(input, &lst_tok, size, info.spec_case, envl);
+			info = tokenize_state_normal(input, &lst_tok, size, info.spec_case,
+					envl);
 			input = info.input;
 		}
 		while (info.state == IN_QUOTE && *input != '\0')
@@ -87,5 +80,5 @@ t_token	*lexer(char *input, int size, t_list **envl)
 			input = info.input;
 		}
 	}
-	return (check_return_value(info.state, &lst_tok));
+	return (check_unclosed_quotes(info.state, &lst_tok));
 }

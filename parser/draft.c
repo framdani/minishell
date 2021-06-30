@@ -108,10 +108,10 @@ t_info		tokenize_state_normal(char *input, t_token **lst_tok, int size, int spec
 		else if (info.spec_case == 1)
 		{
 			info.spec_case = 0;
-			input = expander_spec_case(lst_tok, input, envl);
+			input = expander(lst_tok, input, envl, SPEC_CASE);
 		}
 		else
-			input = expander(lst_tok, input, envl);
+			input = expander(lst_tok, input, envl, NORMAL);
 	}
 	else if (*input == QUOTE)
 	{
@@ -163,7 +163,7 @@ t_info		tokenize_inside_dquote(char *input, t_token **lst_tok, int size, t_list 
 		if (*input == SPACE || *input == '\0')
 			add_token(lst_tok, "DOLLAR", DOLLAR);
 		else
-			input = expander_inside_dquote(lst_tok, input, envl);
+			input = expander(lst_tok, input, envl, IN_DQUOTE);
 			//input = expander(lst_tok, input);
 	}
 	/*else if (*input == ESC_CHAR)

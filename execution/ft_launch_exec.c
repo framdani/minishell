@@ -13,51 +13,46 @@ void	ft_launch_execution(t_cmd *cmds, t_list	*envl)
 	printf("ret = %d\n\n\n", ret);
 }
 
+int	ft_is_builtin(char *args)
+{
+	if (!ft_strncmp("echo", args, 5))
+		return (1);
+	else if (!ft_strncmp("env", args, 4))
+		return (1);
+	else if (!ft_strncmp("export", args, 7))
+		return (1);
+	else if (!ft_strncmp("unset", args, 6))
+		return (1);
+	else if (!ft_strncmp("cd", args, 3))
+		return (1);
+	else if (!ft_strncmp("pwd", args, 4))
+		return (1);
+	return (0);
+}
+
 int	ft_launch_exec(char **args, t_list *envl, int fork)
 {
 	int	ret;
 
 	ret = 0;
 	if (!ft_strncmp("echo", *args, 5))
-	{
 		ft_echo(args + 1, 1);
-		if (!fork)
-			exit(0);
-	}
 	else if (!ft_strncmp("env", *args, 4))
-	{
 		ft_env(envl, 1);
-		if (!fork)
-			exit(0);
-	}
 	else if (!ft_strncmp("export", *args, 7))
-	{
 		ft_export(&envl, args + 1, 1);
-		if (!fork)
-			exit(0);
-	}
 	else if (!ft_strncmp("unset", *args, 6))
-	{
 		ft_unset(&envl, args + 1);
-		if (!fork)
-			exit(0);
-	}
 	else if (!ft_strncmp("cd", *args, 3))
-	{
 		ft_cd(envl, args + 1);
-		if (!fork)
-			exit(0);
-	}
 	else if (!ft_strncmp("pwd", *args, 4))
-	{
 		ft_pwd(envl);
-		if (!fork)
-			exit(0);
-	}
 	else if (!ft_strncmp("exit", *args, 5))
 		ft_exit(args + 1);
 	else
 		ret = ft_exec_cmd(envl, args, fork);
+	if (!fork && ft_is_builtin(*args))
+		exit(0);
 	return (ret);
 }
 
@@ -83,7 +78,7 @@ int	ft_red_smpl_cmd(t_cmd *cmds, t_list *envl)
 		ret = ft_launch_exec(cmds->args, envl, 1);
 		return (ret);
 	}
-	else if (ft_redirect(cmds->file, &fd[0], &fd[1], 0) == 1)
+	else if (ft_redirect(cmds->file, &fd[0], &fd[1], 0, &envl) == 1)
 	{
 		if (cmds->args[0] == NULL)
 		{
