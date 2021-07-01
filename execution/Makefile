@@ -6,7 +6,7 @@
 #    By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/08 18:54:00 by akhalidy          #+#    #+#              #
-#    Updated: 2021/07/01 12:13:58 by akhalidy         ###   ########.fr        #
+#    Updated: 2021/07/01 17:23:50 by akhalidy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CC = clang
 CFLAG = -Wall -Wextra -Werror
 
 SRCS = ft_cd.c \
+	ft_cd_outils.c \
 	ft_echo.c \
 	ft_env.c \
 	ft_exec.c \

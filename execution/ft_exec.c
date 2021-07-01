@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exec_final.c                                    :+:      :+:    :+:   */
+/*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 10:12:35 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/29 19:14:56 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/01 17:38:24 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ char	*ft_get_cmd_path(char *cmd, char *pathenv)
 int	ft_path_is_dir(char *args, char **path)
 {
 	DIR	*dir;
-	
+
 	if (!args)
 		return (-1);
-	dir =  opendir(args);
+	dir = opendir(args);
 	if (!dir)
 	{
 		*path = ft_strdup(args);
@@ -56,6 +56,14 @@ int	ft_path_is_dir(char *args, char **path)
 	return (0);
 }
 
+int	ft_print_exec_error(char *args, char *error, int n_exit)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(args, 2);
+	ft_putendl_fd(error, 2);
+	return (n_exit);
+}
+
 int	ft_check_path(char **path, char **args, t_list *envl)
 {
 	t_list	*pathenv;
@@ -63,15 +71,11 @@ int	ft_check_path(char **path, char **args, t_list *envl)
 	*path = NULL;
 	if (**args == '\0')
 		*path = NULL;
-	else if(**args == '/' || !ft_strncmp(*args, "./", 2) || !ft_strncmp(*args, "../", 3))
+	else if (**args == '/' || !ft_strncmp(*args, "./", 2)
+		|| !ft_strncmp(*args, "../", 3))
 	{
 		if (!ft_path_is_dir(*args, path))
-		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(args[0] , 2);
-			ft_putendl_fd(": is a directory", 2);
-			return (126);
-		}
+			return (ft_print_exec_error(args[0], ": is a directory", 126));
 	}
 	else
 	{
@@ -82,42 +86,35 @@ int	ft_check_path(char **path, char **args, t_list *envl)
 			*path = ft_get_cmd_path(args[0], ".");
 	}
 	if (!*path)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(args[0] , 2);
-		ft_putendl_fd(": command not found", 2);
-		return (127);
-	}
+		return (ft_print_exec_error(args[0], ": command not found", 127));
 	return (0);
 }
 
 int	ft_exec_cmd(t_list *envl, char **args, int fork_on)
 {
-	char	*path;
-	char	**envp;
-	int		status;
-	int		ret;
-	int		id;
-	
-	ret = ft_check_path(&path, args, envl);
-	if (!ret)
+	char		*path;
+	char		**envp;
+	t_exec_hlp	var;
+
+	var.ret = ft_check_path(&path, args, envl);
+	if (!var.ret)
 	{
 		envp = ft_list_to_arr(envl);
 		if (fork_on)
-			id = fork();
-		if ((!id && fork_on) || !fork_on)
+			var.id = fork();
+		if ((!var.id && fork_on) || !fork_on)
 		{
 			execve(path, args, envp);
 			ft_putendl_fd(strerror(errno), 2);
 			ft_exit_child();
 		}
-		if (fork_on && id)
+		if (fork_on && var.id)
 		{
-			waitpid(id, &status, 0);
-			ret = WEXITSTATUS(status);
+			waitpid(var.id, &var.status, 0);
+			var.ret = WEXITSTATUS(var.status);
 		}
 		ft_free(envp);
 	}
 	free(path);
-	return (ret);
+	return (var.ret);
 }

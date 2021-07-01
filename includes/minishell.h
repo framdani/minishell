@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:22:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/01 13:07:58 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/01 17:36:01 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ typedef struct s_envv
 	char	*value;
 }			t_envv;
 
+typedef struct s_exec_hlp
+{
+	int		status;
+	int		ret;
+	int		id;
+}			t_exec_hlp;
+
 char	*get_env(char *env, t_list **envl);
 void	ft_echo(char **args, int fd);
 void	ft_env(t_list *envl, int fd);
@@ -55,7 +62,7 @@ void	ft_inc_shlvl(t_list *envl);
 int		ft_exec_cmd(t_list *envl, char **args, int fork);
 int		ft_launch_exec(char **args, t_list *envl, int fork);
 void	ft_exit(char **args);
-int		ft_redirect(t_file *fil_lst, int *fd_in, int *fd_out, int option, t_list **env);
+int		ft_redirect(t_file *fil, int *fd_in, int *fd_out, int opt, t_list **env);
 void	ft_fork_pipe(int *io, char **args, t_list *envl, int *pid);
 void	ft_set_io(int *fd_io, int *io, int out);
 int		ft_pipe(t_cmd *lst, t_list *envl);
@@ -66,7 +73,11 @@ int		ft_red_smpl_cmd(t_cmd *cmds, t_list *envl);
 void	ft_pipe_help(int fd[2], int io[3], int *k);
 void	ft_initialize(int io[3], t_cmd	**new, t_cmd **lst, int *k);
 void	ft_exit_child(void);
-void    reset_stds(void);
+void	reset_stds(void);
+int		ft_cd_print_error(char *path);
+void	set_pwd_oldpwd(t_list *envl, char *pwd_old);
+void	ft_check_cd_home(char **path, t_list *envl);
+int		ft_check_cd_void(char ***path, t_list *home);
 
 t_global	g_help;
 
