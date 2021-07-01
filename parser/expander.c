@@ -16,19 +16,37 @@
 
 char	*get_env(char *name, t_list **env)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = *env;
-	while (tmp !=	NULL)
+	while (tmp != NULL)
 	{
 		if ((strcmp(name, "PWD") == 0 && g_help.on_pwd == 0)
-				||(strcmp(name, "OLDPWD") == 0 && g_help.on_oldpwd == 0))
+			|| (strcmp(name, "OLDPWD") == 0 && g_help.on_oldpwd == 0))
 			return (NULL);
-		if(strcmp(tmp->env, name) == 0)
+		if (strcmp(tmp->env, name) == 0)
 			return (tmp->value);
 		tmp = tmp->next;
 	}
 	return (NULL);
+}
+
+void	add_expnaded_value(t_token **lst_tok, char *token, int state, char *val)
+{
+	if (token != NULL)
+		add_token(lst_tok, token, CHAR);
+	else
+	{
+		if (state == IN_DQUOTE)
+		{
+			free(val);
+			val = ft_strdup("");
+			add_token(lst_tok, val, CHAR);
+		}
+		else
+			add_token(lst_tok, "SPACE", SPACE);
+	}
+	free(val);
 }
 
 char	*expander(t_token **lst_token, char *input, t_list **envl, int state)
@@ -57,7 +75,7 @@ char	*expander(t_token **lst_token, char *input, t_list **envl, int state)
 			input++;
 		}
 		token = get_env(new_value, envl);
-		if (token != NULL)
+		/*if (token != NULL)
 			add_token(lst_token, token, CHAR);
 		else
 		{
@@ -69,8 +87,9 @@ char	*expander(t_token **lst_token, char *input, t_list **envl, int state)
 			}
 			else
 				add_token(lst_token, "SPACE", SPACE);
-		}
+		}*/
+		add_expnaded_value(lst_token, token, state, new_value);
 	}
-	free(new_value);
+//	free(new_value);
 	return (input);
 }
