@@ -6,7 +6,7 @@
 #    By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/08 18:54:00 by akhalidy          #+#    #+#              #
-#    Updated: 2021/06/25 17:40:27 by akhalidy         ###   ########.fr        #
+#    Updated: 2021/07/01 12:13:58 by akhalidy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,14 @@ CFLAG = -Wall -Wextra -Werror
 SRCS = ft_cd.c \
 	ft_echo.c \
 	ft_env.c \
-	ft_exec_final.c \
+	ft_exec.c \
 	ft_export.c \
 	ft_pwd.c \
 	ft_redirection.c \
 	ft_shlvl.c \
 	ft_unset.c \
 	ft_pipe.c \
+	ft_pipe_outils.c \
 	ft_launch_exec.c \
 	ft_exit.c
 

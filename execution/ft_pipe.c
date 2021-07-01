@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:32:49 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/30 19:01:50 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/01 12:15:10 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,6 @@ void	ft_fork_pipe(int *io, char **args, t_list *envl, int *pid)
 		close(io[1]);
 }
 
-void	ft_set_io(int *fd_io, int *io, int out)
-{
-	if (fd_io[0] != -18)
-		io[0] = fd_io[0];
-	if (fd_io[1] != -18)
-		io[1] = fd_io[1];
-	else
-		io[1] = out;
-}
-
 int	ft_wait_loop(t_cmd	*cmds)
 {
 	int	status;
@@ -78,10 +68,7 @@ int	ft_pipe(t_cmd *lst, t_list *envl)
 	int		k;
 	int		fd_io[2];
 
-	io[0] = 0;
-	new = lst;
-	io[2] = -18;
-	k = 0;
+	ft_initialize(io, &new, &lst, &k);
 	while (lst->next)
 	{
 		pipe(fd);
@@ -89,10 +76,7 @@ int	ft_pipe(t_cmd *lst, t_list *envl)
 		ft_redirect(lst->file, &fd_io[0], &fd_io[1], 1, &envl);
 		ft_set_io(fd_io, io, fd[1]);
 		ft_fork_pipe(io, lst->args, envl, &lst->pid);
-		close(fd[1]);
-		if (!k)
-			k = 1;
-		io[0] = io[2];
+		ft_pipe_help(fd, io, &k);
 		lst = lst->next;
 	}
 	ft_redirect(lst->file, &fd_io[0], &fd_io[1], 0, &envl);

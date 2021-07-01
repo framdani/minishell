@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 12:16:06 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/29 18:26:31 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/01 13:07:02 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ int	ft_redirect(t_file *fil_lst, int *fd_in, int *fd_out, int option, t_list **e
 					close(fd);
 					break ;
 				}
-			//framdani fonction to chech for any env var!
 				line = parse_line_hd(line, env);
 				write(fd, line, ft_strlen(line));
 				write(fd, "\n", 1);
