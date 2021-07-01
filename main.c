@@ -103,4 +103,5 @@ int	main(int argc, char **argv, char **env)
 		system("leaks minishell");
 		free(cmd_line);
 	}
+	ft_free(env);
 }

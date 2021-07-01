@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/18 05:44:07 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/29 18:00:03 by akhalidy         ###   ########.fr       */
+/*   Created: 2019/10/13 05:19:23 by framdani          #+#    #+#             */
+/*   Updated: 2019/10/24 03:34:32 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,26 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char *str;
+	int		length;
+	int		i;
+	char	*res;
 
-	if (!s1 || !s2)
-		return (NULL);
-	str = (char*)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
-	if (!str)
-		return (NULL);
-	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
-	ft_strlcat(str + ft_strlen(s1), s2, ft_strlen(s2) + 1);
-	return (str);
+	length = 0;
+	i = 0;
+	if (!s1 && s2)
+		length = ft_strlen(s2);
+	else if (!s2 && s1)
+		length = ft_strlen(s1);
+	else if (s1 && s2)
+		length = ft_strlen(s1) + ft_strlen(s2);
+	if (!(res = malloc(length + 1)))
+		return (res);
+	if (s1)
+		while (*s1 != '\0')
+			res[i++] = *(char *)s1++;
+	if (s2)
+		while (*s2 != '\0')
+			res[i++] = *(char *)s2++;
+	res[i] = '\0';
+	return (res);
 }
