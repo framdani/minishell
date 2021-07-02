@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 10:12:35 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/01 17:38:24 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/02 16:13:31 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*ft_get_cmd_path(char *cmd, char *pathenv)
 	int			i;
 
 	i = 0;
+	if (!pathenv)
+		return (NULL);
 	split = ft_split(pathenv, ':');
 	while (split[i])
 	{

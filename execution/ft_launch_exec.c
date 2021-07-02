@@ -53,8 +53,6 @@ int	ft_launch_exec(char **args, t_list **envl, int fork)
 		ret = ft_exec_cmd(*envl, args, fork);
 	if (!fork && ft_is_builtin(*args))
 		exit(0);
-	printf("hahia bat segfaulti !\n");
-	printf("after unset :  |%s| \n", (*envl)->env);
 	return (ret);
 }
 
@@ -78,7 +76,6 @@ int	ft_red_smpl_cmd(t_cmd *cmds, t_list **envl)
 	if (!cmds->file)
 	{
 		ret = ft_launch_exec(cmds->args, envl, 1);
-		printf("after unset 2:  %s \n", (*envl)->env);
 		return (ret);
 	}
 	else if (ft_redirect(cmds->file, &fd[0], &fd[1], 0, envl) == 1)
