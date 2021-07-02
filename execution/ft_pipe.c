@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:32:49 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/01 12:15:10 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/02 16:03:26 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_exit_child(void)
 		exit(127);
 }
 
-void	ft_fork_pipe(int *io, char **args, t_list *envl, int *pid)
+void	ft_fork_pipe(int *io, char **args, t_list **envl, int *pid)
 {
 	if (io[0] == -1)
 	{
@@ -60,7 +60,7 @@ int	ft_wait_loop(t_cmd	*cmds)
 	return (WEXITSTATUS(status));
 }
 
-int	ft_pipe(t_cmd *lst, t_list *envl)
+int	ft_pipe(t_cmd *lst, t_list **envl)
 {
 	int		fd[2];
 	int		io[3];
@@ -73,13 +73,13 @@ int	ft_pipe(t_cmd *lst, t_list *envl)
 	{
 		pipe(fd);
 		io[2] = fd[0];
-		ft_redirect(lst->file, &fd_io[0], &fd_io[1], 1, &envl);
+		ft_redirect(lst->file, &fd_io[0], &fd_io[1], 1, envl);
 		ft_set_io(fd_io, io, fd[1]);
 		ft_fork_pipe(io, lst->args, envl, &lst->pid);
 		ft_pipe_help(fd, io, &k);
 		lst = lst->next;
 	}
-	ft_redirect(lst->file, &fd_io[0], &fd_io[1], 0, &envl);
+	ft_redirect(lst->file, &fd_io[0], &fd_io[1], 0, envl);
 	ft_set_io(fd_io, io, 1);
 	ft_fork_pipe(io, lst->args, envl, &lst->pid);
 	if (k)

@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 17:22:16 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/02 17:41:50 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:35:00 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*ft_prev_node(t_list *lst, char *content)
 	prev = NULL;
 	while (lst)
 	{
-		if (!ft_strncmp(lst->env, content, ft_strlen(content)))
+		if (!ft_strncmp(lst->env, content, ft_strlen(content) + 1))
 			return (prev);
 		prev = lst;
 		lst = lst->next;
@@ -29,7 +29,7 @@ t_list	*ft_prev_node(t_list *lst, char *content)
 
 t_list	*ft_find_node(t_list *lst, char *content)
 {
-	t_list *tmp;
+	t_list	 *tmp;
 
 	tmp = lst;
 	while (tmp)

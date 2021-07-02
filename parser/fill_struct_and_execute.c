@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:17:05 by framdani          #+#    #+#             */
-/*   Updated: 2021/06/29 20:13:00 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:48:07 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ t_token	*fill_lst_files(t_file **lst_files, t_token *tok)
 	return (tok);
 }
 
-void	fill_struct_and_execute(t_token *lexer, t_list *envl)
+void	fill_struct_and_execute(t_token *lexer, t_list **envl)
 {
 	t_cmd	*lst_cmds;
 	t_token	*tmp;

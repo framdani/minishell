@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: framdani <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/27 20:07:22 by framdani          #+#    #+#              #
-#    Updated: 2021/06/27 20:07:24 by framdani         ###   ########.fr        #
+#    Updated: 2021/07/01 21:17:54 by akhalidy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ OBJS = $(SRCS:.c=.o)
 all:$(SRCS)
 	@make -C ./libft
 	@make -C ./execution
-	@$(CC) $(CFLAGS) $(SRCS) -o minishell $(LIBFT_PATH) $(EXEC_PATH)
+	@$(CC) $(CFLAGS) -g $(SRCS) -o minishell $(LIBFT_PATH) $(EXEC_PATH)
 	@echo "minishell created successfully"
 
 clean:
@@ -56,3 +56,4 @@ fclean:clean
 re:fclean all
 
 .PHONY:all clean fclean re
+

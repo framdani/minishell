@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:41:12 by framdani          #+#    #+#             */
-/*   Updated: 2021/06/29 20:12:39 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:47:21 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	main(int argc, char **argv, char **env)
 		tokens = parser(tokens);
 		//if (size > 0 && tokens != NULL)
 			//set_return_value
-		fill_struct_and_execute(tokens, envl); //envp
+		fill_struct_and_execute(tokens, &envl); //envp
 		/*if (strcmp(cmd_line, "exit") == 0)
 		{
 			write(1, "exit", 4);
@@ -103,5 +103,5 @@ int	main(int argc, char **argv, char **env)
 		system("leaks minishell");
 		free(cmd_line);
 	}
-	ft_free(env);
+	//ft_free(env);
 }

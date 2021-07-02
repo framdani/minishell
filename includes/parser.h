@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 17:27:45 by framdani          #+#    #+#             */
-/*   Updated: 2021/05/24 17:29:51 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:47:44 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ char	*expander(t_token **lst, char *input, t_list **envl, int state);
 char 	*expander_inside_dquote(t_token **lst_token, char *input, t_list **envl, int state);
 char 	*expander_spec_case(t_token **lst_token, char *input, t_list **envl);
 void	print_error_and_exit(t_token **lst_token, int error);
-void	fill_struct_and_execute(t_token *token, t_list *envl);
+void	fill_struct_and_execute(t_token *token, t_list **envl);
 void	add_arg(t_arg **lst_arg, char *arg);
 void	add_cmd(t_cmd **lst_cmds, t_arg **args, t_file **files);
 void	add_file(t_file **lst_files, char *filename, int type);

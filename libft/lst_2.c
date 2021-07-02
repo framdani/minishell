@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/16 17:28:17 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/05/20 17:32:27 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/02 15:43:18 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
 	if (lst && del)
 	{
-		del(lst->env);
-		del(lst->value);
+		del((lst)->env);
+		(lst)->env = NULL;
+		del((lst)->value);
+		(lst)->value = NULL;
 		free(lst);
+		lst = NULL;
 	}
 }
 
