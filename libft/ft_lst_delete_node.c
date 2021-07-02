@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/22 17:22:16 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/02 15:35:00 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/02 16:29:56 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_delete_node(t_list **lst, char *env)
 	else
 	{
 		tmp = *lst;
-		if (!ft_strncmp(tmp->env, env, ft_strlen(env)))
+		if (!ft_strncmp(tmp->env, env, ft_strlen(env) + 1))
 			*lst = tmp->next;
 		else
 			tmp = NULL;

@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 11:39:05 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/29 16:56:55 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/02 17:18:22 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,18 @@ void	ft_export_add(t_list **envl, char **args)
 			free(envv->name);
 		}
 		else
+		{
+			printf("| inside export start of else %d|  -   | \n", g_help.on_pwd);
+			if (!ft_strncmp(envv->name, "PWD", 4) && !g_help.on_pwd)
+			{
+				
+				g_help.on_pwd = 1;
+				printf("| inside export add %d|  -   | \n", g_help.on_pwd);
+			}
+			else if (!ft_strncmp(envv->name, "OLDPWD", 7) && !g_help.on_oldpwd)
+				g_help.on_oldpwd = 1;
 			ft_lstadd_back(envl, ft_lstnew(envv->name, envv->value));
+		}
 		free(envv);
 		i++;
 	}

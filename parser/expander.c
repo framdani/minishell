@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 15:47:40 by framdani          #+#    #+#             */
-/*   Updated: 2021/05/26 15:47:43 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/02 17:06:52 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../includes/minishell.h"
 #include "../includes/parser.h"
 #include "../libft/libft.h"
@@ -19,11 +20,13 @@ char	*get_env(char *name, t_list **env)
 	t_list	*tmp;
 
 	tmp = *env;
+	printf("| inside get _env%d|  -   | \n", g_help.on_pwd);
+	if ((strcmp(name, "PWD") == 0 && g_help.on_pwd == 0)
+		|| (strcmp(name, "OLDPWD") == 0 && g_help.on_oldpwd == 0))
+		return (NULL);
 	while (tmp != NULL)
 	{
-		if ((strcmp(name, "PWD") == 0 && g_help.on_pwd == 0)
-			|| (strcmp(name, "OLDPWD") == 0 && g_help.on_oldpwd == 0))
-			return (NULL);
+		
 		if (strcmp(tmp->env, name) == 0)
 			return (tmp->value);
 		tmp = tmp->next;
