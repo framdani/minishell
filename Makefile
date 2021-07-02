@@ -12,7 +12,7 @@
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -lreadline
 
 SRCS = main.c\
 	   parser/lexer.c\

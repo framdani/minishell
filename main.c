@@ -13,7 +13,8 @@
 #include "./includes/parser.h"
 #include "libft/libft.h"
 #include "./includes/minishell.h"
-
+#include <readline/readline.h>
+#include <readline/history.h>
 #include <signal.h>
 /*void 	signal_handler(int sig)
 {
@@ -30,7 +31,19 @@ void	prompt(void)
 	free(str);
 }
 
-char	*read_command_line(void)
+void 	signal_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		//ft_putstr_fd(" CTRL-\\ Detected\n", 1);
+		ft_putstr_fd("\n", 1);
+		g_help.ret = 1;
+		printf("ret = %d\n", g_help.ret);
+	    prompt();
+	}
+}
+
+/*char	*read_command_line(void)
 {
 	char	*line_cmd;
 	char	*buff;
@@ -48,7 +61,7 @@ char	*read_command_line(void)
 	}
 	free(buff);
 	return (line_cmd);
-}
+}*/
 
 void	print_lexer(t_token *lexer)
 {
@@ -84,24 +97,17 @@ int	main(int argc, char **argv, char **env)
 
 	while (status)
 	{
-		prompt();
-		cmd_line = read_command_line();
+		//prompt();
+		//signal(SIGINT, signal_handler);
+		cmd_line = readline("\033[0;33mminishell$ \033[0m");
+		add_history(cmd_line);
 		size = ft_strlen(cmd_line) + 1;
 		tokens = lexer(cmd_line, size, &envl);
 		tokens = parser(tokens);
 		//if (size > 0 && tokens != NULL)
 			//set_return_value
 		fill_struct_and_execute(tokens, &envl); //envp
-		/*if (strcmp(cmd_line, "exit") == 0)
-		{
-			write(1, "exit", 4);
-			status = 0;
-			free(cmd_line);
-			system("leaks minishell");
-			break ;
-		}*/
 		system("leaks minishell");
 		free(cmd_line);
 	}
-	//ft_free(env);
 }
