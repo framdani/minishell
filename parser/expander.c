@@ -30,23 +30,55 @@ char	*get_env(char *name, t_list **env)
 	}
 	return (NULL);
 }
-
-void	add_expnaded_value(t_token **lst_tok, char *token, int state, char *val)
+// in case of command inside expanded value
+void 	expand_value(t_token **lst_tok, char *value)
 {
+	char	*new_value;
+
+	new_value = ft_strdup("");
+	while (*value != '\0' && *value == 32)
+		value++;
+	while (*value != '\0')
+	{
+		while (*value != 32 && *value != '\0')
+		{
+			new_value = ft_charjoin(new_value, *value);
+			value++;
+		}
+		add_token(lst_tok, new_value, CHAR);
+		free(new_value);
+		new_value = ft_strdup("");
+		if (*value == 32)
+		{
+			while (*value == 32 && *value != '\0')
+				value++;
+			add_token(lst_tok, "SPACE", SPACE);
+		}
+	}
+	free(new_value);
+}
+
+void	add_expanded_value(t_token **lst_tok, char *token, int state)
+{
+	char *val;
+
 	if (token != NULL)
-		add_token(lst_tok, token, CHAR);
+		if (state == NORMAL) //|| state == SPEC_CASE)
+			expand_value(lst_tok, token);
+		else
+			add_token(lst_tok, token, CHAR);
 	else
 	{
 		if (state == IN_DQUOTE)
 		{
-			free(val);
+			//free(val);
 			val = ft_strdup("");
 			add_token(lst_tok, val, CHAR);
+			free(val);
 		}
 		else
 			add_token(lst_tok, "SPACE", SPACE);
 	}
-	free(val);
 }
 
 char	*expander(t_token **lst_token, char *input, t_list **envl, int state)
@@ -75,7 +107,7 @@ char	*expander(t_token **lst_token, char *input, t_list **envl, int state)
 			input++;
 		}
 		token = get_env(new_value, envl);
-		/*if (token != NULL)
+	/*	if (token != NULL)
 			add_token(lst_token, token, CHAR);
 		else
 		{
@@ -88,8 +120,8 @@ char	*expander(t_token **lst_token, char *input, t_list **envl, int state)
 			else
 				add_token(lst_token, "SPACE", SPACE);
 		}*/
-		add_expnaded_value(lst_token, token, state, new_value);
+		add_expanded_value(lst_token, token, state);
 	}
-//	free(new_value);
+	free(new_value);
 	return (input);
 }
