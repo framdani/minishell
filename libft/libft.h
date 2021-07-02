@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 09:38:40 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/02 15:37:12 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/02 17:26:39 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int					ft_char_frequency(char c, char *s);
 int					ft_is_integer(char *s, int *signe);
 t_list  			*ft_prev_node(t_list *lst, char *content);
 void				ft_delete_node(t_list **lst, char *env);
-void				ft_lst_print_fd(t_list	*head, int fd);
 void				ft_bubblesort(char *arr[], int n);
 void				ft_lstbubblesort(t_list	*lst);
 void				ft_swap_str(char **str1, char **str2);

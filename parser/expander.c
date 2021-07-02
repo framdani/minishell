@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 15:47:40 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/02 17:06:52 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/02 17:22:57 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ char	*get_env(char *name, t_list **env)
 	t_list	*tmp;
 
 	tmp = *env;
-	printf("| inside get _env%d|  -   | \n", g_help.on_pwd);
 	if ((strcmp(name, "PWD") == 0 && g_help.on_pwd == 0)
 		|| (strcmp(name, "OLDPWD") == 0 && g_help.on_oldpwd == 0))
 		return (NULL);

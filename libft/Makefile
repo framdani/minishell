@@ -6,7 +6,7 @@
 #    By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 02:16:17 by akhalidy          #+#    #+#              #
-#    Updated: 2021/06/08 20:33:34 by akhalidy         ###   ########.fr        #
+#    Updated: 2021/07/02 17:25:18 by akhalidy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC  = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	   ft_strnstr.c ft_strrchr.c ft_tolower.c ft_toupper.c ft_strjoin.c \
 	   ft_substr.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c \
 	   ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c \
-	   lst.c ft_atof.c ft_gnl.c lst_2.c ft_lst_delete_node.c ft_lst_print.c \
+	   lst.c ft_atof.c ft_gnl.c lst_2.c ft_lst_delete_node.c  \
 	   ft_bubblesort.c ft_lst_bubblesort.c ft_arr_to_list.c  ft_is_flag.c \
 	   ft_strstrlen.c ft_strtolower.c ft_list_to_arr.c\
 	   ft_print_list.c ft_putstrstr_fd.c no_special_char.c ft_charjoin.c

@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:17:05 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/02 16:33:57 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/02 17:35:18 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ void	fill_struct_and_execute(t_token *lexer, t_list **envl)
 	lst_files = NULL;
 	lst_cmds = NULL;
 	tmp = lexer;
-	print_lexer(lexer);
+	// print_lexer(lexer);
 	if (tmp != NULL)
 	{
 		tmp = skip_token_space(tmp);
