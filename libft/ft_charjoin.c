@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_charjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 16:04:13 by framdani          #+#    #+#             */
-/*   Updated: 2021/05/26 16:08:47 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/03 16:53:26 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 char 	*ft_charjoin(char 	*str, char c)
 {
-	int 	length;
-	int 	i;
-	char 	*res;
+	int		length;
+	int		i;
+	char	*res;
 
 	length = 0;
 	i = 0;
 	if (str)
 		length = ft_strlen(str);
-	if (!(res = malloc(length + 2)))
+	res = malloc(length + 2);
+	if (!res)
 		return (NULL);
 	while (str[i])
 	{

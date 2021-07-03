@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhalidy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 18:30:20 by akhalidy          #+#    #+#             */
-/*   Updated: 2019/10/29 22:47:23 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 17:52:44 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int		numlen(unsigned int n)
+static	int	numlen(unsigned int n)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	if (!n)
@@ -27,7 +27,13 @@ static	int		numlen(unsigned int n)
 	return (i);
 }
 
-char			*ft_itoa(int n)
+char	*ft_assign(char **str, int len)
+{
+	*str = (char *)ft_calloc(len, sizeof(char));
+	return (*str);
+}
+
+char	*ft_itoa(int n)
 {
 	char			*str;
 	unsigned int	x;
@@ -43,7 +49,7 @@ char			*ft_itoa(int n)
 	else
 		x = n;
 	len = numlen(x) + sign + 1;
-	if (!(str = (char *)ft_calloc(len, sizeof(char))))
+	if (!ft_assign(&str, len))
 		return (NULL);
 	len--;
 	while (--len > 0 || (len == 0 && !sign))

@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 10:07:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/29 17:30:45 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 17:00:42 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**ft_list_to_arr(t_list *lst)
 	i = 0;
 	tmp = lst;
 	str = (char **)malloc((ft_lstsize(lst) + 1) * sizeof(char *));
-	while(tmp)
+	while (tmp)
 	{
 		str[i] = ft_strjoin(tmp->env, "=");
 		pfree = str[i];
@@ -32,5 +32,5 @@ char	**ft_list_to_arr(t_list *lst)
 		i++;
 	}
 	str[i] = NULL;
-	return(str);
+	return (str);
 }

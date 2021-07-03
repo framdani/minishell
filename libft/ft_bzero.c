@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhalidy <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 19:32:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2019/10/19 23:33:45 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 16:52:20 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	int t;
-	int r;
-	int k;
+	int	t;
+	int	r;
+	int	k;
 
 	if (n)
 	{

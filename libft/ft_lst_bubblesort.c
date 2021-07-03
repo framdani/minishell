@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 19:28:00 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/05/22 19:02:27 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 17:01:26 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	ft_swap_str(char **str1, char **str2)
 
 void	ft_lstbubblesort(t_list	*lst)
 {
-	int	i;
-	int	j;
-	int n;
+	int		i;
+	int		j;
+	int		n;
 	t_list	*head;
 
 	i = 0;

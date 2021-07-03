@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:32:49 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/03 13:52:47 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 19:02:08 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_fork_pipe(int *io, char **args, t_list **envl, int *pid)
 {
 	if (io[0] == -1)
 	{
+		ft_putendl_fd("CHeey ana d5alt!", 2);
 		*pid = -1;
 		return ;
 	}
@@ -50,14 +51,18 @@ void	ft_fork_pipe(int *io, char **args, t_list **envl, int *pid)
 int	ft_wait_loop(t_cmd	*cmds)
 {
 	int	status;
+	int	pid;
 
 	while (cmds)
 	{
+		pid = cmds->pid;
 		if (cmds->pid > 0)
 			waitpid(cmds->pid, &status, 0);
 		cmds = cmds->next;
 	}
-	return (WEXITSTATUS(status));
+	if (pid > 0)
+		return (WEXITSTATUS(status));
+	return (1);
 }
 
 int	ft_pipe(t_cmd *lst, t_list **envl)
@@ -73,12 +78,10 @@ int	ft_pipe(t_cmd *lst, t_list **envl)
 	{
 		pipe(fd);
 		io[2] = fd[0];
-		if (ft_redirect(lst->file, fd_io, 0, envl) == 1)
-		{
-			ft_set_io(fd_io, io, fd[1]);
-			ft_fork_pipe(io, lst->args, envl, &lst->pid);
-			ft_pipe_help(fd, io, &k);
-		}
+		ft_redirect(lst->file, fd_io, 0, envl);
+		ft_set_io(fd_io, io, fd[1]);
+		ft_fork_pipe(io, lst->args, envl, &lst->pid);
+		ft_pipe_help(fd, io, &k);
 		lst = lst->next;
 	}
 	ft_redirect(lst->file, fd_io, 0, envl);

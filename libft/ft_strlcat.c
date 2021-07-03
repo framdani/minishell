@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 19:15:24 by akhalidy          #+#    #+#             */
-/*   Updated: 2020/12/16 10:31:29 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 17:10:07 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static size_t	ft_min(size_t a, size_t b)
 	return (a);
 }
 
-size_t			ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	int i;
-	int l;
-	int max;
+	int	i;
+	int	l;
+	int	max;
 
 	if (!dst && size == 0)
 		return (ft_strlen(src));

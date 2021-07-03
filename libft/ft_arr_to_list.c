@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:07:58 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/26 17:05:39 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 16:49:48 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ t_list	*ft_arr_to_list(char **str)
 	while (str[i])
 	{
 		split = ft_split(str[i], '=');
-		ft_lstadd_back(&lst, ft_lstnew(ft_strdup(split[0]), ft_strdup(split[1])));
+		ft_lstadd_back(&lst, ft_lstnew(ft_strdup(split[0]),
+				ft_strdup(split[1])));
 		ft_free(split);
 		i++;
 	}
-	return(lst);
+	return (lst);
 }
