@@ -6,13 +6,14 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 15:47:40 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/02 17:22:57 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 20:32:08 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/parser.h"
 #include "../libft/libft.h"
+#include <stdlib.h>
 #include <string.h>
 
 char	*get_env(char *name, t_list **env)
@@ -24,15 +25,14 @@ char	*get_env(char *name, t_list **env)
 		|| (strcmp(name, "OLDPWD") == 0 && g_help.on_oldpwd == 0))
 		return (NULL);
 	while (tmp != NULL)
-	{
-		
+	{	
 		if (strcmp(tmp->env, name) == 0)
 			return (tmp->value);
 		tmp = tmp->next;
 	}
 	return (NULL);
 }
-// in case of command inside expanded value
+
 void 	tokenize_expanded_value(t_token **lst_tok, char *value)
 {
 	char	*new_value;
@@ -60,20 +60,23 @@ void 	tokenize_expanded_value(t_token **lst_tok, char *value)
 	free(new_value);
 }
 
-void	add_expanded_value(t_token **lst_tok, char *token, int state)
+void	add_expanded_value(t_token **lst_tok, char *token, int state,
+	t_list **envl)
 {
-	char *val;
+	char	*val;
 
+	token = get_env(token, envl);
 	if (token != NULL)
-		if (state == NORMAL) //|| state == SPEC_CASE)
+	{
+		if (state == NORMAL)
 			tokenize_expanded_value(lst_tok, token);
 		else
 			add_token(lst_tok, token, CHAR);
+	}
 	else
 	{
 		if (state == IN_DQUOTE)
 		{
-			//free(val);
 			val = ft_strdup("");
 			add_token(lst_tok, val, CHAR);
 			free(val);
@@ -83,19 +86,23 @@ void	add_expanded_value(t_token **lst_tok, char *token, int state)
 	}
 }
 
+void	expand_exit_status(t_token **lst_tok)
+{
+	char	*new_value;
+
+	new_value = ft_itoa(g_help.ret);
+	add_token(lst_tok, new_value, CHAR);
+	free(new_value);
+}
+
 char	*expander(t_token **lst_token, char *input, t_list **envl, int state)
 {
 	char	*new_value;
-	char	*token;
 
-	new_value = ft_strdup("");
 	if (*input == '?')
 	{
-		free(new_value);
-		new_value = ft_itoa(g_help.ret);
-		add_token(lst_token, new_value, CHAR);
+		expand_exit_status(lst_token);
 		input++;
-		free(new_value);
 		return (input);
 	}
 	if (ft_isdigit(*input))
@@ -105,28 +112,14 @@ char	*expander(t_token **lst_token, char *input, t_list **envl, int state)
 	}
 	else if (ft_isalpha(*input) || *input == '_')
 	{
+		new_value = ft_strdup("");
 		while (ft_isalnum(*input) || *input == '_')
 		{
 			new_value = ft_charjoin(new_value, *input);
 			input++;
 		}
-		token = get_env(new_value, envl);
-		//free(new_value);
-		/*	if (token != NULL)
-			add_token(lst_token, token, CHAR);
-		else
-		{
-			if (state == IN_DQUOTE)
-			{
-				free(new_value);
-				new_value = ft_strdup("");
-				add_token(lst_token, new_value, CHAR);
-			}
-			else
-				add_token(lst_token, "SPACE", SPACE);
-		}*/
-		add_expanded_value(lst_token, token, state);
+		add_expanded_value(lst_token, new_value, state, envl);
+		free(new_value);
 	}
-	free(new_value);
 	return (input);
 }
