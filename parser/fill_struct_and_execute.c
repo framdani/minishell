@@ -119,6 +119,7 @@ void	fill_struct_and_execute(t_token *lexer, t_list **envl)
 	lst_files = NULL;
 	lst_cmds = NULL;
 	tmp = lexer;
+	//print_lexer(lexer);
 	if (tmp != NULL)
 	{
 		tmp = skip_token_space(tmp);

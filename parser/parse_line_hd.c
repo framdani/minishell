@@ -6,7 +6,7 @@
 /*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 18:47:07 by framdani          #+#    #+#             */
-/*   Updated: 2021/06/29 19:16:13 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/03 12:09:19 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,14 @@
 
 char 	*parse_line_hd(char *input, t_list **envl)
 {
-	int i;
-	char *ret;
-	char *to_expand;
-	char *new_value;
-	char *pfree;
+	int		i;
+	char	*ret;
+	char	*to_expand;
+	char	*new_value;
+	char	*pfree;
 
 	i = 0;
 	ret = ft_strdup("");
-	//to_expand = ft_strdup("");
-	//new_value = ft_strdup("");
 	while (input[i] != '\0')
 	{
 		if (input[i] == '$')
@@ -40,7 +38,6 @@ char 	*parse_line_hd(char *input, t_list **envl)
 					to_expand = ft_charjoin(to_expand, input[i]);
 					i++;
 				}
-				//new_value = ft_strdup("");
 				new_value = get_env(to_expand, envl);
 				free(to_expand);
 				if (new_value != NULL)
@@ -49,7 +46,6 @@ char 	*parse_line_hd(char *input, t_list **envl)
 					ret = ft_strjoin(ret, new_value);
 					free(pfree);
 				}
-				//free(new_value);
 			}
 		}
 		else

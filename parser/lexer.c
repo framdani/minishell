@@ -65,7 +65,7 @@ t_token	*lexer(char *input, int size, t_list **envl)
 	{
 		while (info.state == NORMAL && *input != '\0')
 		{
-			info = tokenize_state_normal(input, &lst_tok, size, info.spec_case,
+			info = tokenize_state_normal(input, &lst_tok, info.spec_case,
 					envl);
 			input = info.input;
 		}

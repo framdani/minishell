@@ -91,7 +91,9 @@ char	*expander(t_token **lst_token, char *input, t_list **envl, int state)
 	new_value = ft_strdup("");
 	if (*input == '?')
 	{
-		add_token(lst_token, "$?", CHAR);
+		free(new_value);
+		new_value = ft_itoa(g_help.ret);
+		add_token(lst_token, new_value, CHAR);
 		input++;
 		free(new_value);
 		return (input);
@@ -109,7 +111,8 @@ char	*expander(t_token **lst_token, char *input, t_list **envl, int state)
 			input++;
 		}
 		token = get_env(new_value, envl);
-	/*	if (token != NULL)
+		//free(new_value);
+		/*	if (token != NULL)
 			add_token(lst_token, token, CHAR);
 		else
 		{

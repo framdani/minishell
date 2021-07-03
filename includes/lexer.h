@@ -51,7 +51,7 @@ typedef struct			s_token
 t_token		*lexer(char *input, int size, t_list **envl);
 void		print_lexer(t_token *lexer);
 void		add_token(t_token **lst_token, char *data, int type);
-t_info		tokenize_state_normal( char *input, t_token **lst_tok, int size, int spec_case, t_list **envl);
+t_info		tokenize_state_normal( char *input, t_token **lst_tok, int spec_case, t_list **envl);
 t_info		tokenize_inside_dquote(char *input, t_token **lst_tok, int size, t_list **envl);
 t_info		tokenize_inside_squote(char *input, t_token **lst_tok, int size);
 char		*skip_spaces(char *str);
