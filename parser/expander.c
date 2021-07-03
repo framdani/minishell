@@ -33,7 +33,7 @@ char	*get_env(char *name, t_list **env)
 	return (NULL);
 }
 // in case of command inside expanded value
-void 	expand_value(t_token **lst_tok, char *value)
+void 	tokenize_expanded_value(t_token **lst_tok, char *value)
 {
 	char	*new_value;
 
@@ -66,7 +66,7 @@ void	add_expanded_value(t_token **lst_tok, char *token, int state)
 
 	if (token != NULL)
 		if (state == NORMAL) //|| state == SPEC_CASE)
-			expand_value(lst_tok, token);
+			tokenize_expanded_value(lst_tok, token);
 		else
 			add_token(lst_tok, token, CHAR);
 	else
