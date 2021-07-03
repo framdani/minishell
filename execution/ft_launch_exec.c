@@ -4,7 +4,6 @@ void	ft_launch_execution(t_cmd *cmds, t_list	**envl)
 {
 	int		ret;
 
-	printf("\n\n\n");
 	if (!cmds->next)
 		ret = ft_red_smpl_cmd(cmds, envl);
 	else
@@ -78,7 +77,7 @@ int	ft_red_smpl_cmd(t_cmd *cmds, t_list **envl)
 		ret = ft_launch_exec(cmds->args, envl, 1);
 		return (ret);
 	}
-	else if (ft_redirect(cmds->file, &fd[0], &fd[1], 0, envl) == 1)
+	else if (ft_redirect(cmds->file, fd, 0, envl) == 1)
 	{
 		if (cmds->args[0] == NULL)
 		{

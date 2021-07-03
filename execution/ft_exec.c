@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 10:12:35 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/02 16:13:31 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 11:27:13 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ char	*ft_get_cmd_path(char *cmd, char *pathenv)
 	char		**split;
 	int			i;
 
-	i = 0;
+	i = -1;
 	if (!pathenv)
 		return (NULL);
 	split = ft_split(pathenv, ':');
-	while (split[i])
+	while (split[++i])
 	{
 		path = ft_strjoin("/", cmd);
 		pfree = path;
@@ -36,7 +36,6 @@ char	*ft_get_cmd_path(char *cmd, char *pathenv)
 			return (path);
 		}
 		free(path);
-		i++;
 	}
 	ft_free(split);
 	return (NULL);

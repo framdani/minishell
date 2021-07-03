@@ -6,7 +6,7 @@
 #    By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/08 18:54:00 by akhalidy          #+#    #+#              #
-#    Updated: 2021/07/01 17:23:50 by akhalidy         ###   ########.fr        #
+#    Updated: 2021/07/03 12:50:27 by akhalidy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS = ft_cd.c \
 	ft_export.c \
 	ft_pwd.c \
 	ft_redirection.c \
+	ft_red_help.c \
 	ft_shlvl.c \
 	ft_unset.c \
 	ft_pipe.c \

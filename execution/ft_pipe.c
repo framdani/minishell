@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:32:49 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/02 16:03:26 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 13:52:47 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,15 @@ int	ft_pipe(t_cmd *lst, t_list **envl)
 	{
 		pipe(fd);
 		io[2] = fd[0];
-		ft_redirect(lst->file, &fd_io[0], &fd_io[1], 1, envl);
-		ft_set_io(fd_io, io, fd[1]);
-		ft_fork_pipe(io, lst->args, envl, &lst->pid);
-		ft_pipe_help(fd, io, &k);
+		if (ft_redirect(lst->file, fd_io, 0, envl) == 1)
+		{
+			ft_set_io(fd_io, io, fd[1]);
+			ft_fork_pipe(io, lst->args, envl, &lst->pid);
+			ft_pipe_help(fd, io, &k);
+		}
 		lst = lst->next;
 	}
-	ft_redirect(lst->file, &fd_io[0], &fd_io[1], 0, envl);
+	ft_redirect(lst->file, fd_io, 0, envl);
 	ft_set_io(fd_io, io, 1);
 	ft_fork_pipe(io, lst->args, envl, &lst->pid);
 	if (k)
