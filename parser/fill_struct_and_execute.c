@@ -85,7 +85,7 @@ t_token	*init_lists(t_token *lexer, t_cmd **lst_cmds, t_arg **lst_args,
 	return (lexer);
 }
 
-void	fill_struct_and_execute(t_token *lexer, t_list **envl)
+t_cmd	*fill_struct_and_execute(t_token *lexer)
 {
 	t_cmd	*lst_cmds;
 	t_token	*tmp;
@@ -109,9 +109,6 @@ void	fill_struct_and_execute(t_token *lexer, t_list **envl)
 		}
 	}
 	if (lst_args != NULL || lst_files != NULL)
-	{
 		add_cmd(&lst_cmds, &lst_args, &lst_files);
-		ft_launch_execution(lst_cmds, envl);
-	}
-	free_lst_cmds(&lst_cmds);
+	return (lst_cmds);
 }

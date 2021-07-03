@@ -55,12 +55,11 @@ int	main(int argc, char **argv, char **env)
 	char		*cmd_line;
 	int			status;
 	t_token		*tokens;
-	int			size;
-
+	t_cmd		*lst_cmds;
+	int size = 0;
 	argc = 0;
 	argv = NULL;
 	status = 1;
-	size = 0;
 	
 	g_help.on_oldpwd = 1;
 	g_help.on_pwd = 1;
@@ -85,14 +84,11 @@ int	main(int argc, char **argv, char **env)
 		size = ft_strlen(cmd_line) + 1;
 		tokens = lexer(cmd_line, size, &envl);
 		tokens = parser(tokens);
-		//if (size > 0 && tokens != NULL)
-			//set_return_value
-		fill_struct_and_execute(tokens, &envl); //envp
+		lst_cmds = fill_struct_and_execute(tokens);
+		ft_launch_execution(lst_cmds, &envl);
 		system("leaks minishell");
-		//if (*cmd_line)
-		//	add_history(cmd_line);
 		free(cmd_line);
 		free_lst_tokens(&tokens);
-		//free_lst_cmds(&lst_cmds);
+		free_lst_cmds(&lst_cmds);
 	}
 }
