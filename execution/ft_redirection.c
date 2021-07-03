@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
 void	ft_close(int fd)
 {
@@ -62,8 +64,9 @@ int	ft_redirect(t_file *fil_lst, int *fd_in, int *fd_out, int option, t_list **e
 			fd = open("/tmp/file", O_CREAT | O_TRUNC | O_WRONLY, 0644);
 			while (1)
 			{
-				ft_putstr_fd("> ", 1);
-				get_next_line(0, &line);
+				//ft_putstr_fd("> ", 1);
+				//get_next_line(0, &line);
+				line = readline(">");
 				if (!ft_strncmp(lst->filename, line, ft_strlen(lst->filename) + 1))
 				{
 					free(line);

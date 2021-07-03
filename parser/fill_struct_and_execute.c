@@ -14,61 +14,6 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
-/*int 	is_valid_identifier(char *arg)
-{
-	int i;
-
-	i = 0;
-	if (ft_isdigit(arg[0]) || arg[0] == '\0' || arg[0] == '=')
-		return (0);
-	return (1);
-
-}
-
-t_envv	*get_key_value(char	*arg)
-{
-	t_envv		*envv;
-	int			i;
-
-	i = 0;
-	envv->name=ft_strdup("");
-	envv->value = ft_strdup("");
-	if (!is_valid_identifier(arg))
-	{
-		free(envv->name);
-		free(envv->value);
-		return(NULL);
-	}
-	else
-	{
-		while (arg[i] != '=' && arg[i] != '\0')
-		{
-			if (arg[i] != '_' || !ft_isalnum(arg[i]))
-			{
-				free(envv->name);
-				free(envv->value);
-				return (NULL);
-			}
-			envv->name = ft_charjoin(envv->name, arg[i]);
-			i++;
-		}
-		if (arg[i] == '=')
-		{
-			i++;
-			while(arg[i] != '\0')
-			{
-				envv->value = ft_charjoin(envv->value, arg[i]);
-				i++;
-			}
-		}
-		else if (arg[i] == '\0')
-		{
-			envv->value = NULL;
-		}
-	}
-	return (envv);
-}*/
-
 int	ft_lst_size(t_arg	*lst_arg)
 {
 	int		cmpt;
@@ -174,7 +119,6 @@ void	fill_struct_and_execute(t_token *lexer, t_list **envl)
 	lst_files = NULL;
 	lst_cmds = NULL;
 	tmp = lexer;
-	// print_lexer(lexer);
 	if (tmp != NULL)
 	{
 		tmp = skip_token_space(tmp);
@@ -195,17 +139,10 @@ void	fill_struct_and_execute(t_token *lexer, t_list **envl)
 			add_cmd(&lst_cmds, &lst_args, &lst_files);
 			lst_files = NULL;
 		}
-		/*if (tmp != NULL && tmp->type == SEMICOLON)
-		{
-			tmp = tmp->next;
-			//return value = execute();
-			//free_lst_cmd();done
-		}*/
 	}
 	if (lst_args != NULL || lst_files != NULL)
 	{
 		add_cmd(&lst_cmds, &lst_args, &lst_files);
-		//print_struct(lst_cmds);
 		ft_launch_execution(lst_cmds, envl);
 	}
 	free_lst_tokens(&lexer);

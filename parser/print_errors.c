@@ -12,6 +12,7 @@
 
 #include "../includes/parser.h"
 #include "../libft/libft.h"
+#include "../includes/minishell.h"
 
 void	print_error(char *str)
 {
@@ -20,6 +21,8 @@ void	print_error(char *str)
 
 void	print_error_and_exit(t_token **lst_tok, int error)
 {
+	g_help.ret = 258;
+	printf("ret = %d \n", g_help.ret);
 	free_lst_tokens(lst_tok);
 	print_error("Minishell : syntax error ");
 	if (error == 6)

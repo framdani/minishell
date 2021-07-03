@@ -12,7 +12,9 @@
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
+
+LDFLAGS="-lreadline"
 
 SRCS = main.c\
 	   parser/lexer.c\
@@ -39,7 +41,7 @@ OBJS = $(SRCS:.c=.o)
 all:$(SRCS)
 	@make -C ./libft
 	@make -C ./execution
-	@$(CC) $(CFLAGS) -g $(SRCS) -o minishell $(LIBFT_PATH) $(EXEC_PATH)
+	@$(CC) $(CFLAGS) -g $(LDFLAGS) $(SRCS) -o minishell $(LIBFT_PATH) $(EXEC_PATH)
 	@echo "minishell created successfully"
 
 clean:
