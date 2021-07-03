@@ -92,5 +92,7 @@ int	main(int argc, char **argv, char **env)
 		//if (*cmd_line)
 		//	add_history(cmd_line);
 		free(cmd_line);
+		free_lst_tokens(&tokens);
+		//free_lst_cmds(&lst_cmds);
 	}
 }

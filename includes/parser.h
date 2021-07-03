@@ -76,6 +76,7 @@ typedef struct			s_pipe_sequence
  *
  */
 
+int	ft_lst_size(t_arg	*lst_arg);
 char 	*parse_line_hd(char *input, t_list **envl);
 t_token *parser(t_token *lexer);
 char	*expander(t_token **lst, char *input, t_list **envl, int state);

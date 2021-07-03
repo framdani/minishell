@@ -6,51 +6,13 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:17:05 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/02 17:35:18 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 19:10:29 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parser.h"
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
-
-int	ft_lst_size(t_arg	*lst_arg)
-{
-	int		cmpt;
-	t_arg	*tmp;
-
-	cmpt = 0;
-	tmp = lst_arg;
-	while (tmp != NULL)
-	{
-		cmpt++;
-		tmp = tmp->next;
-	}
-	return (cmpt);
-}
-
-char	**convert_into_dpointer(t_arg	**lst_arg)
-{
-	char	**arg;
-	int		i;
-	int		size;
-	t_arg	*tmp;
-
-	i = 0;
-	tmp = *lst_arg;
-	size = ft_lst_size(*lst_arg);
-	arg = malloc(sizeof(char *) * (size + 1));
-	if (!arg)
-		return (NULL);
-	while (tmp != NULL)
-	{
-		arg[i] = ft_strdup(tmp->value);
-		i++;
-		tmp = tmp->next;
-	}
-	arg[i] = 0;
-	return (arg);
-}
 
 t_token 	*skip_token_space(t_token *tok)
 {
@@ -83,7 +45,7 @@ t_token	*fill_lst_files(t_file **lst_files, t_token *tok)
 {
 	char	*filename;
 	char	*tmp;
-	int	type;
+	int		type;
 
 	type = 0;
 	filename = ft_strdup("");
@@ -108,6 +70,21 @@ t_token	*fill_lst_files(t_file **lst_files, t_token *tok)
 	return (tok);
 }
 
+t_token	*init_lists(t_token *lexer, t_cmd **lst_cmds, t_arg **lst_args,
+	t_file **lst_files)
+{
+	*lst_args = NULL;
+	*lst_cmds = NULL;
+	*lst_files = NULL;
+	if (lexer != NULL)
+	{
+		lexer = skip_token_space(lexer);
+		if (lexer != NULL && lexer->type == PIPE)
+			lexer = lexer->next;
+	}
+	return (lexer);
+}
+
 void	fill_struct_and_execute(t_token *lexer, t_list **envl)
 {
 	t_cmd	*lst_cmds;
@@ -115,17 +92,7 @@ void	fill_struct_and_execute(t_token *lexer, t_list **envl)
 	t_arg	*lst_args;
 	t_file	*lst_files;
 
-	lst_args = NULL;
-	lst_files = NULL;
-	lst_cmds = NULL;
-	tmp = lexer;
-	//print_lexer(lexer);
-	if (tmp != NULL)
-	{
-		tmp = skip_token_space(tmp);
-		if (tmp != NULL && tmp->type == PIPE)
-			tmp = tmp->next;
-	}
+	tmp = init_lists(lexer, &lst_cmds, &lst_args, &lst_files);
 	while (tmp != NULL)
 	{
 		if (tmp != NULL && tmp->type == CHAR)
@@ -146,6 +113,5 @@ void	fill_struct_and_execute(t_token *lexer, t_list **envl)
 		add_cmd(&lst_cmds, &lst_args, &lst_files);
 		ft_launch_execution(lst_cmds, envl);
 	}
-	free_lst_tokens(&lexer);
 	free_lst_cmds(&lst_cmds);
 }

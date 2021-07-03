@@ -37,6 +37,44 @@ void	add_arg(t_arg **lst_args, char *arg)
 	free(arg);
 }
 
+int	ft_lst_size(t_arg	*lst_arg)
+{
+	int		cmpt;
+	t_arg	*tmp;
+
+	cmpt = 0;
+	tmp = lst_arg;
+	while (tmp != NULL)
+	{
+		cmpt++;
+		tmp = tmp->next;
+	}
+	return (cmpt);
+}
+
+char	**convert_into_dpointer(t_arg	**lst_arg)
+{
+	char	**arg;
+	int		i;
+	int		size;
+	t_arg	*tmp;
+
+	i = 0;
+	tmp = *lst_arg;
+	size = ft_lst_size(*lst_arg);
+	arg = malloc(sizeof(char *) * (size + 1));
+	if (!arg)
+		return (NULL);
+	while (tmp != NULL)
+	{
+		arg[i] = ft_strdup(tmp->value);
+		i++;
+		tmp = tmp->next;
+	}
+	arg[i] = 0;
+	return (arg);
+}
+
 void	add_cmd(t_cmd **lst_cmds, t_arg **args, t_file **files)
 {
 	t_cmd	*new;
@@ -49,7 +87,6 @@ void	add_cmd(t_cmd **lst_cmds, t_arg **args, t_file **files)
 		new->args = convert_into_dpointer(args);
 		free_lst_args(args);
 		new->file = *files;
-		//nbrarg = size(lst_args)
 		if (*lst_cmds == NULL)
 			*lst_cmds = new;
 		else
