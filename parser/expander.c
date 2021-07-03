@@ -89,10 +89,10 @@ char	*expander(t_token **lst_token, char *input, t_list **envl, int state)
 	char	*token;
 
 	new_value = ft_strdup("");
-	
 	if (*input == '?')
 	{
-		new_value = ft_charjoin(new_value, g_help.ret);
+		free(new_value);
+		new_value = ft_itoa(g_help.ret);
 		add_token(lst_token, new_value, CHAR);
 		input++;
 		free(new_value);
@@ -105,7 +105,6 @@ char	*expander(t_token **lst_token, char *input, t_list **envl, int state)
 	}
 	else if (ft_isalpha(*input) || *input == '_')
 	{
-		//new_value = ft_strdup("");
 		while (ft_isalnum(*input) || *input == '_')
 		{
 			new_value = ft_charjoin(new_value, *input);

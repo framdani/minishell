@@ -100,7 +100,8 @@ t_info	tokenize_state_normal(char *input, t_token **lst_tok, int spec_case, t_li
 	char *data;
 	t_info	info;
 	int size;
-	t_info tmp;
+	//t_info tmp;
+	int j;
 	size = ft_strlen(input);
 	info.input = input;
 	info.state = NORMAL;
@@ -151,9 +152,25 @@ t_info	tokenize_state_normal(char *input, t_token **lst_tok, int spec_case, t_li
 	}
 	else
 	{
-		tmp = concatenate_char(lst_tok, input, info.spec_case);
+		data = malloc(size);
+		info.spec_case = spec_case;
+		j = 0;
+	while (*input != '\0' && no_special_char(*input))
+	{
+		if (*input == '=' && next_char(input) == '$')
+			info.spec_case = 1;
+		data[j] = *input;
+		j++;
+		input++;
+	}
+	data[j] = '\0';
+	add_token(lst_tok, data, CHAR);
+	free(data);
+	info.input = input;
+		/*tmp = concatenate_char(lst_tok, input, info.spec_case);
 		input = tmp.input;
-		info.spec_case = tmp.spec_case;
+		info.spec_case = tmp.spec_case;*/
+
 	}
 	info.input = input;
 	return (info);

@@ -43,7 +43,7 @@ char			*ft_itoa(int n)
 	else
 		x = n;
 	len = numlen(x) + sign + 1;
-	if (!(str = (char *)ft_calloc(len, sizeof(char))))
+	if (!(str = (char *)ft_calloc(len ,sizeof(char))))
 		return (NULL);
 	len--;
 	while (--len > 0 || (len == 0 && !sign))
