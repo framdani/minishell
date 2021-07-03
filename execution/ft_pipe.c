@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:32:49 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/03 19:02:08 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 19:20:24 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	ft_fork_pipe(int *io, char **args, t_list **envl, int *pid)
 {
 	if (io[0] == -1)
 	{
-		ft_putendl_fd("CHeey ana d5alt!", 2);
 		*pid = -1;
 		return ;
 	}
