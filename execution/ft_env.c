@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 11:23:17 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/02 17:23:36 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 11:21:44 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_lst_print_fd(t_list	*head, int fd)
 {
-	while(head)
+	while (head)
 	{
-		if (head->value) //&& *(head->value))
+		if (head->value)
 		{
 			ft_putstr_fd(head->env, fd);
 			ft_putstr_fd("=", fd);

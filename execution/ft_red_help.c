@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_red_help.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/26 15:53:34 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/03 12:07:35 by akhalidy         ###   ########.fr       */
+/*   Created: 2021/07/03 12:50:12 by akhalidy          #+#    #+#             */
+/*   Updated: 2021/07/03 12:52:05 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_pwd(t_list *envl)
+void	ft_close(int fd)
 {
-	char	*path;
-	t_list	*tmp;
-	int		k;
+	if (fd >= 0)
+		close(fd);
+}
 
-	k = 0;
-	path = getcwd(NULL, 0);
-	if (!path)
-	{
-		tmp = ft_find_node(envl, "PWD");
-		if (tmp)
-		{
-			k = 1;
-			path = tmp->value;
-		}
-	}
-	ft_putendl_fd(path, 1);
-	if (path && !k)
-		free(path);
+void	ft_rd_print_error(char *path, int option)
+{
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(path, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	ft_putstr_fd("\n", 2);
+	if (option)
+		exit (1);
+}
+
+void	reset_stds(void)
+{
+	dup2(g_help.std_in, STDIN_FILENO);
+	dup2(g_help.std_out, STDOUT_FILENO);
 }
