@@ -16,7 +16,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <signal.h>
-
+//#include <readline/rl_replace_line.h>
 /*char	*read_command_line(void)
 {
 	char	*line_cmd;
@@ -77,6 +77,7 @@ int	main(int argc, char **argv, char **env)
 		if (cmd_line == NULL)//catch ctrl-D
 		{
 			ft_putstr_fd("exit", 1);
+			//rl_replace_line("exit");
 			exit(0);
 		}
 		if (*cmd_line)

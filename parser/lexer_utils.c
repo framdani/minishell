@@ -13,7 +13,6 @@
 #include "../includes/parser.h"
 #include "../libft/libft.h"
 
-
 char	*skip_spaces(char *str)
 {
 	while (*str != '\0' && (*str == 32 || *str == '\t'))
