@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 21:55:10 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/26 20:52:09 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 17:08:16 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strdup(const char *s1)
 	size_t	l;
 
 	if (!s1)
-		return(NULL);
+		return (NULL);
 	l = ft_strlen(s1);
 	str = (char *)malloc(l + 1);
 	if (str)

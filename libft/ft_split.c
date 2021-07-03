@@ -6,16 +6,16 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 05:09:59 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/17 21:03:43 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 17:31:28 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		wordcounter(const char *str, char c)
+int	wordcounter(const char *str, char c)
 {
-	int count;
-	int i;
+	int	count;
+	int	i;
 
 	if (!*str)
 		return (0);
@@ -32,9 +32,9 @@ int		wordcounter(const char *str, char c)
 	return (count);
 }
 
-int		ft_split_num(char **s)
+int	ft_split_num(char **s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -44,9 +44,11 @@ int		ft_split_num(char **s)
 
 char	**ft_free(char **ptr)
 {
-	int i;
+	int	i;
 
 	i = 0;
+	if (!ptr)
+		return (NULL);
 	while (ptr[i])
 		free(ptr[i++]);
 	free(ptr);
@@ -55,28 +57,29 @@ char	**ft_free(char **ptr)
 
 char	**ft_split(char const *s, char c)
 {
-	size_t	end;
-	size_t	start;
-	size_t	i;
-	char	**ptr;
+	t_help	hlp;
 
 	if (!s)
 		return (NULL);
-	if (!(ptr = (char **)malloc((wordcounter(s, c) + 1) * sizeof(char *))))
+	hlp.ptr = (char **)malloc((wordcounter(s, c) + 1) * sizeof(char *));
+	if (!hlp.ptr)
 		return (NULL);
-	i = 0;
-	end = 0;
-	while (s[end])
+	hlp.i = 0;
+	hlp.end = 0;
+	while (s[hlp.end])
 	{
-		while (s[end] == c)
-			end++;
-		start = end;
-		while (s[end] != c && s[end])
-			end++;
-		if (s[end - 1] != c)
-			if (!(ptr[i++] = ft_substr(s, start, end - start)))
-				return (ft_free(ptr));
+		while (s[hlp.end] == c)
+			hlp.end++;
+		hlp.start = hlp.end;
+		while (s[hlp.end] != c && s[hlp.end])
+			hlp.end++;
+		if (s[hlp.end - 1] != c)
+		{
+			hlp.ptr[hlp.i++] = ft_substr(s, hlp.start, hlp.end - hlp.start);
+			if (!hlp.ptr)
+				return (ft_free(hlp.ptr));
+		}
 	}
-	ptr[i] = NULL;
-	return (ptr);
+	hlp.ptr[hlp.i] = NULL;
+	return (hlp.ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/19 19:11:47 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/08 18:29:46 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 17:06:44 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	ft_putstrstr_fd(char **str, int fd)
 
 	i = 0;
 	tmp = str;
-	while(*tmp)
+	while (*tmp)
 	{
 		ft_putstr_fd(*tmp, fd);
-		ft_putstr_fd("\n",fd);
+		ft_putstr_fd("\n", fd);
 		tmp++;
 	}
 }

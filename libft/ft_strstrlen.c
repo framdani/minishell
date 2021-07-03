@@ -6,18 +6,18 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 17:23:50 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/08 18:37:43 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/03 17:15:01 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_strstrlen(char **str)
+int	ft_strstrlen(char **str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
 		i++;
-	return(i);
+	return (i);
 }
