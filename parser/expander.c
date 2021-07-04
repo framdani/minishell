@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 15:47:40 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/03 20:32:08 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/04 14:44:32 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*get_env(char *name, t_list **env)
 	return (NULL);
 }
 
-void 	tokenize_expanded_value(t_token **lst_tok, char *value)
+void	tokenize_expanded_value(t_token **lst_tok, char *value)
 {
 	char	*new_value;
 

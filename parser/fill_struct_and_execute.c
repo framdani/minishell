@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/28 15:17:05 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/03 19:10:29 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/04 14:46:51 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
-t_token 	*skip_token_space(t_token *tok)
+t_token	*skip_token_space(t_token *tok)
 {
 	if (tok != NULL)
 	{

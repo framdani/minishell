@@ -85,7 +85,9 @@ int	main(int argc, char **argv, char **env)
 		tokens = lexer(cmd_line, size, &envl);
 		tokens = parser(tokens);
 		lst_cmds = fill_struct_and_execute(tokens);
-		ft_launch_execution(lst_cmds, &envl);
+		print_struct(lst_cmds);
+		if (lst_cmds != NULL)
+			ft_launch_execution(lst_cmds, &envl);
 		system("leaks minishell");
 		free(cmd_line);
 		free_lst_tokens(&tokens);

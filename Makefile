@@ -12,7 +12,7 @@
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
 
 LDFLAGS="-lreadline"
 
@@ -23,7 +23,7 @@ SRCS = main.c\
 	   parser/expander.c\
 	   parser/fill_struct_and_execute.c\
 	   parser/create_lst_cmds.c\
-	   parser/draft.c\
+	   parser/tokenizer.c\
 	   parser/free.c\
 	   parser/parse_line_hd.c\
 	   parser/lexer_utils.c

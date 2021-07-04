@@ -65,7 +65,7 @@ void	free_lst_tokens(t_token **lst_tok)
 	}
 }
 
-void 	free_double_pointer(char **tab)
+void	free_double_pointer(char **tab)
 {
 	int	i;
 
@@ -81,7 +81,7 @@ void 	free_double_pointer(char **tab)
 	}
 }
 
-void 	free_lst_cmds(t_cmd **lst_cmds)
+void	free_lst_cmds(t_cmd **lst_cmds)
 {
 	t_cmd	*tmp;
 

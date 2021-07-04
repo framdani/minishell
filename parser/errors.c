@@ -13,6 +13,7 @@
 #include "../includes/parser.h"
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
+#include <stdlib.h>
 
 void	print_error(char *str)
 {
@@ -41,4 +42,5 @@ void	print_error_and_exit(t_token **lst_tok, int error)
 		print_error("near unexpected token ';'\n");
 	else
 		print_error(" : Missing quote.\n");
+	//exit(EXIT_SUCCESS);
 }

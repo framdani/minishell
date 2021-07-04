@@ -53,7 +53,7 @@ int	expand_value_hd(char *input, int i, char **ret, t_list **envl)
 	return (i);
 }
 
-char 	*parse_line_hd(char *input, t_list **envl)
+char	*parse_line_hd(char *input, t_list **envl)
 {
 	int		i;
 	char	*ret;
