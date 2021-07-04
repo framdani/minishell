@@ -68,7 +68,7 @@ char	*tokenize_redirection(t_token **lst_tok, char *input)
 	return (info);
 }*/
 
-t_info concatenate_char(t_token **lst_tok,char *input, int spec_case)
+t_info concatenate_chars(t_token **lst_tok,char *input, int spec_case)
 {
 	char *data;
 	t_info info;
@@ -77,7 +77,7 @@ t_info concatenate_char(t_token **lst_tok,char *input, int spec_case)
 
 	j =0;
 	size = ft_strlen(input);
-	data = malloc(size);
+	data = malloc(size + 1);
 	info.spec_case = spec_case;
 	j = 0;
 	while (*input != '\0' && no_special_char(*input))
@@ -92,6 +92,21 @@ t_info concatenate_char(t_token **lst_tok,char *input, int spec_case)
 	add_token(lst_tok, data, CHAR);
 	free(data);
 	info.input = input;
+	info.state = NORMAL;
+	return(info);
+}
+
+t_info change_state(char *input, int spec_case)
+{
+	t_info info;
+
+	info.spec_case = spec_case;
+	if (*input == QUOTE)
+		info.state = IN_QUOTE;
+	else
+		info.state = IN_DQUOTE;
+	input++;
+	info.input = input;
 	return(info);
 }
 
@@ -101,7 +116,7 @@ t_info	tokenize_state_normal(char *input, t_token **lst_tok, int spec_case, t_li
 	t_info	info;
 	int size;
 	//t_info tmp;
-	int j;
+	//int j;
 	size = ft_strlen(input);
 	info.input = input;
 	info.state = NORMAL;
@@ -136,42 +151,10 @@ t_info	tokenize_state_normal(char *input, t_token **lst_tok, int spec_case, t_li
 		else
 			input = expander(lst_tok, input, envl, NORMAL);
 	}
-	else if (*input == QUOTE)//ft_change_state(char *input)
-	{
-		input++;
-		info.input = input;
-		info.state = IN_QUOTE;
-		return (info);
-	}
-	else if (*input == D_QUOTE)
-	{
-		input++;
-		info.input = input;
-		info.state = IN_DQUOTE;
-		return (info);
-	}
+	else if (*input == QUOTE || *input == D_QUOTE)
+		return (change_state(input, info.spec_case));
 	else
-	{
-		data = malloc(size);
-		info.spec_case = spec_case;
-		j = 0;
-	while (*input != '\0' && no_special_char(*input))
-	{
-		if (*input == '=' && next_char(input) == '$')
-			info.spec_case = 1;
-		data[j] = *input;
-		j++;
-		input++;
-	}
-	data[j] = '\0';
-	add_token(lst_tok, data, CHAR);
-	free(data);
-	info.input = input;
-		/*tmp = concatenate_char(lst_tok, input, info.spec_case);
-		input = tmp.input;
-		info.spec_case = tmp.spec_case;*/
-
-	}
+		return (concatenate_chars(lst_tok, input, info.spec_case));
 	info.input = input;
 	return (info);
 }
