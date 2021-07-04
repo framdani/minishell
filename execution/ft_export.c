@@ -6,13 +6,13 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 11:39:05 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/02 17:22:54 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/04 21:57:20 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int 	is_valid_identifier(char *arg)
+int	is_valid_identifier(char *arg)
 {
 	int	i;
 

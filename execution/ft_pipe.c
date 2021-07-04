@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:32:49 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/03 19:20:24 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/04 21:50:56 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_exit_child(void)
 {
 	if (errno == 13 || errno == 21)
 		exit(126);
-	if (errno == 2)
+	if (errno == 2 || errno == 22)
 		exit(127);
 }
 
