@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 15:53:34 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/03 12:07:35 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:59:48 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void	ft_pwd(t_list *envl)
 	ft_putendl_fd(path, 1);
 	if (path && !k)
 		free(path);
+	g_help.ret = 0;
 }

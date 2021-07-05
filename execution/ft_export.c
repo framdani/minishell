@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 11:39:05 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 18:41:52 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 19:25:19 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,16 @@ void	ft_export_print_error(void)
 	g_help.ret = 1;
 }
 
+void	ft_free_envv(t_list **env, t_envv **envv)
+{
+	if ((*envv)->value)
+	{
+		free((*env)->value);
+		(*env)->value = (*envv)->value;
+	}
+	free((*envv)->name);
+}
+
 void	ft_export_add(t_list **envl, char **args)
 {
 	t_list	*env;
@@ -34,22 +44,17 @@ void	ft_export_add(t_list **envl, char **args)
 	int		i;
 
 	i = -1;
-	g_help.ret = 0;
 	while (args[++i])
 	{
 		envv = get_key_value(args[i]);
 		if (!envv)
-			return (ft_export_print_error());
+		{
+			ft_export_print_error();
+			continue ;
+		}
 		env = ft_find_node(*envl, envv->name);
 		if (env)
-		{
-			if (envv->value)
-			{
-				free(env->value);
-				env->value = envv->value;
-			}
-			free(envv->name);
-		}
+			ft_free_envv(&env, &envv);
 		else
 			ft_set_global_pwd_oldpwd(envv, envl);
 		free(envv);
@@ -61,6 +66,7 @@ void	ft_export(t_list **envl, char **args, int fd)
 	t_list	*head;
 
 	head = *envl;
+	g_help.ret = 0;
 	if (!*args)
 	{
 		ft_lstbubblesort(head);

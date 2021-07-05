@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 11:23:17 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/03 11:21:44 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:56:16 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void	ft_lst_print_fd(t_list	*head, int fd)
 
 void	ft_env(t_list *envl, int fd)
 {
+	g_help.ret = 0;
 	ft_lst_print_fd(envl, fd);
 }

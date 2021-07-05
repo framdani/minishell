@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 15:37:34 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/24 20:39:30 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 19:48:37 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_exit(char **args)
 	{
 		ft_putendl_fd("exit", 1);
 		system("leaks minishell");
-		exit(0);
+		exit(g_help.ret);
 	}
 	if (!ft_isinteger(*args))
 	{

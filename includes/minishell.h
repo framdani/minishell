@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:22:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 15:10:24 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:54:34 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 
 typedef struct s_global
 {
-	char	*old_pwd;
-	char	*pwd;
 	int		on_pwd;
 	int		on_oldpwd;
 	int		ret;

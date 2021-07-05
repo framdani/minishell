@@ -2,14 +2,12 @@
 
 void	ft_launch_execution(t_cmd *cmds, t_list	**envl)
 {
-	int		ret;
-
 	if (!cmds->next)
-		ret = ft_red_smpl_cmd(cmds, envl);
+		g_help.ret = ft_red_smpl_cmd(cmds, envl);
 	else
-		ret = ft_pipe(cmds, envl);
+		g_help.ret = ft_pipe(cmds, envl);
 	unlink("/tmp/file");
-	printf("ret = %d\n\n\n", ret);
+	printf("ret = %d\n\n\n", g_help.ret);
 }
 
 int	ft_is_builtin(char *args)

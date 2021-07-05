@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_outils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 17:23:02 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 15:23:27 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:47:45 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_cd_print_error(char ***path, int ret)
 	ft_putstr_fd("\n", 2);
 	if (ret == 5)
 		ft_free(*path);
+	g_help.ret = 1;
 	return (1);
 }
 
@@ -51,6 +52,7 @@ int	ft_check_cd_void(char ***path, t_list *home)
 	if (!home && !**path)
 	{
 		ft_putstr_fd("bash: cd: HOME not set\n", 2);
+		g_help.ret = 1;
 		return (-1);
 	}
 	else if (home && !**path)
