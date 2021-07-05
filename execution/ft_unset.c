@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 12:03:46 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 18:31:04 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:42:11 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_unset(t_list **envl, char **args)
 	int	i;
 
 	i = 0;
+	g_help.ret = 0;
 	while (args[i])
 	{
 		if (is_valid_arg(args[i]))

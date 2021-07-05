@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 11:39:05 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 18:00:08 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:41:52 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void	ft_set_global_pwd_oldpwd(t_envv *envv, t_list **envl)
 	ft_lstadd_back(envl, ft_lstnew(envv->name, envv->value));
 }
 
+void	ft_export_print_error(void)
+{
+	ft_putendl_fd("not a valid identifier", 2);
+	g_help.ret = 1;
+}
+
 void	ft_export_add(t_list **envl, char **args)
 {
 	t_list	*env;
@@ -28,11 +34,12 @@ void	ft_export_add(t_list **envl, char **args)
 	int		i;
 
 	i = -1;
+	g_help.ret = 0;
 	while (args[++i])
 	{
 		envv = get_key_value(args[i]);
 		if (!envv)
-			return (ft_putendl_fd("not a valid identifier", 2));
+			return (ft_export_print_error());
 		env = ft_find_node(*envl, envv->name);
 		if (env)
 		{

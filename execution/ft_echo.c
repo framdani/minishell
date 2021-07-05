@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 12:43:30 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/06/08 19:00:52 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:42:51 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,5 @@ void	ft_echo(char **args, int fd)
 	}
 	if (flag != 'n')
 		ft_putchar_fd('\n', fd);
+	g_help.ret = 0;
 }
