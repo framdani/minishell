@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_charjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 16:04:13 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/03 16:53:26 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 17:58:26 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char 	*ft_charjoin(char 	*str, char c)
+char	*ft_charjoin(char *str, char c)
 {
 	int		length;
 	int		i;
