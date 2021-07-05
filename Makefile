@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+         #
+#    By: framdani <framdani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/27 20:07:22 by framdani          #+#    #+#              #
-#    Updated: 2021/07/05 15:09:04 by akhalidy         ###   ########.fr        #
+#    Updated: 2021/07/05 15:55:07 by framdani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS = main.c\
 	   parser/tokenizer.c\
 	   parser/free.c\
 	   parser/parse_line_hd.c\
-	   parser/lexer_utils.c\
+	   parser/tokenizer_utils.c\
 	   parser/parse_identifier.c
 
 NAME= minishell

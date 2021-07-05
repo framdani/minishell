@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draft.c                                            :+:      :+:    :+:   */
+/*   tokenizer.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 12:38:31 by framdani          #+#    #+#             */
-/*   Updated: 2021/06/27 12:38:34 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/05 16:28:40 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,30 @@ char	*tokenize_redirection(t_token **lst_tok, char *input)
 	return (input);
 }
 
-/*t_info tokenize_expander(t_token **lst_tok, char *input, t_list **envl)
+t_info tokenize_expander(t_token **lst_tok, char *input, t_list **envl, int spec_case)
 {
 	char *data;
 	t_info info;
 
-	info.spec_case = 0;
+	info.spec_case = spec_case;
 	input++;
-	if (*input == SPACE || *input == '\0' || *input == DOLLAR)
+	info.input = input;
+	if (*info.input == SPACE || *info.input == '\0' || *info.input == DOLLAR)
 	{
-		data = malloc(2);
-		data[0] = '$';
-		data[1] = '\0';
+		data = ft_strdup("$");
 		add_token(lst_tok, data, CHAR);
 		free(data);
 	}
 	else if (info.spec_case == 1)
 	{
 		info.spec_case = 0;
-		input = expander(lst_tok, input, envl, SPEC_CASE);
+		info.input = expander(lst_tok, info.input, envl, SPEC_CASE);
 	}
 	else
-		input = expander(lst_tok, input, envl, NORMAL);
-	info.input = input;
+		info.input = expander(lst_tok, info.input, envl, NORMAL);
+	info.state = NORMAL;
 	return (info);
-}*/
+}
 
 t_info concatenate_chars(t_token **lst_tok,char *input, int spec_case)
 {
@@ -112,50 +111,30 @@ t_info change_state(char *input, int spec_case)
 
 t_info	tokenize_state_normal(char *input, t_token **lst_tok, int spec_case, t_list **envl)
 {
-	char *data;
 	t_info	info;
-	int size;
-	//t_info tmp;
-	//int j;
-	size = ft_strlen(input);
+
 	info.input = input;
 	info.state = NORMAL;
 	info.spec_case = spec_case;
-	if (*input == ' ' || *input == '\t')
+	if (*info.input == ' ' || *info.input == '\t')
 	{
-		input = skip_spaces(input);
+		info.input = skip_spaces(info.input);
 		add_token(lst_tok, "SPACE", SPACE);
 	}
-	else if (*input == '|')
+	else if (*info.input == '|')
 	{
-		input++;
+		info.input++;
 		add_token(lst_tok, "PIPE", PIPE);
-		input = skip_spaces(input);
+		info.input = skip_spaces(info.input);
 	}
-	else if (*input == '<' || *input == '>')
-		input = tokenize_redirection(lst_tok, input);
-	else if (*input == '$')
-	{
-		input++;
-		if (*input == SPACE || *input == '\0' || *input == DOLLAR)
-		{
-			data = ft_strdup("$");
-			add_token(lst_tok, data, CHAR);
-			free(data);
-		}
-		else if (info.spec_case == 1)
-		{
-			info.spec_case = 0;
-			input = expander(lst_tok, input, envl, SPEC_CASE);
-		}
-		else
-			input = expander(lst_tok, input, envl, NORMAL);
-	}
-	else if (*input == QUOTE || *input == D_QUOTE)
-		return (change_state(input, info.spec_case));
+	else if (*info.input == '<' || *info.input == '>')
+		info.input = tokenize_redirection(lst_tok, info.input);
+	else if (*info.input == '$')
+		info = tokenize_expander(lst_tok, info.input, envl, info.spec_case);
+	else if (*info.input == QUOTE || *info.input == D_QUOTE)
+		return (change_state(info.input, info.spec_case));
 	else
-		return (concatenate_chars(lst_tok, input, info.spec_case));
-	info.input = input;
+		return (concatenate_chars(lst_tok, info.input, info.spec_case));
 	return (info);
 }
 
@@ -166,36 +145,40 @@ t_info		tokenize_inside_dquote(char *input, t_token **lst_tok, int size, t_list 
 	t_info	info;
 	info.state= IN_DQUOTE;
 	info.input = input;
-	if (*input == DOLLAR)
+	if (*info.input == DOLLAR)
 	{
-		input++;
-		if (*input == SPACE || *input == '\0')
-			add_token(lst_tok, "DOLLAR", DOLLAR);
-		else
-			input = expander(lst_tok, input, envl, IN_DQUOTE);
-	}
-	else if (info.state == IN_DQUOTE && *input != '\0')
-	{
-		data = malloc(size);
-		j = 0;
-		while (*input != D_QUOTE && *input != DOLLAR && *input != '\0')
+		info.input++;
+		if (*info.input == SPACE || *info.input == '\0' || *info.input == '\"' || *info.input == '$')
 		{
-			data[j] = *input;
+			data = ft_strdup("$");
+			add_token(lst_tok, data, CHAR);
+			free(data);
+		}
+		else
+			info.input = expander(lst_tok, info.input, envl, IN_DQUOTE);
+	}
+	else if (info.state == IN_DQUOTE && *info.input != '\0')
+	{
+		data = malloc(size + 1);
+		j = 0;
+		while (*info.input != D_QUOTE && *info.input != DOLLAR && *info.input != '\0')
+		{
+			data[j] = *info.input;
 			j++;
-			input++;
+			info.input++;
 		}
 		data[j] = '\0';
 		add_token(lst_tok, data, CHAR);
 		free(data);
 	}
-	if (*input != '\0' && *input == D_QUOTE)
+	if (*info.input != '\0' && *info.input == D_QUOTE)
 	{
-		input++;
+		//input++;
 		info.state = NORMAL;
-		info.input = input;
+		info.input++;
 		return (info);
 	}
-	info.input = input;
+	//info.input = input;
 	return (info);
 }
 

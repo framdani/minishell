@@ -3,37 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 16:17:56 by framdani          #+#    #+#             */
-/*   Updated: 2021/06/02 10:42:40 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:54:47 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parser.h"
 #include "../libft/libft.h"
 
-void	add_token(t_token **lst_tok, char *data, int type)
+char	*skip_spaces(char *str)
 {
-	t_token		*new;
-	t_token		*tmp;
+	while (*str != '\0' && (*str == 32 || *str == '\t'))
+		str++;
+	return (str);
+}
 
-	new = malloc(sizeof(t_token));
-	if (new != NULL)
-	{
-		new->next = NULL;
-		new->value = ft_strdup(data);
-		new->type = type;
-		if (*lst_tok == NULL)
-			*lst_tok = new;
-		else
-		{
-			tmp = *lst_tok;
-			while (tmp->next != NULL)
-				tmp = tmp->next;
-			tmp->next = new;
-		}
-	}
+char	next_char(char *str)
+{
+	str++;
+	return (*str);
 }
 
 t_token	*check_unclosed_quotes(int state, t_token **lst_tok)

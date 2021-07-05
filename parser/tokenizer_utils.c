@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*   tokenizer_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 14:57:03 by framdani          #+#    #+#             */
-/*   Updated: 2021/06/30 14:57:23 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:54:51 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/parser.h"
 #include "../libft/libft.h"
 
-char	*skip_spaces(char *str)
+void	add_token(t_token **lst_tok, char *data, int type)
 {
-	while (*str != '\0' && (*str == 32 || *str == '\t'))
-		str++;
-	return (str);
-}
+	t_token		*new;
+	t_token		*tmp;
 
-char	next_char(char *str)
-{
-	str++;
-	return (*str);
+	new = malloc(sizeof(t_token));
+	if (new != NULL)
+	{
+		new->next = NULL;
+		new->value = ft_strdup(data);
+		new->type = type;
+		if (*lst_tok == NULL)
+			*lst_tok = new;
+		else
+		{
+			tmp = *lst_tok;
+			while (tmp->next != NULL)
+				tmp = tmp->next;
+			tmp->next = new;
+		}
+	}
 }
