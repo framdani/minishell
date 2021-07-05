@@ -20,6 +20,7 @@
 #include <string.h>
 #include "lexer.h"
 #include "../libft/libft.h"
+
 # define INPUT = 0
 # define OUTPUT = 1
 /* List of args = SUFFIX
@@ -47,6 +48,11 @@ typedef struct			s_file
  * nbr_args = size of t_args
  *
  */
+typedef struct s_envv
+{
+	char	*name;
+	char	*value;
+}			t_envv;
 
 typedef struct			s_cmd
 {
@@ -83,7 +89,7 @@ char	*expander(t_token **lst, char *input, t_list **envl, int state);
 char 	*expander_inside_dquote(t_token **lst_token, char *input, t_list **envl, int state);
 char 	*expander_spec_case(t_token **lst_token, char *input, t_list **envl);
 void	print_error_and_exit(t_token **lst_token, int error);
-t_cmd	*fill_struct_and_execute(t_token *token); //t_list **envl);
+t_cmd	*fill_struct(t_token *token); //t_list **envl);
 void	add_arg(t_arg **lst_arg, char *arg);
 void	add_cmd(t_cmd **lst_cmds, t_arg **args, t_file **files);
 void	add_file(t_file **lst_files, char *filename, int type);
@@ -96,5 +102,6 @@ void	free_lst_files(t_file **lst_files);
 void	free_lst_args(t_arg **lst_args);
 void 	free_lst_cmds(t_cmd **lst_cmds);
 int		is_redirection(int type);
+t_envv	*get_key_value(char	*arg);
 void	print_error(char *str);
 #endif

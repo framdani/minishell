@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:22:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 13:25:44 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:10:24 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ typedef struct s_global
 	int		std_in;
 	int		std_out;
 }			t_global;
-
-typedef struct s_envv
-{
-	char	*name;
-	char	*value;
-}			t_envv;
 
 typedef struct s_exec_hlp
 {

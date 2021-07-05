@@ -12,64 +12,6 @@
 
 #include "../includes/minishell.h"
 
-int	is_valid_identifier(char *arg)
-{
-	int	i;
-
-	i = 0;
-	if (ft_isdigit(arg[0]) || arg[0] == '\0' || arg[0] == '=')
-		return (0);
-	return (1);
-}
-
-t_envv	*get_key_value(char	*arg)
-{
-	t_envv		*envv;
-	int			i;
-
-	i = 0;
-	envv = malloc(sizeof(t_envv));
-	envv->name = ft_strdup("");
-	envv->value = ft_strdup("");
-	if (!is_valid_identifier(arg))
-	{
-		free(envv->name);
-		free(envv->value);
-		free(envv);
-		return (NULL);
-	}
-	else
-	{
-		while (arg[i] != '=' && arg[i] != '\0')
-		{
-			if (arg[i] != '_' && !ft_isalnum(arg[i]))
-			{
-				free(envv->name);
-				free(envv->value);
-				free(envv);
-				return (NULL);
-			}
-			envv->name = ft_charjoin(envv->name, arg[i]);
-			i++;
-		}
-		if (arg[i] == '=')
-		{
-			i++;
-			while (arg[i] != '\0')
-			{
-				envv->value = ft_charjoin(envv->value, arg[i]);
-				i++;
-			}
-		}
-		else if (arg[i] == '\0')
-		{
-			free(envv->value);
-			envv->value = NULL;
-		}
-	}
-	return (envv);
-}
-
 void	ft_export_add(t_list **envl, char **args)
 {
 	t_list	*env;

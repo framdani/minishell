@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_struct_and_execute.c                          :+:      :+:    :+:   */
+/*   fill_lst_cmds.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/28 15:17:05 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/04 14:46:51 by framdani         ###   ########.fr       */
+/*   Created: 2021/07/05 12:55:17 by framdani          #+#    #+#             */
+/*   Updated: 2021/07/05 12:55:37 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,13 @@ t_token	*init_lists(t_token *lexer, t_cmd **lst_cmds, t_arg **lst_args,
 	{
 		lexer = skip_token_space(lexer);
 		if (lexer != NULL && lexer->type == PIPE)
-			lexer = lexer->next;
+			return (NULL);
+			//lexer = lexer->next;
 	}
 	return (lexer);
 }
 
-t_cmd	*fill_struct_and_execute(t_token *lexer)
+t_cmd	*fill_struct(t_token *lexer)
 {
 	t_cmd	*lst_cmds;
 	t_token	*tmp;

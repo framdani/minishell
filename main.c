@@ -36,6 +36,44 @@
 	free(buff);
 	return (line_cmd);
 }*/
+void	print_struct(t_cmd *lst_cmds)
+{
+	t_cmd		*tmp;
+	char		**arg;
+	t_file		*files;
+	int			i;
+
+	tmp = lst_cmds;
+	i = 0;
+	while (tmp != NULL)
+	{
+		i = 0;
+		arg = tmp->args;
+		ft_putstr_fd("cmds : \n", 1);
+		if (arg)
+		{
+			while (arg[i] != NULL)
+			{
+				ft_putstr_fd("ARG : ", 1);
+				ft_putstr_fd(arg[i], 1);
+				ft_putstr_fd("\n", 1);
+				i++;
+			}
+		}
+		files = tmp->file;
+		while (files != NULL)
+		{
+			ft_putstr_fd("File : ", 1);
+			ft_putstr_fd(files->filename, 1);
+			ft_putstr_fd("\n", 1);
+			ft_putstr_fd("Type : ", 1);
+			ft_putchar_fd(files->type, 1);
+			ft_putstr_fd("\n", 1);
+			files = files->next;
+		}
+		tmp = tmp->next;
+	}
+}
 
 void	print_lexer(t_token *lexer)
 {
@@ -84,8 +122,8 @@ int	main(int argc, char **argv, char **env)
 		size = ft_strlen(cmd_line) + 1;
 		tokens = lexer(cmd_line, size, &envl);
 		tokens = parser(tokens);
-		lst_cmds = fill_struct_and_execute(tokens);
-		print_struct(lst_cmds);
+		lst_cmds = fill_struct(tokens);
+		//print_struct(lst_cmds);
 		if (lst_cmds != NULL)
 			ft_launch_execution(lst_cmds, &envl);
 		system("leaks minishell");

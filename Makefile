@@ -6,7 +6,7 @@
 #    By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/27 20:07:22 by framdani          #+#    #+#              #
-#    Updated: 2021/07/05 14:47:13 by akhalidy         ###   ########.fr        #
+#    Updated: 2021/07/05 15:09:04 by akhalidy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,13 @@ SRCS = main.c\
 	   parser/parser.c\
 	   parser/errors.c\
 	   parser/expander.c\
-	   parser/fill_struct_and_execute.c\
+	   parser/fill_lst_cmds.c\
 	   parser/create_lst_cmds.c\
 	   parser/tokenizer.c\
 	   parser/free.c\
 	   parser/parse_line_hd.c\
-	   parser/lexer_utils.c
+	   parser/lexer_utils.c\
+	   parser/parse_identifier.c
 
 NAME= minishell
 
@@ -45,13 +46,13 @@ all:$(SRCS)
 	@echo "minishell created successfully"
 
 clean:
-	make -C ./libft/ clean
-	make -C ./execution/ clean
+	@make -C ./libft/ clean
+	@make -C ./execution/ clean
 	@rm -f *.o
 
 fclean:clean
-	make -C ./libft/ fclean
-	make -C ./execution/ fclean
+	@make -C ./libft/ fclean
+	@make -C ./execution/ fclean
 	@rm -rf $(NAME)
 	@rm -rvf minishell.dSYM
 
