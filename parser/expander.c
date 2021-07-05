@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 15:47:40 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/04 14:44:32 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/05 11:15:14 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@ char	*get_env(char *name, t_list **env)
 	t_list	*tmp;
 
 	tmp = *env;
-	if ((strcmp(name, "PWD") == 0 && g_help.on_pwd == 0)
-		|| (strcmp(name, "OLDPWD") == 0 && g_help.on_oldpwd == 0))
-		return (NULL);
+	// if ((strcmp(name, "PWD") == 0 && g_help.on_pwd == 0)
+	// 	|| (strcmp(name, "OLDPWD") == 0 && g_help.on_oldpwd == 0))
+	// 	return (NULL);
 	while (tmp != NULL)
 	{	
 		if (strcmp(tmp->env, name) == 0)
+		{
+			fprintf(stderr, "$pwd : %s \n", tmp->value);
 			return (tmp->value);
+		}
 		tmp = tmp->next;
 	}
 	return (NULL);

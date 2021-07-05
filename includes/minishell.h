@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:22:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/03 12:57:54 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 13:25:44 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,21 @@ typedef struct s_exec_hlp
 	int		id;
 }			t_exec_hlp;
 
+// typedef struct s_cd_hlp
+// {
+// 	list	*oldpwd;
+// 	t_list	*pwd;
+// 	char	*pwd_old;
+// 	char	*tmp;
+// 	int		ret;
+// }			t_exec_hlp;
+
 char	*get_env(char *env, t_list **envl);
 void	ft_echo(char **args, int fd);
 void	ft_env(t_list *envl, int fd);
 void	ft_export(t_list **envl, char **args, int fd);
 void	ft_unset(t_list **envl, char **args);
-int		ft_cd(t_list *envl, char **path);
+int		ft_cd(t_list **envl, char **path);
 int		ft_cd_print_error(char *path);
 void	ft_pwd(t_list *envl);
 void	ft_inc_shlvl(t_list *envl);

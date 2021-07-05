@@ -43,7 +43,7 @@ int	ft_launch_exec(char **args, t_list **envl, int fork)
 	else if (!ft_strncmp("unset", *args, 6))
 		ft_unset(envl, args + 1);
 	else if (!ft_strncmp("cd", *args, 3))
-		ft_cd(*envl, args + 1);
+		ft_cd(envl, args + 1);
 	else if (!ft_strncmp("pwd", *args, 4))
 		ft_pwd(*envl);
 	else if (!ft_strncmp("exit", *args, 5))
