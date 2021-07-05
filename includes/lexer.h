@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 16:20:32 by framdani          #+#    #+#             */
-/*   Updated: 2021/04/30 16:53:12 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/05 16:54:09 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,8 @@ t_info		tokenize_inside_squote(char *input, t_token **lst_tok, int size);
 char		*skip_spaces(char *str);
 char		next_char(char *str);
 void		free_lst_tokens(t_token **lst);
+t_info tokenize_expander(t_token **lst_tok, char *input, t_list **envl, int spec_case);
+char	*tokenize_redirection(t_token **lst_tok, char *input);
+t_info concatenate_chars(t_token **lst_tok,char *input, int spec_case);
+t_info change_state(char *input, int spec_case);
 #endif
