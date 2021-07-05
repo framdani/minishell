@@ -80,7 +80,10 @@ t_token	*init_lists(t_token *lexer, t_cmd **lst_cmds, t_arg **lst_args,
 	{
 		lexer = skip_token_space(lexer);
 		if (lexer != NULL && lexer->type == PIPE)
-			lexer = lexer->next;
+		{
+			return (NULL);
+			//lexer = lexer->next;
+		}
 	}
 	return (lexer);
 }
