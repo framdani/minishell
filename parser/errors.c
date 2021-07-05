@@ -42,5 +42,4 @@ void	print_error_and_exit(t_token **lst_tok, int error)
 		print_error("near unexpected token ';'\n");
 	else
 		print_error(" : Missing quote.\n");
-	//exit(EXIT_SUCCESS);
 }

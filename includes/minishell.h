@@ -37,12 +37,12 @@ typedef struct s_global
 	int		std_out;
 }			t_global;
 
-typedef struct s_envv
+/*typedef struct s_envv
 {
 	char	*name;
 	char	*value;
 }			t_envv;
-
+*/
 typedef struct s_exec_hlp
 {
 	int		status;
