@@ -44,40 +44,43 @@ void	ft_cd_env_reset(t_list *oldpwd, char *pwd_old, t_list **envl)
 		ft_lstadd_back(envl, ft_lstnew(ft_strdup("OLDPWD"), ft_strdup(" ")));
 }
 
-int	ft_cd(t_list **envl, char **path)
+int	ft_cd_initialize(t_cd_hlp *var, t_list **envl, char ***path)
 {
-	t_list	*oldpwd;
-	t_list	*pwd;
-	char	*pwd_old;
-	char	*tmp;
-	int		ret;
-
-	if (!*path)
+	if (!**path)
 	{
-		ret = ft_check_cd_void(&path, ft_find_node(*envl, "HOME"));
-		if (ret == -1)
+		var->ret = ft_check_cd_void(path, ft_find_node(*envl, "HOME"));
+		if (var->ret == -1)
 			return (-1);
 	}
-	oldpwd = ft_find_node(*envl, "OLDPWD");
-	pwd = ft_find_node(*envl, "PWD");
-	pwd_old = getcwd(NULL, 0);
-	if (!pwd_old && !ft_strncmp(*path, ".", 2))
+	var->oldpwd = ft_find_node(*envl, "OLDPWD");
+	var->pwd = ft_find_node(*envl, "PWD");
+	var->pwd_old = getcwd(NULL, 0);
+	return (1);
+}
+
+int	ft_cd(t_list **envl, char **path)
+{
+	t_cd_hlp	var;
+
+	if (ft_cd_initialize(&var, envl, &path) == -1)
+		return (1);
+	if (!var.pwd_old && !ft_strncmp(*path, ".", 2))
 	{
 		ft_putendl_fd(strerror(errno), 2);
-		return (0);
+		return (1);
 	}
 	ft_check_cd_home(path, *envl);
-	if (chdir(*path) == -1 && ft_cd_print_error(*path))
+	if (chdir(*path) == -1 && ft_cd_print_error(&path, var.ret))
 	{
-		free(pwd_old);
-		return (-1);
+		free(var.pwd_old);
+		return (1);
 	}
-	if (ret == 5)
-		ft_free(path);
-	if (pwd)
-		ft_cd_env_change(oldpwd, pwd, envl);
+	if (var.pwd)
+		ft_cd_env_change(var.oldpwd, var.pwd, envl);
 	else
-		ft_cd_env_reset(oldpwd, pwd_old, envl);
-	free(pwd_old);
-	return (1);
+		ft_cd_env_reset(var.oldpwd, var.pwd_old, envl);
+	if (var.ret == 5)
+		ft_free(path);
+	free(var.pwd_old);
+	return (0);
 }

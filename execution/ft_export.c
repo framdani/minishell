@@ -6,11 +6,20 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 11:39:05 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 10:12:20 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 18:00:08 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_set_global_pwd_oldpwd(t_envv *envv, t_list **envl)
+{
+	if (!ft_strncmp(envv->name, "PWD", 4) && !g_help.on_pwd)
+		g_help.on_pwd = 1;
+	else if (!ft_strncmp(envv->name, "OLDPWD", 7) && !g_help.on_oldpwd)
+		g_help.on_oldpwd = 1;
+	ft_lstadd_back(envl, ft_lstnew(envv->name, envv->value));
+}
 
 void	ft_export_add(t_list **envl, char **args)
 {
@@ -18,8 +27,8 @@ void	ft_export_add(t_list **envl, char **args)
 	t_envv	*envv;
 	int		i;
 
-	i = 0;
-	while (args[i])
+	i = -1;
+	while (args[++i])
 	{
 		envv = get_key_value(args[i]);
 		if (!envv)
@@ -35,15 +44,8 @@ void	ft_export_add(t_list **envl, char **args)
 			free(envv->name);
 		}
 		else
-		{
-			if (!ft_strncmp(envv->name, "PWD", 4) && !g_help.on_pwd)
-				g_help.on_pwd = 1;
-			else if (!ft_strncmp(envv->name, "OLDPWD", 7) && !g_help.on_oldpwd)
-				g_help.on_oldpwd = 1;
-			ft_lstadd_back(envl, ft_lstnew(envv->name, envv->value));
-		}
+			ft_set_global_pwd_oldpwd(envv, envl);
 		free(envv);
-		i++;
 	}
 }
 

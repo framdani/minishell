@@ -12,13 +12,15 @@
 
 #include "../includes/minishell.h"
 
-int	ft_cd_print_error(char *path)
+int	ft_cd_print_error(char ***path, int ret)
 {
 	ft_putstr_fd("bash: cd: ", 2);
-	ft_putstr_fd(path, 2);
+	ft_putstr_fd(**path, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
+	if (ret == 5)
+		ft_free(*path);
 	return (1);
 }
 
@@ -29,9 +31,10 @@ void	ft_check_cd_home(char **path, t_list *envl)
 	char	*pfree;
 
 	pfree = NULL;
+	home = NULL;
 	lst = ft_find_node(envl, "HOME");
 	if (!lst)
-		home = getenv("HOME");
+		home = ft_strdup(getenv("HOME"));
 	else if (lst)
 		home = ft_strdup(lst->value);
 	if (*path && **path == '~')
@@ -40,6 +43,7 @@ void	ft_check_cd_home(char **path, t_list *envl)
 		*path = ft_strjoin(home, *path + 1);
 		free(pfree);
 	}
+	free(home);
 }
 
 int	ft_check_cd_void(char ***path, t_list *home)

@@ -44,14 +44,14 @@ typedef struct s_exec_hlp
 	int		id;
 }			t_exec_hlp;
 
-// typedef struct s_cd_hlp
-// {
-// 	list	*oldpwd;
-// 	t_list	*pwd;
-// 	char	*pwd_old;
-// 	char	*tmp;
-// 	int		ret;
-// }			t_exec_hlp;
+typedef struct s_cd_hlp
+{
+	t_list	*oldpwd;
+	t_list	*pwd;
+	char	*pwd_old;
+	char	*tmp;
+	int		ret;
+}			t_cd_hlp;
 
 char	*get_env(char *env, t_list **envl);
 void	ft_echo(char **args, int fd);
@@ -59,7 +59,7 @@ void	ft_env(t_list *envl, int fd);
 void	ft_export(t_list **envl, char **args, int fd);
 void	ft_unset(t_list **envl, char **args);
 int		ft_cd(t_list **envl, char **path);
-int		ft_cd_print_error(char *path);
+int		ft_cd_print_error(char ***path, int ret);
 void	ft_pwd(t_list *envl);
 void	ft_inc_shlvl(t_list *envl);
 int		ft_exec_cmd(t_list *envl, char **args, int fork);
@@ -77,7 +77,6 @@ void	ft_pipe_help(int fd[2], int io[3], int *k);
 void	ft_initialize(int io[3], t_cmd	**new, t_cmd **lst, int *k);
 void	ft_exit_child(void);
 void	reset_stds(void);
-int		ft_cd_print_error(char *path);
 void	set_pwd_oldpwd(t_list *envl, char *pwd_old);
 void	ft_check_cd_home(char **path, t_list *envl);
 int		ft_check_cd_void(char ***path, t_list *home);
