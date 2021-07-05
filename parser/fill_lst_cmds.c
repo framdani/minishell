@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_lst_cmds.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:55:17 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/05 12:55:37 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:50:48 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ t_token	*init_lists(t_token *lexer, t_cmd **lst_cmds, t_arg **lst_args,
 		lexer = skip_token_space(lexer);
 		if (lexer != NULL && lexer->type == PIPE)
 			return (NULL);
-			//lexer = lexer->next;
 	}
 	return (lexer);
 }

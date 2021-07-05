@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   parse_identifier.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 13:10:42 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/05 13:11:01 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/05 15:49:32 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parser.h"
 #include "../includes/minishell.h"
 
 int	is_valid_identifier(char *arg)
@@ -23,64 +22,51 @@ int	is_valid_identifier(char *arg)
 	return (1);
 }
 
-void	get_value(char *arg, int i, t_envv **envv)
+void	get_value(char *arg, t_envv **envv)
 {
-	//char *value;
-
-	//value = ft_strdup("");
-	t_envv *tmp;
+	t_envv	*tmp;
 
 	tmp = *envv;
-	i++;
-	while (arg[i] != '\0')
+	arg++;
+	while (*arg != '\0')
 	{
-		tmp->value = ft_charjoin(tmp->value, arg[i]);
-		i++;
+		tmp->value = ft_charjoin(tmp->value, *arg);
+		arg++;
 	}
-	//return (value);
+}
+
+t_envv	*free_envv(t_envv **envv)
+{
+	t_envv	*tmp;
+
+	tmp = *envv;
+	free(tmp->name);
+	free(tmp->value);
+	free(tmp);
+	return (NULL);
 }
 
 t_envv	*get_key_value(char	*arg)
 {
 	t_envv		*envv;
-	int			i;
 
-	i = 0;
 	envv = malloc(sizeof(t_envv));
 	envv->name = ft_strdup("");
 	envv->value = ft_strdup("");
 	if (!is_valid_identifier(arg))
-	{
-		free(envv->name);
-		free(envv->value);
-		free(envv);
-		return (NULL);
-	}
+		return (free_envv(&envv));
 	else
 	{
-		while (arg[i] != '=' && arg[i] != '\0')
+		while (*arg != '=' && *arg != '\0')
 		{
-			if (arg[i] != '_' && !ft_isalnum(arg[i]))
-			{
-				free(envv->name);
-				free(envv->value);
-				free(envv);
-				return (NULL);
-			}
-			envv->name = ft_charjoin(envv->name, arg[i]);
-			i++;
+			if (*arg != '_' && !ft_isalnum(*arg))
+				return (free_envv(&envv));
+			envv->name = ft_charjoin(envv->name, *arg);
+			arg++;
 		}
-		if (arg[i] == '=')//get_value
-		{
-			//i++;
-			/*while (arg[i] != '\0')
-			{
-				envv->value = ft_charjoin(envv->value, arg[i]);
-				i++;
-			}*/
-			get_value(arg, i, &envv);
-		}
-		else if (arg[i] == '\0')
+		if (*arg == '=')
+			get_value(arg, &envv);
+		else if (*arg == '\0')
 		{
 			free(envv->value);
 			envv->value = NULL;
