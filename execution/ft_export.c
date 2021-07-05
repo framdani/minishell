@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 11:39:05 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 19:25:19 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 21:54:53 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,6 @@ void	ft_export_print_error(void)
 {
 	ft_putendl_fd("not a valid identifier", 2);
 	g_help.ret = 1;
-}
-
-void	ft_free_envv(t_list **env, t_envv **envv)
-{
-	if ((*envv)->value)
-	{
-		free((*env)->value);
-		(*env)->value = (*envv)->value;
-	}
-	free((*envv)->name);
 }
 
 void	ft_export_add(t_list **envl, char **args)
@@ -61,6 +51,35 @@ void	ft_export_add(t_list **envl, char **args)
 	}
 }
 
+void	ft_print_export(t_list *head, int fd)
+{
+	ft_lstbubblesort(head);
+	while (head)
+	{
+		if (!ft_strncmp(head->env, "PWD", 4) && !g_help.on_pwd)
+		{
+			head = head->next;
+			continue ;
+		}
+		else if (!ft_strncmp(head->env, "OLDPWD", 7) && !g_help.on_oldpwd)
+		{
+			head = head->next;
+			continue ;
+		}
+		ft_putstr_fd("declare -x ", fd);
+		ft_putstr_fd(head->env, fd);
+		if (head->value)
+		{
+			ft_putstr_fd("=\"", fd);
+			ft_putstr_fd(head->value, fd);
+			ft_putstr_fd("\"\n", fd);
+		}
+		else
+			ft_putstr_fd("\n", fd);
+		head = head->next;
+	}
+}
+
 void	ft_export(t_list **envl, char **args, int fd)
 {
 	t_list	*head;
@@ -68,23 +87,7 @@ void	ft_export(t_list **envl, char **args, int fd)
 	head = *envl;
 	g_help.ret = 0;
 	if (!*args)
-	{
-		ft_lstbubblesort(head);
-		while (head)
-		{
-			ft_putstr_fd("declare -x ", fd);
-			ft_putstr_fd(head->env, fd);
-			if (head->value)
-			{
-				ft_putstr_fd("=\"", fd);
-				ft_putstr_fd(head->value, fd);
-				ft_putstr_fd("\"\n", fd);
-			}
-			else
-				ft_putstr_fd("\n", fd);
-			head = head->next;
-		}
-	}
+		ft_print_export(head, fd);
 	else
 		ft_export_add(&head, args);
 }

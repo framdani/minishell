@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 12:50:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/03 12:52:05 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 21:30:19 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,14 @@ void	reset_stds(void)
 {
 	dup2(g_help.std_in, STDIN_FILENO);
 	dup2(g_help.std_out, STDOUT_FILENO);
+}
+
+void	ft_free_envv(t_list **env, t_envv **envv)
+{
+	if ((*envv)->value)
+	{
+		free((*env)->value);
+		(*env)->value = (*envv)->value;
+	}
+	free((*envv)->name);
 }

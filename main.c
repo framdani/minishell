@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:41:12 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/05 19:48:20 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 21:51:51 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,14 @@ void	print_lexer(t_token *lexer)
 	}
 }
 
+// void handler(int c)
+// {
+// 	c = 1;
+// 	write(1, "\n", 1);
+// 	write(1, "minishell$ \n", 12);
+// 	//	free(g_help.test);
+// }
+
 int	main(int argc, char **argv, char **env)
 {
 	t_list		*envl;
@@ -109,7 +117,7 @@ int	main(int argc, char **argv, char **env)
 	while (status)
 	{
 		//prompt();
-		//signal(SIGINT, signal_handler);
+		// signal(SIGINT, handler);
 		cmd_line = readline("minishell$ ");
 		if (cmd_line == NULL)//catch ctrl-D
 		{
@@ -126,7 +134,7 @@ int	main(int argc, char **argv, char **env)
 		//print_struct(lst_cmds);
 		if (lst_cmds != NULL)
 			ft_launch_execution(lst_cmds, &envl);
-		system("leaks minishell");
+		// system("leaks minishell");
 		free(cmd_line);
 		free_lst_tokens(&tokens);
 		free_lst_cmds(&lst_cmds);

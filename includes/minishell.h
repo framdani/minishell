@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:22:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 18:54:34 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/05 21:31:11 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ void	ft_check_cd_home(char **path, t_list *envl);
 int		ft_check_cd_void(char ***path, t_list *home);
 void	ft_close(int fd);
 void	ft_rd_print_error(char *path, int option);
+void	ft_free_envv(t_list **env, t_envv **envv);
 void	reset_stds(void);
+
 t_global	g_help;
 
 #endif
