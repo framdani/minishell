@@ -49,6 +49,7 @@ typedef struct s_cmd
 	struct s_cmd		*next;
 }						t_cmd;
 
+void	not_valid_id(char *id);
 int		ft_lst_size(t_arg	*lst_arg);
 char	*parse_line_hd(char *input, t_list **envl);
 t_token	*parser(t_token *lexer);
