@@ -127,6 +127,7 @@ int	main(int argc, char **argv, char **env)
 			add_history(cmd_line);
 		size = ft_strlen(cmd_line) + 1;
 		tokens = lexer(cmd_line, size, &envl);
+		//print_lexer(tokens);
 		tokens = parser(tokens);
 		lst_cmds = fill_struct(tokens);
 		//print_struct(lst_cmds);

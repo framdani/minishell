@@ -15,6 +15,13 @@
 #include "../includes/minishell.h"
 #include <stdlib.h>
 
+void	not_valid_id(char *id)
+{
+	ft_putstr_fd("minishell : '", 2);
+	ft_putstr_fd(id, 2);
+	ft_putstr_fd("' : not a valid identifier\n", 2);
+}
+
 void	print_error(char *str)
 {
 	ft_putstr_fd(str, 2);

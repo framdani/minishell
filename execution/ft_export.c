@@ -21,9 +21,9 @@ void	ft_set_global_pwd_oldpwd(t_envv *envv, t_list **envl)
 	ft_lstadd_back(envl, ft_lstnew(envv->name, envv->value));
 }
 
-void	ft_export_print_error(void)
+void	ft_export_print_error(char *arg)
 {
-	ft_putendl_fd("not a valid identifier", 2);
+	not_valid_id(arg);
 	g_help.ret = 1;
 }
 
@@ -39,7 +39,7 @@ void	ft_export_add(t_list **envl, char **args)
 		envv = get_key_value(args[i]);
 		if (!envv)
 		{
-			ft_export_print_error();
+			ft_export_print_error(args[i]);
 			continue ;
 		}
 		env = ft_find_node(*envl, envv->name);
