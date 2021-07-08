@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 12:16:06 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/03 12:57:06 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/07 21:12:15 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,22 @@ void	ft_here_doc(int *fd_in, t_file *lst, t_list **env)
 	int		tmp;
 	char	*line;
 	int		fd;
+	int		pid;
+	int		status;
 
-	tmp = *fd_in;
-	fd = open("/tmp/file", O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	while (1)
+	g_help.in_here_doc = 1;
+	g_help.in_child = 1;
+	pid = fork();
+	if (!pid)
 	{
-		line = readline(">");
-		if (!ft_strncmp(lst->filename, line, ft_strlen(lst->filename) + 1))
-		{
-			free(line);
-			close(fd);
-			break ;
-		}
-		line = parse_line_hd(line, env);
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
-		free(line);
+		ft_her_doc_help(lst, env);
+		exit (0);
 	}
+	waitpid(pid, &status, 0);
+	ft_close(*fd_in);
+	g_help.in_here_doc = WEXITSTATUS(status);
 	*fd_in = open("/tmp/file", O_RDONLY);
-	ft_close(tmp);
+	g_help.in_child = 0;
 }
 
 int	ft_open_fil_read(int *fd_in, int *fd_out, t_file *lst, int option)

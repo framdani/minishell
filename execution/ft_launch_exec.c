@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_launch_exec.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/07 19:54:13 by akhalidy          #+#    #+#             */
+/*   Updated: 2021/07/08 15:15:04 by akhalidy         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 void	ft_launch_execution(t_cmd *cmds, t_list	**envl)
@@ -7,7 +19,6 @@ void	ft_launch_execution(t_cmd *cmds, t_list	**envl)
 	else
 		g_help.ret = ft_pipe(cmds, envl);
 	unlink("/tmp/file");
-	printf("ret = %d\n\n\n", g_help.ret);
 }
 
 int	ft_is_builtin(char *args)
@@ -71,12 +82,14 @@ int	ft_red_smpl_cmd(t_cmd *cmds, t_list **envl)
 	int	ret;
 
 	if (!cmds->file)
-	{
-		ret = ft_launch_exec(cmds->args, envl, 1);
-		return (ret);
-	}
+		return (ft_launch_exec(cmds->args, envl, 1));
 	else if (ft_redirect(cmds->file, fd, 0, envl) == 1)
 	{
+		if (g_help.in_here_doc == 254)
+		{
+			g_help.in_here_doc = 0;
+			return (1);
+		}
 		if (cmds->args[0] == NULL)
 		{
 			close(fd[0]);

@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:22:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 21:31:11 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/07 21:12:10 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,18 @@
 # include <sys/errno.h>
 # include <dirent.h>
 # include "../libft/libft.h"
+
 # include "parser.h"
 
 typedef struct s_global
 {
-	int		on_pwd;
 	int		on_oldpwd;
-	int		ret;
-	int		std_in;
+	int		on_pwd;
 	int		std_out;
+	int		std_in;
+	int		in_child;
+	int		in_here_doc;
+	int		ret;
 }			t_global;
 
 typedef struct s_exec_hlp
@@ -50,6 +53,15 @@ typedef struct s_cd_hlp
 	char	*tmp;
 	int		ret;
 }			t_cd_hlp;
+
+typedef struct s_pipe
+{
+	int		fd[2];
+	int		io[3];
+	t_cmd	*new;
+	int		k;
+	int		fd_io[2];
+}			t_pipe;
 
 char	*get_env(char *env, t_list **envl);
 void	ft_echo(char **args, int fd);
@@ -72,7 +84,7 @@ int		ft_red_smpl_cmd(t_cmd *cmds, t_list **envl);
 void	ft_launch_execution(t_cmd *cmds, t_list	**envl);
 int		ft_red_smpl_cmd(t_cmd *cmds, t_list **envl);
 void	ft_pipe_help(int fd[2], int io[3], int *k);
-void	ft_initialize(int io[3], t_cmd	**new, t_cmd **lst, int *k);
+void	ft_initialize(int io[3], t_cmd	**new, t_cmd *lst, int *k);
 void	ft_exit_child(void);
 void	reset_stds(void);
 void	set_pwd_oldpwd(t_list *envl, char *pwd_old);
@@ -82,6 +94,12 @@ void	ft_close(int fd);
 void	ft_rd_print_error(char *path, int option);
 void	ft_free_envv(t_list **env, t_envv **envv);
 void	reset_stds(void);
+void	ft_exec_wait(t_exec_hlp *var);
+int		ft_pipe_last_cmd(t_pipe var, t_cmd *lst, t_list **envl);
+void	handler(int c);
+void	handler_2(int c);
+void	handler_3(int c);
+void	ft_her_doc_help(t_file *lst, t_list **env);
 
 t_global	g_help;
 

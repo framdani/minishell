@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:41:12 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/05 21:51:51 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/08 15:24:16 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,6 @@ void	print_lexer(t_token *lexer)
 	}
 }
 
-// void handler(int c)
-// {
-// 	c = 1;
-// 	write(1, "\n", 1);
-// 	write(1, "minishell$ \n", 12);
-// 	//	free(g_help.test);
-// }
 
 int	main(int argc, char **argv, char **env)
 {
@@ -109,6 +102,8 @@ int	main(int argc, char **argv, char **env)
 	
 	g_help.on_oldpwd = 1;
 	g_help.on_pwd = 1;
+	g_help.in_child = 0;
+	g_help.in_here_doc = 0;
 	g_help.std_in = dup(STDIN_FILENO);
 	g_help.std_out = dup(STDOUT_FILENO);
 	envl = ft_arr_to_list(env);
@@ -117,12 +112,15 @@ int	main(int argc, char **argv, char **env)
 	while (status)
 	{
 		//prompt();
-		// signal(SIGINT, handler);
+		signal(SIGINT, handler);
+		signal(SIGQUIT, handler_2);
 		cmd_line = readline("minishell$ ");
 		if (cmd_line == NULL)//catch ctrl-D
 		{
 			ft_putstr_fd("exit", 1);
-			//rl_replace_line("exit");
+			rl_on_new_line();
+			rl_replace_line("exit", 0);
+			system("leaks minishell");
 			exit(0);
 		}
 		if (*cmd_line)
@@ -134,7 +132,7 @@ int	main(int argc, char **argv, char **env)
 		//print_struct(lst_cmds);
 		if (lst_cmds != NULL)
 			ft_launch_execution(lst_cmds, &envl);
-		// system("leaks minishell");
+		system("leaks minishell");
 		free(cmd_line);
 		free_lst_tokens(&tokens);
 		free_lst_cmds(&lst_cmds);

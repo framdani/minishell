@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 10:12:35 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/04 21:56:08 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/08 15:25:30 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	ft_check_path(char **path, char **args, t_list *envl)
 	t_list	*pathenv;
 
 	*path = NULL;
+	if (!*args)
+		return (0);
 	if (**args == '\0')
 		*path = NULL;
 	else if (**args == '/' || !ft_strncmp(*args, "./", 2)
@@ -106,14 +108,10 @@ int	ft_exec_cmd(t_list *envl, char **args, int fork_on)
 		if ((!var.id && fork_on) || !fork_on)
 		{
 			execve(path, args, envp);
-			ft_putendl_fd(strerror(errno), 2);
 			ft_exit_child();
 		}
 		if (fork_on && var.id)
-		{
-			waitpid(var.id, &var.status, 0);
-			var.ret = WEXITSTATUS(var.status);
-		}
+			ft_exec_wait(&var);
 		ft_free(envp);
 	}
 	free(path);

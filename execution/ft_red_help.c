@@ -6,11 +6,13 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 12:50:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 21:30:19 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/07 21:15:33 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
 void	ft_close(int fd)
 {
@@ -43,4 +45,30 @@ void	ft_free_envv(t_list **env, t_envv **envv)
 		(*env)->value = (*envv)->value;
 	}
 	free((*envv)->name);
+}
+
+void	ft_her_doc_help(t_file *lst, t_list **env)
+{
+	int		fd;
+	char	*line;
+
+	signal(SIGINT, handler_3);
+	signal(SIGQUIT, handler_3);
+	fd = open("/tmp/file", O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	while (1)
+	{
+		line = readline(">");
+		if (!line)
+			break ;
+		if (!ft_strncmp(lst->filename, line, ft_strlen(lst->filename) + 1))
+		{
+			free(line);
+			close(fd);
+			break ;
+		}
+		line = parse_line_hd(line, env);
+		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
+		free(line);
+	}
 }
