@@ -111,26 +111,20 @@ int	main(int argc, char **argv, char **env)
 
 	while (status)
 	{
-		//prompt();
 		signal(SIGINT, handler);
 		signal(SIGQUIT, handler_2);
 		cmd_line = readline("minishell$ ");
-		if (cmd_line == NULL)//catch ctrl-D
+		if (cmd_line == NULL)
 		{
-			ft_putstr_fd("exit", 1);
-			rl_on_new_line();
-			rl_replace_line("exit", 0);
-			system("leaks minishell");
-			exit(0);
+			write(2, "exit\n", 5);
+			exit(g_help.ret);
 		}
 		if (*cmd_line)
 			add_history(cmd_line);
 		size = ft_strlen(cmd_line) + 1;
 		tokens = lexer(cmd_line, size, &envl);
-		//print_lexer(tokens);
 		tokens = parser(tokens);
 		lst_cmds = fill_struct(tokens);
-		//print_struct(lst_cmds);
 		if (lst_cmds != NULL)
 			ft_launch_execution(lst_cmds, &envl);
 		system("leaks minishell");
