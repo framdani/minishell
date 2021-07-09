@@ -6,13 +6,13 @@
 #    By: framdani <framdani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/27 20:07:22 by framdani          #+#    #+#              #
-#    Updated: 2021/07/09 12:30:47 by framdani         ###   ########.fr        #
+#    Updated: 2021/07/09 19:20:22 by framdani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror #-g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 LDFLAGS="-lreadline"
 

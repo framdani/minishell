@@ -6,7 +6,7 @@
 /*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 12:50:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/09 12:34:57 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/09 21:01:22 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	ft_her_doc_help(t_file *lst, t_list **env)
 {
 	int		fd;
 	char	*line;
+	char 	*val;
 
 	signal(SIGINT, handler_3);
 	signal(SIGQUIT, handler_3);
@@ -60,13 +61,16 @@ void	ft_her_doc_help(t_file *lst, t_list **env)
 		line = readline(">");
 		if (!line)
 			break ;
-		if (!ft_strncmp(lst->filename, line, ft_strlen(lst->filename) + 1))
+		val = remove_quotes(lst->filename);
+		if (!ft_strncmp(val, line, ft_strlen(val) + 1))
 		{
 			free(line);
+			free(val);
 			close(fd);
 			break ;
 		}
-		line = parse_line_hd(line, env);
+		if (!quote_exist(lst->filename))
+			line = parse_line_hd(line, env);
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
 		free(line);

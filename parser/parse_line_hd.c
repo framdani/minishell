@@ -3,15 +3,122 @@
 /*                                                        :::      ::::::::   */
 /*   parse_line_hd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 18:47:07 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/03 20:26:29 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/09 20:56:26 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/parser.h"
+
+char *remove_quotes(char *str)
+{
+	char *new_val;
+	int i;
+
+	i = 0;
+	new_val = ft_strdup("");
+	while (str[i] != '\0')
+	{
+		if (str[i] != '\'' && str[i] != '\"')
+			new_val = ft_charjoin(new_val, str[i]);
+		i++;	
+	}
+	return (new_val);
+}
+
+char *parse_stop_word(t_token **lst_tok, char *input)
+{
+	int state;
+	char *data;
+	int j;
+
+	j = 0;
+	state = NORMAL;
+	while (*input != '\0')
+	{
+		
+		data = malloc(ft_strlen(input) + 1);
+		while (*input != '\0' && *input != '\'' && *input != '\"' && *input != '<'
+			&& *input != 32 && *input != '|' && *input != '>')
+		{
+			data[j] = *input;
+			input++;
+			j++;
+		}
+		data[j] = '\0';
+		add_token(lst_tok, data, CHAR);
+		free(data);
+	
+		if (*input == '\"' || *input == '\'')
+		{
+			if (*input == '\"')
+			{
+				if (state == NORMAL)
+					state = IN_DQUOTE;
+				else
+					state = NORMAL;
+			}
+			else if (*input == '\'')
+			{
+				if (state == NORMAL)
+					state = IN_QUOTE;
+				else
+					state = NORMAL;	
+			}
+			data = malloc(2);
+			data[0] = *input;
+			data[1] = '\0';
+			add_token(lst_tok, data, CHAR);
+			free(data);
+			input++;
+		}
+		if (state == NORMAL)
+			return (input);
+	}
+	if (state == IN_QUOTE || state == IN_DQUOTE)
+		print_error_and_exit(lst_tok, 0);
+	return (input);
+}
+
+int		quote_exist(char *input)
+{
+	int i;
+
+	i = 0;
+	while (input[i] != '\0' && input[i] != 32)
+	{
+		if (input[i] == '\'' || input[i] == '\"')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+char	*stop_word(t_token **lst_tok, char *input)
+{
+	char *data;
+	int j;
+
+	j = 0;
+	data = malloc(ft_strlen(input) + 1);
+	if (!quote_exist(input))
+	{
+		while (*input != '<' && *input != '>' && *input != '|'
+				&& *input != 32 && *input != '\0')
+		{
+			data[j] = *input;
+			input++;
+			j++;
+		}
+		data[j] = '\0';
+		add_token(lst_tok, data, CHAR);
+		free(data);
+	}
+	//else // 
+	return (input);
+}
 
 void	exit_status(char **ret)
 {
