@@ -6,7 +6,7 @@
 /*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/05 12:55:17 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/05 15:50:48 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/10 15:44:04 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,7 @@ t_token	*init_lists(t_token *lexer, t_cmd **lst_cmds, t_arg **lst_args,
 	*lst_cmds = NULL;
 	*lst_files = NULL;
 	if (lexer != NULL)
-	{
 		lexer = skip_token_space(lexer);
-		/*if (lexer != NULL && lexer->type == PIPE)
-		{
-			lexer = lexer->next;
-			//return (NULL);
-		}*/
-	}
 	return (lexer);
 }
 

@@ -6,7 +6,7 @@
 /*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 17:27:45 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/09 20:57:13 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/10 15:50:05 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ void	free_lst_cmds(t_cmd **lst_cmds);
 int		is_redirection(int type);
 t_envv	*get_key_value(char	*arg);
 void	print_error(char *str);
-char	*stop_word(t_token **lst_tok, char *input);
-char *parse_stop_word(t_token **lst_tok, char *input);
-char *remove_quotes(char *str);
+char	*parse_stop_word(t_token **lst_tok, char *input);
+char	*remove_quotes(char *str);
 int		quote_exist(char *input);
 #endif

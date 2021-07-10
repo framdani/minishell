@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_errors.c                                     :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 16:51:26 by framdani          #+#    #+#             */
-/*   Updated: 2021/06/02 13:42:26 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/10 15:49:08 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	print_error(char *str)
 void	print_error_and_exit(t_token **lst_tok, int error)
 {
 	g_help.ret = 258;
-	printf("ret = %d \n", g_help.ret);
 	free_lst_tokens(lst_tok);
 	print_error("Minishell : syntax error ");
 	if (error == 6)
