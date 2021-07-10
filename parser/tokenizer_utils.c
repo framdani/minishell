@@ -6,7 +6,7 @@
 /*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 14:57:03 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/05 17:45:02 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/09 19:17:30 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ char	*tokenize_redirection(t_token **lst_tok, char *input)
 		{
 			add_token(lst_tok, "LESSER", LESSER);
 			input++;
+			input = skip_spaces(input);
+			input = parse_stop_word(lst_tok, input);
+			return (input);
 		}
 		else
 			add_token(lst_tok, "LEFT", LEFT);
@@ -70,7 +73,6 @@ t_info	tokenize_expander(t_token **lst_tok, char *input, t_list **envl,
 {
 	char	*data;
 	t_info	info;
-
 	info.spec_case = spec_case;
 	input++;
 	info.input = input;

@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:41:12 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/10 10:57:50 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/10 12:32:33 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,10 @@ int	main(int argc, char **argv, char **env)
 	ft_inc_shlvl(envl);
 	while (status)
 	{
-		//prompt();
 		signal(SIGINT, handler);
 		signal(SIGQUIT, handler_2);
 		cmd_line = readline("minishell$ ");
-		if (cmd_line == NULL)//catch ctrl-D
+		if (cmd_line == NULL)
 		{
 			ft_putstr_fd("exit", 1);
 			rl_on_new_line();
