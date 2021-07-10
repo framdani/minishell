@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 12:13:32 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 18:49:02 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/10 16:41:25 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_cd_env_change(t_list *oldpwd, t_list *pwd, t_list **envl)
 		pwd->value = tmp;
 }	
 
-void	ft_cd_env_reset(t_list *oldpwd, char *pwd_old, t_list **envl)
+void	ft_cd_env_reset(t_list *oldpwd, t_list **envl)
 {
 	ft_lstadd_back(envl, ft_lstnew(ft_strdup("PWD"), getcwd(NULL, 0)));
 	if (oldpwd)
@@ -78,7 +78,7 @@ int	ft_cd(t_list **envl, char **path)
 	if (var.pwd)
 		ft_cd_env_change(var.oldpwd, var.pwd, envl);
 	else
-		ft_cd_env_reset(var.oldpwd, var.pwd_old, envl);
+		ft_cd_env_reset(var.oldpwd, envl);
 	if (var.ret == 5)
 		ft_free(path);
 	free(var.pwd_old);

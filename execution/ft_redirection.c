@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/05 12:16:06 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/09 17:46:43 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/10 16:41:04 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 
 void	ft_here_doc(int *fd_in, t_file *lst, t_list **env)
 {
-	int		tmp;
-	char	*line;
-	int		fd;
 	int		pid;
 	int		status;
 

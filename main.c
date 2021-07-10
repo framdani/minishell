@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:41:12 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/10 12:32:33 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/10 16:24:10 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <signal.h>
-//#include <readline/rl_replace_line.h>
+// #include <readline/rl_replace_line.h>
 /*char	*read_command_line(void)
 {
 	char	*line_cmd;
@@ -116,7 +116,7 @@ int	main(int argc, char **argv, char **env)
 		{
 			ft_putstr_fd("exit", 1);
 			rl_on_new_line();
-			rl_replace_line("exit", 0);
+			// rl_replace_line("exit", 0);
 			// system("leaks minishell");
 			exit(g_help.ret);
 		}
@@ -130,7 +130,7 @@ int	main(int argc, char **argv, char **env)
 		//print_struct(lst_cmds);
 		if (lst_cmds != NULL)
 			ft_launch_execution(lst_cmds, &envl);
-		// system("leaks minishell");
+		system("leaks minishell");
 		free(cmd_line);
 		free_lst_tokens(&tokens);
 		free_lst_cmds(&lst_cmds);

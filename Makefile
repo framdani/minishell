@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: framdani <framdani@student.42.fr>          +#+  +:+       +#+         #
+#    By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/27 20:07:22 by framdani          #+#    #+#              #
-#    Updated: 2021/07/09 19:20:22 by framdani         ###   ########.fr        #
+#    Updated: 2021/07/10 16:33:45 by akhalidy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,9 @@ CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 LDFLAGS="-lreadline"
 
-LIB = -L/Users/framdani/.brew/opt/readline/lib
+LIB = -L/Users/$(USER)/.brew/opt/readline/lib
 
-INCLUDE = -I/Users/framdani/.brew/opt/readline/include
+INCLUDE = -I/Users/$(USER)/.brew/opt/readline/include
 
 SRCS = main.c\
 	   parser/lexer.c\
@@ -42,7 +42,7 @@ OBJS = $(*:.c=.o)
 
 all:$(SRCS)
 	@make -C ./libft
-	@gcc *.c */*.c $(LDFLAGS) $(LIB) $(INCLUDE) -o minishell  $(LIBFT_PATH)
+	@gcc *.c */*.c $(LDFLAGS) $(CFLAGS) $(LIB) $(INCLUDE) -o minishell  $(LIBFT_PATH)
 	@echo "minishell created successfully"
 
 clean:
