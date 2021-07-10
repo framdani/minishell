@@ -6,7 +6,7 @@
 /*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/10 15:16:55 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/10 15:41:51 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/10 16:37:18 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	is_delimiter(char c)
 {
-	if (c == QUOTE || c == D_QUOTE || c == LEFT || c == RIGHT
+	if (c == '\'' || c == '\"' || c == LEFT || c == RIGHT
 		|| c == SPACE || c == PIPE || c == '\0')
 		return (1);
 	return (0);
@@ -26,14 +26,14 @@ int	detect_state(t_token **lst_tok, char c, int state)
 	char	*data;
 
 	data = malloc(2);
-	if (c == QUOTE)
+	if (c == '\'')
 	{
 		if (state == NORMAL)
 			state = IN_QUOTE;
 		else
 			state = NORMAL;
 	}
-	else if (c == D_QUOTE)
+	else if (c == '\"')
 	{
 		if (state == NORMAL)
 			state = IN_DQUOTE;

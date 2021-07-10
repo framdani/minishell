@@ -6,7 +6,7 @@
 /*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 14:57:03 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/10 15:48:32 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/10 16:34:19 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ char	*tokenize_redirection(t_token **lst_tok, char *input)
 		{
 			add_token(lst_tok, "LESSER", LESSER);
 			input++;
-			input = parse_stop_word(lst_tok, input);
+			input = skip_spaces(input);
+			return (parse_stop_word(lst_tok, input));
 		}
 		else
 			add_token(lst_tok, "LEFT", LEFT);
+		input = skip_spaces(input);
 	}
 	else if (*input == '>')
 	{
@@ -60,8 +62,8 @@ char	*tokenize_redirection(t_token **lst_tok, char *input)
 		}
 		else
 			add_token(lst_tok, "RIGHT", RIGHT);
+		input = skip_spaces(input);
 	}
-	input = skip_spaces(input);
 	return (input);
 }
 
