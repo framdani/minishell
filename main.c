@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:41:12 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/08 15:24:16 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/10 10:57:50 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	print_lexer(t_token *lexer)
 	}
 }
 
-
 int	main(int argc, char **argv, char **env)
 {
 	t_list		*envl;
@@ -108,7 +107,6 @@ int	main(int argc, char **argv, char **env)
 	g_help.std_out = dup(STDOUT_FILENO);
 	envl = ft_arr_to_list(env);
 	ft_inc_shlvl(envl);
-
 	while (status)
 	{
 		//prompt();
@@ -120,8 +118,8 @@ int	main(int argc, char **argv, char **env)
 			ft_putstr_fd("exit", 1);
 			rl_on_new_line();
 			rl_replace_line("exit", 0);
-			system("leaks minishell");
-			exit(0);
+			// system("leaks minishell");
+			exit(g_help.ret);
 		}
 		if (*cmd_line)
 			add_history(cmd_line);
@@ -133,7 +131,7 @@ int	main(int argc, char **argv, char **env)
 		//print_struct(lst_cmds);
 		if (lst_cmds != NULL)
 			ft_launch_execution(lst_cmds, &envl);
-		system("leaks minishell");
+		// system("leaks minishell");
 		free(cmd_line);
 		free_lst_tokens(&tokens);
 		free_lst_cmds(&lst_cmds);

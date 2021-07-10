@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 10:12:35 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/08 15:25:30 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/10 12:23:24 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_check_path(char **path, char **args, t_list *envl)
 
 	*path = NULL;
 	if (!*args)
-		return (0);
+		exit (0);
 	if (**args == '\0')
 		*path = NULL;
 	else if (**args == '/' || !ft_strncmp(*args, "./", 2)

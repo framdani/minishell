@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:54:13 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/08 15:15:04 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/09 13:21:41 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	ft_is_builtin(char *args)
 		return (1);
 	else if (!ft_strncmp("pwd", args, 4))
 		return (1);
+	else if (!ft_strncmp("exit", args, 5))
+		return (1);
 	return (0);
 }
 
@@ -56,7 +58,7 @@ int	ft_launch_exec(char **args, t_list **envl, int fork)
 	else if (!ft_strncmp("pwd", *args, 4))
 		ft_pwd(*envl);
 	else if (!ft_strncmp("exit", *args, 5))
-		ft_exit(args + 1);
+		ft_exit(args + 1, fork);
 	else
 		ret = ft_exec_cmd(*envl, args, fork);
 	if (!fork && ft_is_builtin(*args))
