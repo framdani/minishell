@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 11:23:17 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/05 21:54:55 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/10 17:05:12 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,16 @@ void	ft_lst_print_fd(t_list	*head, int fd)
 	}
 }
 
-void	ft_env(t_list *envl, int fd)
+void	ft_env(t_list *envl, char **args, int fd)
 {
 	g_help.ret = 0;
-	ft_lst_print_fd(envl, fd);
+	if (*args)
+	{
+		ft_putstr_fd("env: ", 2);
+		ft_putstr_fd(*args, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		g_help.ret = 127;
+	}
+	else
+		ft_lst_print_fd(envl, fd);
 }

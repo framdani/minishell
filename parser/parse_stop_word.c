@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_stop_word.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/10 15:16:55 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/10 16:37:18 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/10 16:44:11 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ char	*join_no_special_chars(t_token **lst_tok, char *input)
 char	*parse_stop_word(t_token **lst_tok, char *input)
 {
 	int		state;
-	char	*data;
 	int		j;
 
 	j = 0;

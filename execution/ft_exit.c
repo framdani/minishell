@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/01 15:37:34 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/10 12:27:04 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/10 17:12:07 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void	ft_exit(char **args, int fork)
 				ft_putendl_fd("exit", 1);
 			exit((unsigned char)ft_atoi(*args));
 		}
-		ft_putendl_fd("minishell$: exit: too many arguments", 2);
+		ft_putendl_fd("exit", 2);
+		ft_putendl_fd("minishell: exit: too many arguments", 2);
+		g_help.ret = 1;
 	}
 	else
 	{

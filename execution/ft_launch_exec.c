@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:54:13 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/09 13:21:41 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/10 17:00:28 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,10 @@ int	ft_is_builtin(char *args)
 
 int	ft_launch_exec(char **args, t_list **envl, int fork)
 {
-	int	ret;
-
-	ret = 0;
 	if (!ft_strncmp("echo", *args, 5))
 		ft_echo(args + 1, 1);
 	else if (!ft_strncmp("env", *args, 4))
-		ft_env(*envl, 1);
+		ft_env(*envl, args + 1, 1);
 	else if (!ft_strncmp("export", *args, 7))
 		ft_export(envl, args + 1, 1);
 	else if (!ft_strncmp("unset", *args, 6))
@@ -60,10 +57,10 @@ int	ft_launch_exec(char **args, t_list **envl, int fork)
 	else if (!ft_strncmp("exit", *args, 5))
 		ft_exit(args + 1, fork);
 	else
-		ret = ft_exec_cmd(*envl, args, fork);
+		g_help.ret = ft_exec_cmd(*envl, args, fork);
 	if (!fork && ft_is_builtin(*args))
-		exit(0);
-	return (ret);
+		exit(g_help.ret);
+	return (g_help.ret);
 }
 
 void	ft_dup_io(int fd[2])

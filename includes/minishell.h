@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:22:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/10 12:27:40 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/10 17:00:48 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_pipe
 
 char	*get_env(char *env, t_list **envl);
 void	ft_echo(char **args, int fd);
-void	ft_env(t_list *envl, int fd);
+void	ft_env(t_list *envl, char **args, int fd);
 void	ft_export(t_list **envl, char **args, int fd);
 void	ft_unset(t_list **envl, char **args);
 int		ft_cd(t_list **envl, char **path);
