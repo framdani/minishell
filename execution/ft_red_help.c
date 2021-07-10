@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_red_help.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 12:50:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/10 12:32:55 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/10 15:52:47 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_her_doc_help(t_file *lst, t_list **env)
 {
 	int		fd;
 	char	*line;
-	char 	*val;
+	char	*val;
 
 	signal(SIGINT, handler_3);
 	signal(SIGQUIT, handler_3);
@@ -71,8 +71,7 @@ void	ft_her_doc_help(t_file *lst, t_list **env)
 		}
 		if (!quote_exist(lst->filename))
 			line = parse_line_hd(line, env);
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
+		ft_putendl_fd(line, fd);
 		free(line);
 	}
 }
