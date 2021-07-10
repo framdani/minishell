@@ -6,7 +6,7 @@
 /*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:41:12 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/10 18:14:20 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/10 18:22:43 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,16 @@ void	print_lexer(t_token *lexer)
 	}
 }
 
+int	only_spaces(char *str)
+{
+	while(*str == ' ' || *str == '\t')
+		str++;
+	if (*str == '\0')
+		return (1);
+	else
+		return (0); 		
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_list		*envl;
@@ -117,17 +127,21 @@ int	main(int argc, char **argv, char **env)
 			ft_putstr_fd("\033[Aminishell$ exit\n", 1);
 			exit(g_help.ret);
 		}
-		if (*cmd_line)
-			add_history(cmd_line);
-		size = ft_strlen(cmd_line) + 1;
-		tokens = lexer(cmd_line, size, &envl);
-		tokens = parser(tokens);
-		lst_cmds = fill_struct(tokens);
-		if (lst_cmds != NULL)
-			ft_launch_execution(lst_cmds, &envl);
-		system("leaks minishell");
+		if (!only_spaces(cmd_line))
+		{
+			if (*cmd_line != '\0')
+				add_history(cmd_line);
+			size = ft_strlen(cmd_line) + 1;
+			tokens = lexer(cmd_line, size, &envl);
+			tokens = parser(tokens);
+			lst_cmds = fill_struct(tokens);
+			if (lst_cmds != NULL)
+				ft_launch_execution(lst_cmds, &envl);
+			system("leaks minishell");
+		//free(cmd_line);
+			free_lst_tokens(&tokens);
+			free_lst_cmds(&lst_cmds);
+		}
 		free(cmd_line);
-		free_lst_tokens(&tokens);
-		free_lst_cmds(&lst_cmds);
 	}
 }
