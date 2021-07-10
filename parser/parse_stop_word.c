@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_stop_word.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/10 15:16:55 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/10 16:44:11 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/10 18:09:34 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,23 @@ char	*join_no_special_chars(t_token **lst_tok, char *input)
 	return (input);
 }
 
+char	*join_special_chars_inside_qt(t_token **lst_tok, char *input)
+{
+	char	*data;
+
+	data = malloc(2);
+	data[0] = *input;
+	data[1] = '\0';
+	add_token(lst_tok, data, CHAR);
+	input++;
+	free(data);
+	return (input);
+}
+
 char	*parse_stop_word(t_token **lst_tok, char *input)
 {
 	int		state;
-	int		j;
 
-	j = 0;
 	state = NORMAL;
 	while (*input != '\0')
 	{
@@ -83,6 +94,8 @@ char	*parse_stop_word(t_token **lst_tok, char *input)
 		}
 		if (state == NORMAL)
 			return (input);
+		else
+			input = join_special_chars_inside_qt(lst_tok, input);
 	}
 	if (state == IN_QUOTE || state == IN_DQUOTE)
 		print_error_and_exit(lst_tok, 0);
