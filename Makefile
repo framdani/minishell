@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+         #
+#    By: framdani <framdani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/27 20:07:22 by framdani          #+#    #+#              #
-#    Updated: 2021/07/10 16:57:53 by akhalidy         ###   ########.fr        #
+#    Updated: 2021/07/11 19:24:55 by framdani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ OBJS = $(*:.c=.o)
 
 all:$(SRCS)
 	@make -C ./libft
-	@gcc *.c */*.c $(LDFLAGS) $(CFLAGS) $(LIB) $(INCLUDE) -o minishell  $(LIBFT_PATH)
+	@gcc *.c */*.c $(LDFLAGS) -ltermcap $(CFLAGS) $(LIB) $(INCLUDE) -o minishell  $(LIBFT_PATH)
 	@echo "minishell created successfully"
 
 clean:

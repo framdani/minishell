@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/26 15:47:40 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/10 16:56:36 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/11 17:11:18 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	add_expanded_value(t_token **lst_tok, char *token, int state,
 	if (token != NULL)
 	{
 		if (state == NORMAL)
-			tokenize_expanded_value(lst_tok, token);
+			tokenize_expanded_value(lst_tok, token);//previous char
 		else
 			add_token(lst_tok, token, CHAR);
 	}
