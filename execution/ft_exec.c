@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exec.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 10:12:35 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/10 12:23:24 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/11 16:04:20 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	ft_print_exec_error(char *args, char *error, int n_exit)
 	ft_putstr_fd(args, 2);
 	ft_putendl_fd(error, 2);
 	return (n_exit);
+	//exit(n_exit);
 }
 
 int	ft_check_path(char **path, char **args, t_list *envl)
