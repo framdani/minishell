@@ -6,16 +6,19 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:41:12 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/12 14:51:36 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/12 15:54:35 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./includes/parser.h"
 #include "libft/libft.h"
-#include "./includes/minishell.h"
+#include "includes/minishell.h"
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <signal.h>
+#include <curses.h>
+#include <term.h>
+
 // #include <readline/rl_replace_line.h>
 /*char	*read_command_line(void)
 {
@@ -114,25 +117,25 @@ int	main(int argc, char **argv, char **env)
 		cmd_line = readline("minishell$ ");
 		if (cmd_line == NULL)
 		{
-			// rl_on_new_line();
-			// rl_replace_line("",0);
-			// rl_redisplay();
-			write(1, "\033[Aminishell$ exit\n", 19);
+			char *cm_cap = tgetstr("up", NULL);
+			tputs(tgoto(cm_cap, 0, 0), 0, putchar);
+			printf("minishell$ exit\n");
 			exit(g_help.ret);
 		}
-		if (*cmd_line)
+		if (*cmd_line != '\0')
 			add_history(cmd_line);
 		size = ft_strlen(cmd_line) + 1;
 		tokens = lexer(cmd_line, size, &envl);
 		//print_lexer(tokens);
 		tokens = parser(tokens);
 		lst_cmds = fill_struct(tokens);
-		//print_struct(lst_cmds);
+			//print_struct(lst_cmds);
 		if (lst_cmds != NULL)
 			ft_launch_execution(lst_cmds, &envl);
 		// system("leaks minishell");
 		free(cmd_line);
 		free_lst_tokens(&tokens);
 		free_lst_cmds(&lst_cmds);
+		free(cmd_line);
 	}
 }
