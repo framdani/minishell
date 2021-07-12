@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:32:49 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/09 15:36:12 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/11 20:22:05 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_exit_child(void)
 {
-	ft_putendl_fd(strerror(errno), 2);
+	if (errno != 22)
+		ft_putendl_fd(strerror(errno), 2);
 	if (errno == 13 || errno == 21)
 		exit(126);
 	if (errno == 2 || errno == 22)
@@ -53,7 +54,6 @@ int	ft_wait_loop(t_cmd	*cmds)
 	int	status;
 	int	pid;
 
-	g_help.in_child = 1;
 	while (cmds)
 	{
 		pid = cmds->pid;

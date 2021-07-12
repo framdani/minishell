@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 20:49:30 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/10 12:33:03 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/12 14:54:25 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	handler(int c)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	else if (c == SIGINT && g_help.in_child)
+	else if (c == SIGINT && g_help.in_child == 1)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
@@ -41,7 +41,7 @@ void	handler(int c)
 
 void	handler_2(int c)
 {
-	if (c == SIGQUIT && g_help.in_child && !g_help.in_here_doc)
+	if (c == SIGQUIT && g_help.in_child == 1 && !g_help.in_here_doc)
 	{
 		write(1, "Quit: 3\n", 8);
 		rl_on_new_line();
@@ -62,5 +62,19 @@ void	handler_3(int c)
 	{
 		rl_on_new_line();
 		rl_redisplay();
+	}
+}
+
+void	child_handler(int sig)
+{
+	if (sig == SIGQUIT)
+	{
+		ft_putendl_fd("Quit: 3", 2);
+		exit(131);
+	}
+	if (sig == SIGINT)
+	{
+		write(1, "\n", 2);
+		exit(130);
 	}
 }

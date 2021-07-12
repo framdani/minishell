@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/01 12:13:25 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/09 15:37:46 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/12 14:54:41 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	ft_set_io(int *fd_io, int *io, int out)
 
 void	ft_exec_wait(t_exec_hlp *var)
 {
-	g_help.in_child = 1;
 	waitpid(var->id, &var->status, 0);
 	if (WIFEXITED(var->status))
 		var->ret = WEXITSTATUS(var->status);

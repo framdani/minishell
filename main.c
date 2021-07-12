@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:41:12 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/10 16:43:13 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/12 14:51:36 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,10 @@ int	main(int argc, char **argv, char **env)
 		cmd_line = readline("minishell$ ");
 		if (cmd_line == NULL)
 		{
-			ft_putstr_fd("exit", 1);
-			rl_on_new_line();
-			// rl_replace_line("exit", 0);
-			// system("leaks minishell");
+			// rl_on_new_line();
+			// rl_replace_line("",0);
+			// rl_redisplay();
+			write(1, "\033[Aminishell$ exit\n", 19);
 			exit(g_help.ret);
 		}
 		if (*cmd_line)
@@ -130,7 +130,7 @@ int	main(int argc, char **argv, char **env)
 		//print_struct(lst_cmds);
 		if (lst_cmds != NULL)
 			ft_launch_execution(lst_cmds, &envl);
-		system("leaks minishell");
+		// system("leaks minishell");
 		free(cmd_line);
 		free_lst_tokens(&tokens);
 		free_lst_cmds(&lst_cmds);

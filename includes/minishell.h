@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:22:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/10 17:00:48 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/12 15:01:00 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	handler(int c);
 void	handler_2(int c);
 void	handler_3(int c);
 void	ft_her_doc_help(t_file *lst, t_list **env);
+void	child_handler(int sig);
+int		ft_check_path(char **path, char **args, t_list *envl);
 
 t_global	g_help;
 
