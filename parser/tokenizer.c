@@ -6,7 +6,7 @@
 /*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/27 12:38:31 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/11 17:15:14 by framdani         ###   ########.fr       */
+/*   Updated: 2021/07/12 17:25:45 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ t_info	tokenize_state_normal(char *input, t_token **lst_tok, int spec_case,
 	t_list **envl)
 {
 	t_info	info;
-	char c;
-	
-	c = next_char(input);
+
 	info.input = input;
 	info.state = NORMAL;
 	info.spec_case = spec_case;

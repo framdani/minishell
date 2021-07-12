@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:22:12 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/12 15:01:00 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/07/12 17:28:48 by framdani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 # include <sys/errno.h>
 # include <dirent.h>
 # include "../libft/libft.h"
-
+# include <signal.h>
+# include <curses.h>
+# include <term.h>
 # include "parser.h"
 
 typedef struct s_global
