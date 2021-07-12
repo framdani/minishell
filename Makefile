@@ -6,7 +6,7 @@
 #    By: framdani <framdani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/27 20:07:22 by framdani          #+#    #+#              #
-#    Updated: 2021/07/11 19:24:55 by framdani         ###   ########.fr        #
+#    Updated: 2021/07/12 18:14:39 by framdani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,18 +32,35 @@ SRCS = main.c\
 	   parser/parse_line_hd.c\
 	   parser/tokenizer_utils.c\
 	   parser/parse_identifier.c\
-	   execution/*.c
-
-NAME= minishell
+	   parser/parse_stop_word.c\
+	   execution/ft_cd_outils.c\
+	   execution/ft_cd.c\
+	   execution/ft_echo.c\
+	   execution/ft_env.c\
+	   execution/ft_exec.c\
+	   execution/ft_exit.c\
+	   execution/ft_export.c\
+	   execution/ft_launch_exec.c\
+	   execution/ft_path.c\
+	   execution/ft_pipe_outils.c\
+	   execution/ft_pipe.c\
+	   execution/ft_pwd.c\
+	   execution/ft_red_help.c\
+	   execution/ft_redirection.c\
+	   execution/ft_shlvl.c\
+	   execution/ft_signals.c\
+	   execution/ft_unset.c
+	   
+NAME = minishell
 
 LIBFT_PATH = ./libft/libft.a
 
-OBJS = $(*:.c=.o)
+OBJS = $(SRCS:.c=.o)
 
 all:$(SRCS)
 	@make -C ./libft
-	@gcc *.c */*.c $(LDFLAGS) -ltermcap $(CFLAGS) $(LIB) $(INCLUDE) -o minishell  $(LIBFT_PATH)
-	@echo "minishell created successfully"
+	@$(CC) $(CFLAGS) $(SRCS) $(LDFLAGS) -ltermcap $(LIB) $(INCLUDE) -o minishell  $(LIBFT_PATH)
+	@echo "Done."
 
 clean:
 	@make -C ./libft/ clean

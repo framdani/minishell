@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+         #
+#    By: framdani <framdani@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/17 02:16:17 by akhalidy          #+#    #+#              #
-#    Updated: 2021/07/03 17:03:12 by akhalidy         ###   ########.fr        #
+#    Updated: 2021/07/12 18:03:37 by framdani         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME = libft.a
 
-CC = gcc
+CC = clang
 
 SRC  = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 		ft_isascii.c ft_isdigit.c ft_isprint.c  \
@@ -43,7 +43,6 @@ all: $(NAME)
 $(NAME): $(SRC) $(OBJ)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	@echo "libft.a created successfuly"
 
 $(OBJ):
 	@$(CC) $(CFLAGS) -c $(SRC)
