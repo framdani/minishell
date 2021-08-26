@@ -1,7 +1,5 @@
 ## Minishell
-This is a school project. We have to recode a little bash.
-
-For more informations about the main instructions, [click here]()
+This is a school project. We have to recode a little bash. For more informations about the main instructions, [click here](https://github.com/framdani/minishell/blob/main/en.subject.pdf) .
 
 ## Grammar
 
@@ -65,3 +63,9 @@ cd minishell
 # Build and run the program
 make && ./minishell
 ```
+## Authors
+[Fatima-zahra RAMDANI](https://github.com/framdani)
+
+[Asmaa KHALIDY](https://github.com/akh9001)
+
+
