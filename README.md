@@ -1,5 +1,7 @@
 ## Minishell
-The objective of this project is to create a simple shell.
+This is a school project. We have to recode a little bash.
+
+For more informations about the main instructions, [click here]()
 
 ## Grammar
 
