@@ -56,11 +56,8 @@ Clone the repo
 ```
 git clone https://github.com/framdani/minishell.git
 ```
-cd into the root directory and run make
+cd into the root directory and generate the executable
 ```
 cd minishell && make
-```
-Run the executable
-```
 ./minishell
 ```
