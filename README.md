@@ -52,9 +52,15 @@ here_end         : WORD
 
 ## Build & Run the program
 
+Clone the repo 
 ```
 git clone https://github.com/framdani/minishell.git
-cd minishell
-make
+```
+cd into the root directory and run make
+```
+cd minishell && make
+```
+Run the executable
+```
 ./minishell
 ```
