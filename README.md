@@ -51,13 +51,15 @@ here_end         : WORD
 ```
 
 ## Build & Run the program
-
-Clone the repo 
+From your command line :
+ 
 ```
+# Clone the repo
 git clone https://github.com/framdani/minishell.git
-```
-cd into the root directory and generate the executable
-```
-cd minishell && make
-./minishell
+
+# Go into the repo
+cd minishell
+
+# Build and run the program
+make && ./minishell
 ```
