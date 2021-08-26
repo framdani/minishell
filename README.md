@@ -50,4 +50,11 @@ here_end         : WORD
                  ;
 ```
 
+## Build & Run the program
 
+```
+git clone https://github.com/framdani/minishell.git
+cd minishell
+make
+./minishell
+```
