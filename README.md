@@ -4,24 +4,12 @@ The objective of this project is to create a simple shell.
 ## Grammar
 
 ```
-complete_command : list separator
-                 | list
-                 ;
-list             : list separator
-                 ;
 pipeline         : pipe_sequence
                  ;
 pipe_sequence    : command
                  | pipe_sequence '|' command
                  ;
 command          : simple_command
-                 | compound_command redirect_list
-                 ;
-name             : NAME
-                 ;
-wordlist         : wordlist WORD
-                 |          WORD
-                 ;
                  ;
 simple_command   : cmd_prefix cmd_word cmd_suffix
                  | cmd_prefix cmd_word
@@ -53,16 +41,12 @@ io_file          : '<'       filename
                  | '>'       filename
                  | DGREAT    filename
                  | LESSGREAT filename
-                 | CLOBBER   filename
                  ;
 filename         : WORD                     
                  ;
 io_here          : DLESS     here_end
                  ;
 here_end         : WORD 
-                 ;
-
-separator        : ';'
                  ;
 ```
 
