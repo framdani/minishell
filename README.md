@@ -1,5 +1,5 @@
 ## Minishell
-This is a school project. We have to recode a little bash. For more informations about the main instructions, [click here](https://github.com/framdani/minishell/blob/main/en.subject.pdf) .
+This is a 42Network/1337 project where we have to make a mini bash. For more informations about the main instructions, [click here](https://github.com/framdani/minishell/blob/main/en.subject.pdf) .
 
 ## Grammar
 
