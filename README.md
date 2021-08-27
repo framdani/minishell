@@ -57,7 +57,7 @@ From your command line :
 # Clone the repo
 git clone https://github.com/framdani/minishell.git
 
-# Go into the repo
+# Go to the root directory
 cd minishell
 
 # Build and run the program
