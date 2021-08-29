@@ -1,11 +1,6 @@
 ## Minishell
 This is a 42Network/1337 project where we have to make a mini bash. For more informations about the main instructions, [click here](https://github.com/framdani/minishell/blob/main/en.subject.pdf) .
 
-
-https://user-images.githubusercontent.com/52450718/131256774-4c196fe8-076c-4502-bd02-0d1dd50c2e8f.mov
-
-
-
 ## Grammar
 
 ```
