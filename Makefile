@@ -60,7 +60,7 @@ OBJS = $(SRCS:.c=.o)
 all:$(SRCS)
 	@make -C ./libft
 	@$(CC) $(CFLAGS) $(SRCS) $(LDFLAGS) -ltermcap $(LIB) $(INCLUDE) -o minishell  $(LIBFT_PATH)
-	@echo "Done."
+	@echo "minishell created successfully"
 
 clean:
 	@make -C ./libft/ clean

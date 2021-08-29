@@ -14,7 +14,11 @@
 
 void	ft_check_sub_shell(char **args)
 {
-	if (!ft_strncmp(*args, "./minishell", 12))
+	int	size;
+
+	size = ft_strlen(*args);
+	size -= 10;
+	if (!ft_strncmp(*args + size, "/minishell", 11))
 		g_help.in_child = -1;
 	else
 		g_help.in_child = 1;

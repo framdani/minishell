@@ -15,7 +15,10 @@
 void	ft_exit_child(void)
 {
 	if (errno != 22)
+	{
 		ft_putendl_fd(strerror(errno), 2);
+		exit(errno);
+	}
 	if (errno == 13 || errno == 21)
 		exit(126);
 	if (errno == 2 || errno == 22)
