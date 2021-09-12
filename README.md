@@ -3,6 +3,9 @@ This is a 42Network/1337 project where we have to make a mini bash. For more inf
 
 ## Grammar
 
+Grammar is the set of rules by which the words in a computer statement are interpreted into meaningful machine instructions.
+The grammar below represents the syntax rules of this mini bash.
+
 ```
 pipeline         : pipe_sequence
                  ;
