@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: framdani <framdani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 12:41:12 by framdani          #+#    #+#             */
-/*   Updated: 2021/07/12 17:52:23 by framdani         ###   ########.fr       */
+/*   Updated: 2021/12/20 10:56:12 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ int	main(int argc, char **argv, char **env)
 		if (lst_cmds != NULL)
 			ft_launch_execution(lst_cmds, &envl);
 		free_lst_cmds(&lst_cmds);
-		system("leaks minishell");
+		// system("leaks minishell");
 	}
 }
