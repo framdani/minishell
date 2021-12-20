@@ -53,12 +53,18 @@ here_end         : WORD
                  ;
 ```
 
+## Execution :
+The main concept of this part is to execute the command passed the minishell program
+
 ## Build & Run the program
 From your command line :
  
 ```
 # Clone the repo
 git clone https://github.com/framdani/minishell.git
+
+# install readline :
+ brew install readline #In your compilation, append these flags: -lreadline -L /Users/$(USER)/.brew/opt/readline/lib -I/Users/$(USER)/.brew/opt/readline/include
 
 # Go to the root directory
 cd minishell
