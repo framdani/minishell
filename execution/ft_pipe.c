@@ -6,7 +6,7 @@
 /*   By: akhalidy <akhalidy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 16:32:49 by akhalidy          #+#    #+#             */
-/*   Updated: 2021/07/11 20:22:05 by akhalidy         ###   ########.fr       */
+/*   Updated: 2021/12/20 10:03:10 by akhalidy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_exit_child(void)
 		exit(126);
 	if (errno == 2 || errno == 22)
 		exit(127);
+	exit (222);
 }
 
 void	ft_fork_pipe(int *io, char **args, t_list **envl, int *pid)
