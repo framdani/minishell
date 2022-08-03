@@ -53,7 +53,7 @@ here_end         : WORD
                  ;
 ```
 
-## Execution :
+## Execution
 The execution part consists of changing the standard (0 and 1) file descriptors to another one in the existance of a redirection or a pipe then checking if the command given is either a builtin command or an executable file in the path environment variable and save the exit status/code of that executed command.
 
 
